@@ -3353,5 +3353,1525 @@ class Site extends CI_Controller
 			//$data['other']="template=$template";
 		$this->load->view("redirect",$data);
 	}
+    
+    // NEW TABLES ADDED
+    
+    
+     
+    public function viewprofession()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofession";
+$data["base_url"]=site_url("site/viewprofessionjson");
+$data["title"]="View profession";
+$this->load->view("template",$data);
+}
+function viewprofessionjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_profession`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_profession`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_profession`.`category`";
+$elements[2]->sort="1";
+$elements[2]->header="Category";
+$elements[2]->alias="category";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_profession`");
+$this->load->view("json",$data);
+}
+
+public function createprofession()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofession";
+$data["title"]="Create profession";
+$this->load->view("template",$data);
+}
+public function createprofessionsubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("category","Category","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofession";
+$data["title"]="Create profession";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$category=$this->input->get_post("category");
+if($this->profession_model->create($user,$category)==0)
+$data["alerterror"]="New profession could not be created.";
+else
+$data["alertsuccess"]="profession created Successfully.";
+$data["redirect"]="site/viewprofession";
+$this->load->view("redirect",$data);
+}
+}
+public function editprofession()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofession";
+$data["title"]="Edit profession";
+$data["before"]=$this->profession_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editprofessionsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("category","Category","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofession";
+$data["title"]="Edit profession";
+$data["before"]=$this->profession_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$category=$this->input->get_post("category");
+if($this->profession_model->edit($id,$user,$category)==0)
+$data["alerterror"]="New profession could not be Updated.";
+else
+$data["alertsuccess"]="profession Updated Successfully.";
+$data["redirect"]="site/viewprofession";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteprofession()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->profession_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewprofession";
+$this->load->view("redirect",$data);
+}
+public function viewcategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewcategory";
+$data["base_url"]=site_url("site/viewcategoryjson");
+$data["title"]="View category";
+$this->load->view("template",$data);
+}
+function viewcategoryjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_category`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_category`.`name`";
+$elements[1]->sort="1";
+$elements[1]->header="Name";
+$elements[1]->alias="name";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_category`");
+$this->load->view("json",$data);
+}
+
+public function createcategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createcategory";
+$data["title"]="Create category";
+$this->load->view("template",$data);
+}
+public function createcategorysubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("name","Name","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createcategory";
+$data["title"]="Create category";
+$this->load->view("template",$data);
+}
+else
+{
+$name=$this->input->get_post("name");
+if($this->category_model->create($name)==0)
+$data["alerterror"]="New category could not be created.";
+else
+$data["alertsuccess"]="category created Successfully.";
+$data["redirect"]="site/viewcategory";
+$this->load->view("redirect",$data);
+}
+}
+public function editcategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editcategory";
+$data["title"]="Edit category";
+$data["before"]=$this->category_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editcategorysubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("name","Name","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editcategory";
+$data["title"]="Edit category";
+$data["before"]=$this->category_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$name=$this->input->get_post("name");
+if($this->category_model->edit($id,$name)==0)
+$data["alerterror"]="New category could not be Updated.";
+else
+$data["alertsuccess"]="category Updated Successfully.";
+$data["redirect"]="site/viewcategory";
+$this->load->view("redirect",$data);
+}
+}
+public function deletecategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->category_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewcategory";
+$this->load->view("redirect",$data);
+}
+public function viewusercategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewusercategory";
+$data["base_url"]=site_url("site/viewusercategoryjson");
+$data["title"]="View usercategory";
+$this->load->view("template",$data);
+}
+function viewusercategoryjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_usercategory`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_usercategory`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_usercategory`.`category`";
+$elements[2]->sort="1";
+$elements[2]->header="Category";
+$elements[2]->alias="category";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_usercategory`");
+$this->load->view("json",$data);
+}
+
+public function createusercategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createusercategory";
+$data["title"]="Create usercategory";
+$this->load->view("template",$data);
+}
+public function createusercategorysubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("category","Category","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createusercategory";
+$data["title"]="Create usercategory";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$category=$this->input->get_post("category");
+if($this->usercategory_model->create($user,$category)==0)
+$data["alerterror"]="New usercategory could not be created.";
+else
+$data["alertsuccess"]="usercategory created Successfully.";
+$data["redirect"]="site/viewusercategory";
+$this->load->view("redirect",$data);
+}
+}
+public function editusercategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editusercategory";
+$data["title"]="Edit usercategory";
+$data["before"]=$this->usercategory_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editusercategorysubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("category","Category","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editusercategory";
+$data["title"]="Edit usercategory";
+$data["before"]=$this->usercategory_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$category=$this->input->get_post("category");
+if($this->usercategory_model->edit($id,$user,$category)==0)
+$data["alerterror"]="New usercategory could not be Updated.";
+else
+$data["alertsuccess"]="usercategory Updated Successfully.";
+$data["redirect"]="site/viewusercategory";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteusercategory()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->usercategory_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewusercategory";
+$this->load->view("redirect",$data);
+}
+public function viewprofessionexperience()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofessionexperience";
+$data["base_url"]=site_url("site/viewprofessionexperiencejson");
+$data["title"]="View professionexperience";
+$this->load->view("template",$data);
+}
+function viewprofessionexperiencejson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_professionexperience`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_professionexperience`.`profession`";
+$elements[1]->sort="1";
+$elements[1]->header="Profession";
+$elements[1]->alias="profession";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_professionexperience`.`user`";
+$elements[2]->sort="1";
+$elements[2]->header="User";
+$elements[2]->alias="user";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professionexperience`.`companyname`";
+$elements[3]->sort="1";
+$elements[3]->header="companyname";
+$elements[3]->alias="companyname";
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professionexperience`.`jobtitle`";
+$elements[4]->sort="1";
+$elements[4]->header="jobtitle";
+$elements[4]->alias="jobtitle";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professionexperience`.`companylogo`";
+$elements[5]->sort="1";
+$elements[5]->header="Company Logo";
+$elements[5]->alias="companylogo";
+$elements[6]=new stdClass();
+$elements[6]->field="`expert_professionexperience`.`jobdescription`";
+$elements[6]->sort="1";
+$elements[6]->header="jobdescription";
+$elements[6]->alias="jobdescription";
+$elements[7]=new stdClass();
+$elements[7]->field="`expert_professionexperience`.`startdate`";
+$elements[7]->sort="1";
+$elements[7]->header="Start date";
+$elements[7]->alias="startdate";
+$elements[8]=new stdClass();
+$elements[8]->field="`expert_professionexperience`.`enddate`";
+$elements[8]->sort="1";
+$elements[8]->header="End Date";
+$elements[8]->alias="enddate";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionexperience`");
+$this->load->view("json",$data);
+}
+
+public function createprofessionexperience()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofessionexperience";
+$data["title"]="Create professionexperience";
+$this->load->view("template",$data);
+}
+public function createprofessionexperiencesubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("companyname","companyname","trim");
+$this->form_validation->set_rules("jobtitle","jobtitle","trim");
+$this->form_validation->set_rules("companylogo","Company Logo","trim");
+$this->form_validation->set_rules("jobdescription","jobdescription","trim");
+$this->form_validation->set_rules("startdate","Start date","trim");
+$this->form_validation->set_rules("enddate","End Date","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofessionexperience";
+$data["title"]="Create professionexperience";
+$this->load->view("template",$data);
+}
+else
+{
+$profession=$this->input->get_post("profession");
+$user=$this->input->get_post("user");
+$companyname=$this->input->get_post("companyname");
+$jobtitle=$this->input->get_post("jobtitle");
+$companylogo=$this->input->get_post("companylogo");
+$jobdescription=$this->input->get_post("jobdescription");
+$startdate=$this->input->get_post("startdate");
+$enddate=$this->input->get_post("enddate");
+if($this->professionexperience_model->create($profession,$user,$companyname,$jobtitle,$companylogo,$jobdescription,$startdate,$enddate)==0)
+$data["alerterror"]="New professionexperience could not be created.";
+else
+$data["alertsuccess"]="professionexperience created Successfully.";
+$data["redirect"]="site/viewprofessionexperience";
+$this->load->view("redirect",$data);
+}
+}
+public function editprofessionexperience()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofessionexperience";
+$data["title"]="Edit professionexperience";
+$data["before"]=$this->professionexperience_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editprofessionexperiencesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("companyname","companyname","trim");
+$this->form_validation->set_rules("jobtitle","jobtitle","trim");
+$this->form_validation->set_rules("companylogo","Company Logo","trim");
+$this->form_validation->set_rules("jobdescription","jobdescription","trim");
+$this->form_validation->set_rules("startdate","Start date","trim");
+$this->form_validation->set_rules("enddate","End Date","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofessionexperience";
+$data["title"]="Edit professionexperience";
+$data["before"]=$this->professionexperience_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$profession=$this->input->get_post("profession");
+$user=$this->input->get_post("user");
+$companyname=$this->input->get_post("companyname");
+$jobtitle=$this->input->get_post("jobtitle");
+$companylogo=$this->input->get_post("companylogo");
+$jobdescription=$this->input->get_post("jobdescription");
+$startdate=$this->input->get_post("startdate");
+$enddate=$this->input->get_post("enddate");
+if($this->professionexperience_model->edit($id,$profession,$user,$companyname,$jobtitle,$companylogo,$jobdescription,$startdate,$enddate)==0)
+$data["alerterror"]="New professionexperience could not be Updated.";
+else
+$data["alertsuccess"]="professionexperience Updated Successfully.";
+$data["redirect"]="site/viewprofessionexperience";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteprofessionexperience()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->professionexperience_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewprofessionexperience";
+$this->load->view("redirect",$data);
+}
+public function viewprofessionaward()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofessionaward";
+$data["base_url"]=site_url("site/viewprofessionawardjson");
+$data["title"]="View professionaward";
+$this->load->view("template",$data);
+}
+function viewprofessionawardjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_professionaward`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_professionaward`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_professionaward`.`profession`";
+$elements[2]->sort="1";
+$elements[2]->header="Profession";
+$elements[2]->alias="profession";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professionaward`.`website`";
+$elements[3]->sort="1";
+$elements[3]->header="Website";
+$elements[3]->alias="website";
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professionaward`.`videolink`";
+$elements[4]->sort="1";
+$elements[4]->header="Video Link";
+$elements[4]->alias="videolink";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professionaward`.`photo`";
+$elements[5]->sort="1";
+$elements[5]->header="photo";
+$elements[5]->alias="photo";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionaward`");
+$this->load->view("json",$data);
+}
+
+public function createprofessionaward()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofessionaward";
+$data["title"]="Create professionaward";
+$this->load->view("template",$data);
+}
+public function createprofessionawardsubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("website","Website","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+$this->form_validation->set_rules("photo","photo","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofessionaward";
+$data["title"]="Create professionaward";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$website=$this->input->get_post("website");
+$videolink=$this->input->get_post("videolink");
+$photo=$this->input->get_post("photo");
+if($this->professionaward_model->create($user,$profession,$website,$videolink,$photo)==0)
+$data["alerterror"]="New professionaward could not be created.";
+else
+$data["alertsuccess"]="professionaward created Successfully.";
+$data["redirect"]="site/viewprofessionaward";
+$this->load->view("redirect",$data);
+}
+}
+public function editprofessionaward()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofessionaward";
+$data["title"]="Edit professionaward";
+$data["before"]=$this->professionaward_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editprofessionawardsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("website","Website","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+$this->form_validation->set_rules("photo","photo","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofessionaward";
+$data["title"]="Edit professionaward";
+$data["before"]=$this->professionaward_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$website=$this->input->get_post("website");
+$videolink=$this->input->get_post("videolink");
+$photo=$this->input->get_post("photo");
+if($this->professionaward_model->edit($id,$user,$profession,$website,$videolink,$photo)==0)
+$data["alerterror"]="New professionaward could not be Updated.";
+else
+$data["alertsuccess"]="professionaward Updated Successfully.";
+$data["redirect"]="site/viewprofessionaward";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteprofessionaward()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->professionaward_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewprofessionaward";
+$this->load->view("redirect",$data);
+}
+public function viewhobby()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewhobby";
+$data["base_url"]=site_url("site/viewhobbyjson");
+$data["title"]="View hobby";
+$this->load->view("template",$data);
+}
+function viewhobbyjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_hobby`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_hobby`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_hobby`.`category`";
+$elements[2]->sort="1";
+$elements[2]->header="Category";
+$elements[2]->alias="category";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_hobby`.`expinyrs`";
+$elements[3]->sort="1";
+$elements[3]->header="Experience In Years";
+$elements[3]->alias="expinyrs";
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_hobby`.`description`";
+$elements[4]->sort="1";
+$elements[4]->header="Description";
+$elements[4]->alias="description";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_hobby`.`skills`";
+$elements[5]->sort="1";
+$elements[5]->header="Skills";
+$elements[5]->alias="skills";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobby`");
+$this->load->view("json",$data);
+}
+
+public function createhobby()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createhobby";
+$data["title"]="Create hobby";
+$this->load->view("template",$data);
+}
+public function createhobbysubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("category","Category","trim");
+$this->form_validation->set_rules("expinyrs","Experience In Years","trim");
+$this->form_validation->set_rules("description","Description","trim");
+$this->form_validation->set_rules("skills","Skills","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createhobby";
+$data["title"]="Create hobby";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$category=$this->input->get_post("category");
+$expinyrs=$this->input->get_post("expinyrs");
+$description=$this->input->get_post("description");
+$skills=$this->input->get_post("skills");
+if($this->hobby_model->create($user,$category,$expinyrs,$description,$skills)==0)
+$data["alerterror"]="New hobby could not be created.";
+else
+$data["alertsuccess"]="hobby created Successfully.";
+$data["redirect"]="site/viewhobby";
+$this->load->view("redirect",$data);
+}
+}
+public function edithobby()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="edithobby";
+$data["title"]="Edit hobby";
+$data["before"]=$this->hobby_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function edithobbysubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("category","Category","trim");
+$this->form_validation->set_rules("expinyrs","Experience In Years","trim");
+$this->form_validation->set_rules("description","Description","trim");
+$this->form_validation->set_rules("skills","Skills","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="edithobby";
+$data["title"]="Edit hobby";
+$data["before"]=$this->hobby_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$category=$this->input->get_post("category");
+$expinyrs=$this->input->get_post("expinyrs");
+$description=$this->input->get_post("description");
+$skills=$this->input->get_post("skills");
+if($this->hobby_model->edit($id,$user,$category,$expinyrs,$description,$skills)==0)
+$data["alerterror"]="New hobby could not be Updated.";
+else
+$data["alertsuccess"]="hobby Updated Successfully.";
+$data["redirect"]="site/viewhobby";
+$this->load->view("redirect",$data);
+}
+}
+public function deletehobby()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->hobby_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewhobby";
+$this->load->view("redirect",$data);
+}
+public function viewhobbyawards()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewhobbyawards";
+$data["base_url"]=site_url("site/viewhobbyawardsjson");
+$data["title"]="View hobbyawards";
+$this->load->view("template",$data);
+}
+function viewhobbyawardsjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_hobbyawards`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_hobbyawards`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_hobbyawards`.`hobby`";
+$elements[2]->sort="1";
+$elements[2]->header="Hobby";
+$elements[2]->alias="hobby";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_hobbyawards`.`awards`";
+$elements[3]->sort="1";
+$elements[3]->header="Awards";
+$elements[3]->alias="awards";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyawards`");
+$this->load->view("json",$data);
+}
+
+public function createhobbyawards()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createhobbyawards";
+$data["title"]="Create hobbyawards";
+$this->load->view("template",$data);
+}
+public function createhobbyawardssubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("awards","Awards","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createhobbyawards";
+$data["title"]="Create hobbyawards";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$awards=$this->input->get_post("awards");
+if($this->hobbyawards_model->create($user,$hobby,$awards)==0)
+$data["alerterror"]="New hobbyawards could not be created.";
+else
+$data["alertsuccess"]="hobbyawards created Successfully.";
+$data["redirect"]="site/viewhobbyawards";
+$this->load->view("redirect",$data);
+}
+}
+public function edithobbyawards()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="edithobbyawards";
+$data["title"]="Edit hobbyawards";
+$data["before"]=$this->hobbyawards_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function edithobbyawardssubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("awards","Awards","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="edithobbyawards";
+$data["title"]="Edit hobbyawards";
+$data["before"]=$this->hobbyawards_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$awards=$this->input->get_post("awards");
+if($this->hobbyawards_model->edit($id,$user,$hobby,$awards)==0)
+$data["alerterror"]="New hobbyawards could not be Updated.";
+else
+$data["alertsuccess"]="hobbyawards Updated Successfully.";
+$data["redirect"]="site/viewhobbyawards";
+$this->load->view("redirect",$data);
+}
+}
+public function deletehobbyawards()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->hobbyawards_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewhobbyawards";
+$this->load->view("redirect",$data);
+}
+public function viewhobbyeducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewhobbyeducation";
+$data["base_url"]=site_url("site/viewhobbyeducationjson");
+$data["title"]="View hobbyeducation";
+$this->load->view("template",$data);
+}
+function viewhobbyeducationjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_hobbyeducation`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_hobbyeducation`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_hobbyeducation`.`hobby`";
+$elements[2]->sort="1";
+$elements[2]->header="Hobby";
+$elements[2]->alias="hobby";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_hobbyeducation`.`degree`";
+$elements[3]->sort="1";
+$elements[3]->header="Degree";
+$elements[3]->alias="degree";
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_hobbyeducation`.`institute`";
+$elements[4]->sort="1";
+$elements[4]->header="Institute";
+$elements[4]->alias="institute";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_hobbyeducation`.`yearofpassing`";
+$elements[5]->sort="1";
+$elements[5]->header="Year of Passing";
+$elements[5]->alias="yearofpassing";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyeducation`");
+$this->load->view("json",$data);
+}
+
+public function createhobbyeducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createhobbyeducation";
+$data["title"]="Create hobbyeducation";
+$this->load->view("template",$data);
+}
+public function createhobbyeducationsubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("degree","Degree","trim");
+$this->form_validation->set_rules("institute","Institute","trim");
+$this->form_validation->set_rules("yearofpassing","Year of Passing","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createhobbyeducation";
+$data["title"]="Create hobbyeducation";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$degree=$this->input->get_post("degree");
+$institute=$this->input->get_post("institute");
+$yearofpassing=$this->input->get_post("yearofpassing");
+if($this->hobbyeducation_model->create($user,$hobby,$degree,$institute,$yearofpassing)==0)
+$data["alerterror"]="New hobbyeducation could not be created.";
+else
+$data["alertsuccess"]="hobbyeducation created Successfully.";
+$data["redirect"]="site/viewhobbyeducation";
+$this->load->view("redirect",$data);
+}
+}
+public function edithobbyeducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="edithobbyeducation";
+$data["title"]="Edit hobbyeducation";
+$data["before"]=$this->hobbyeducation_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function edithobbyeducationsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("degree","Degree","trim");
+$this->form_validation->set_rules("institute","Institute","trim");
+$this->form_validation->set_rules("yearofpassing","Year of Passing","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="edithobbyeducation";
+$data["title"]="Edit hobbyeducation";
+$data["before"]=$this->hobbyeducation_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$degree=$this->input->get_post("degree");
+$institute=$this->input->get_post("institute");
+$yearofpassing=$this->input->get_post("yearofpassing");
+if($this->hobbyeducation_model->edit($id,$user,$hobby,$degree,$institute,$yearofpassing)==0)
+$data["alerterror"]="New hobbyeducation could not be Updated.";
+else
+$data["alertsuccess"]="hobbyeducation Updated Successfully.";
+$data["redirect"]="site/viewhobbyeducation";
+$this->load->view("redirect",$data);
+}
+}
+public function deletehobbyeducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->hobbyeducation_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewhobbyeducation";
+$this->load->view("redirect",$data);
+}
+public function viewhobbywebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewhobbywebsite";
+$data["base_url"]=site_url("site/viewhobbywebsitejson");
+$data["title"]="View hobbywebsite";
+$this->load->view("template",$data);
+}
+function viewhobbywebsitejson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_hobbywebsite`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_hobbywebsite`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_hobbywebsite`.`hobby`";
+$elements[2]->sort="1";
+$elements[2]->header="Hobby";
+$elements[2]->alias="hobby";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_hobbywebsite`.`website`";
+$elements[3]->sort="1";
+$elements[3]->header="Website";
+$elements[3]->alias="website";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbywebsite`");
+$this->load->view("json",$data);
+}
+
+public function createhobbywebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createhobbywebsite";
+$data["title"]="Create hobbywebsite";
+$this->load->view("template",$data);
+}
+public function createhobbywebsitesubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("website","Website","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createhobbywebsite";
+$data["title"]="Create hobbywebsite";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$website=$this->input->get_post("website");
+if($this->hobbywebsite_model->create($user,$hobby,$website)==0)
+$data["alerterror"]="New hobbywebsite could not be created.";
+else
+$data["alertsuccess"]="hobbywebsite created Successfully.";
+$data["redirect"]="site/viewhobbywebsite";
+$this->load->view("redirect",$data);
+}
+}
+public function edithobbywebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="edithobbywebsite";
+$data["title"]="Edit hobbywebsite";
+$data["before"]=$this->hobbywebsite_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function edithobbywebsitesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("website","Website","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="edithobbywebsite";
+$data["title"]="Edit hobbywebsite";
+$data["before"]=$this->hobbywebsite_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$website=$this->input->get_post("website");
+if($this->hobbywebsite_model->edit($id,$user,$hobby,$website)==0)
+$data["alerterror"]="New hobbywebsite could not be Updated.";
+else
+$data["alertsuccess"]="hobbywebsite Updated Successfully.";
+$data["redirect"]="site/viewhobbywebsite";
+$this->load->view("redirect",$data);
+}
+}
+public function deletehobbywebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->hobbywebsite_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewhobbywebsite";
+$this->load->view("redirect",$data);
+}
+public function viewhobbyvideolinks()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewhobbyvideolinks";
+$data["base_url"]=site_url("site/viewhobbyvideolinksjson");
+$data["title"]="View hobbyvideolinks";
+$this->load->view("template",$data);
+}
+function viewhobbyvideolinksjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_hobbyvideolinks`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_hobbyvideolinks`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_hobbyvideolinks`.`hobby`";
+$elements[2]->sort="1";
+$elements[2]->header="Hobby";
+$elements[2]->alias="hobby";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_hobbyvideolinks`.`videolink`";
+$elements[3]->sort="1";
+$elements[3]->header="Video Link";
+$elements[3]->alias="videolink";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyvideolinks`");
+$this->load->view("json",$data);
+}
+
+public function createhobbyvideolinks()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createhobbyvideolinks";
+$data["title"]="Create hobbyvideolinks";
+$this->load->view("template",$data);
+}
+public function createhobbyvideolinkssubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createhobbyvideolinks";
+$data["title"]="Create hobbyvideolinks";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$videolink=$this->input->get_post("videolink");
+if($this->hobbyvideolinks_model->create($user,$hobby,$videolink)==0)
+$data["alerterror"]="New hobbyvideolinks could not be created.";
+else
+$data["alertsuccess"]="hobbyvideolinks created Successfully.";
+$data["redirect"]="site/viewhobbyvideolinks";
+$this->load->view("redirect",$data);
+}
+}
+public function edithobbyvideolinks()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="edithobbyvideolinks";
+$data["title"]="Edit hobbyvideolinks";
+$data["before"]=$this->hobbyvideolinks_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function edithobbyvideolinkssubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="edithobbyvideolinks";
+$data["title"]="Edit hobbyvideolinks";
+$data["before"]=$this->hobbyvideolinks_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$videolink=$this->input->get_post("videolink");
+if($this->hobbyvideolinks_model->edit($id,$user,$hobby,$videolink)==0)
+$data["alerterror"]="New hobbyvideolinks could not be Updated.";
+else
+$data["alertsuccess"]="hobbyvideolinks Updated Successfully.";
+$data["redirect"]="site/viewhobbyvideolinks";
+$this->load->view("redirect",$data);
+}
+}
+public function deletehobbyvideolinks()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->hobbyvideolinks_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewhobbyvideolinks";
+$this->load->view("redirect",$data);
+}
+public function viewhobbyphotos()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewhobbyphotos";
+$data["base_url"]=site_url("site/viewhobbyphotosjson");
+$data["title"]="View hobbyphotos";
+$this->load->view("template",$data);
+}
+function viewhobbyphotosjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_hobbyphotos`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_hobbyphotos`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_hobbyphotos`.`hobby`";
+$elements[2]->sort="1";
+$elements[2]->header="Hobby";
+$elements[2]->alias="hobby";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_hobbyphotos`.`image`";
+$elements[3]->sort="1";
+$elements[3]->header="Image";
+$elements[3]->alias="image";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyphotos`");
+$this->load->view("json",$data);
+}
+
+public function createhobbyphotos()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createhobbyphotos";
+$data["title"]="Create hobbyphotos";
+$this->load->view("template",$data);
+}
+public function createhobbyphotossubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("image","Image","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createhobbyphotos";
+$data["title"]="Create hobbyphotos";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$image=$this->input->get_post("image");
+if($this->hobbyphotos_model->create($user,$hobby,$image)==0)
+$data["alerterror"]="New hobbyphotos could not be created.";
+else
+$data["alertsuccess"]="hobbyphotos created Successfully.";
+$data["redirect"]="site/viewhobbyphotos";
+$this->load->view("redirect",$data);
+}
+}
+public function edithobbyphotos()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="edithobbyphotos";
+$data["title"]="Edit hobbyphotos";
+$data["before"]=$this->hobbyphotos_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function edithobbyphotossubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","Hobby","trim");
+$this->form_validation->set_rules("image","Image","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="edithobbyphotos";
+$data["title"]="Edit hobbyphotos";
+$data["before"]=$this->hobbyphotos_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$image=$this->input->get_post("image");
+if($this->hobbyphotos_model->edit($id,$user,$hobby,$image)==0)
+$data["alerterror"]="New hobbyphotos could not be Updated.";
+else
+$data["alertsuccess"]="hobbyphotos Updated Successfully.";
+$data["redirect"]="site/viewhobbyphotos";
+$this->load->view("redirect",$data);
+}
+}
+public function deletehobbyphotos()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->hobbyphotos_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewhobbyphotos";
+$this->load->view("redirect",$data);
+}
 }
 ?>

@@ -897,4 +897,19 @@ $id=$this->input->get_post("id");
 $data["message"]=$this->certification_model->getsinglecertification($id);
 $this->load->view("json",$data);
 }
+    function registerUser() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $name=$data['name'];
+        $email=$data['email'];
+        $password=$data['password'];
+        $data["message"] = $this->restapi_model->registeruser($name, $email, $password);
+        $this->load->view("json", $data);
+    }
+    function loginuser() {
+      $data = json_decode(file_get_contents('php://input'), true);
+      $email=$data["email"];
+      $password=$data["password"];
+        $data["message"] = $this->restapi_model->loginuser($email, $password);
+        $this->load->view("json", $data);
+    }
 } ?>

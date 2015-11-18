@@ -17,15 +17,7 @@
 					<input type="text" id="normal-field" class="form-control" name="name" value="<?php echo set_value('name',$before->name);?>">
 				  </div>
 				</div>
-<!--
-				<div class=" form-group">
-				  <label class="col-sm-2 control-label" for="normal-field">Username</label>
-				  <div class="col-sm-4">
-					<input type="text" id="normal-field" class="form-control" name="username" value="<?php echo set_value('username',$before->username);?>">
-				  </div>
-				</div>
--->
-				
+
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label" for="normal-field">Email</label>
 				  <div class="col-sm-4">
@@ -122,25 +114,7 @@
 					?>
 				  </div>
 				</div>
-				
-<!--
-				<div class=" form-group categoryclass" 
-                   <?php if(empty($selectedcategory))
-                        echo 'style="display:none;"';
-                    else
-                       echo '';
-                     ?>
-                     >
-				  <label class="col-sm-2 control-label">Category</label>
-				  <div class="col-sm-4">
-					<?php
-						
-						echo form_dropdown('category[]',$category,$selectedcategory,'id="select10" class="chzn-select form-control" 	data-placeholder="Choose a category..." multiple');
-					?>
-				  </div>
-				</div>
--->
-				
+
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label" for="normal-field">Image</label>
 				  <div class="col-sm-4">

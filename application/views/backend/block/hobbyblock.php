@@ -2,9 +2,9 @@
 
 <div class="panel-body">
 <ul class="nav nav-stacked">
-<li><a href="<?php echo site_url('site/edituser?id=').$before1; ?>">User Details</a></li>
-<li><a href="<?php echo site_url('site/viewprofession?id=').$before2; ?>">Profession</a></li>
-<li><a href="<?php echo site_url('site/viewhobby?id=').$before3; ?>">Hobbies</a></li>
+<li><a href="<?php echo site_url('site/edituser?id=').$before->id; ?>">User Details</a></li>
+<li><a href="<?php echo site_url('site/viewprofession?id=').$before->id; ?>">Profession</a></li>
+<li><a href="<?php echo site_url('site/viewhobby?id=').$before->id; ?>">Hobbies</a></li>
 <!--
 <li><a href="<?php echo site_url('site/viewlanguage?id=').$before->id; ?>">languages</a></li>
 <li><a href="<?php echo site_url('site/viewskill?id=').$before->id; ?>">skills</a></li>

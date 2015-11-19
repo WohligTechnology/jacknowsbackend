@@ -1,5 +1,5 @@
 <div id="page-title">
-<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createuser"); ?>">Create</a>
+<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createcategory"); ?>">Create</a>
 <h1 class="page-header text-overflow">category Details </h1>
 </div>
 <div id="page-content">

@@ -16,7 +16,7 @@ Create professionexperience </h3>
 <div class=" form-group">
 <label class="col-sm-2 control-label" for="normal-field">Profession</label>
 <div class="col-sm-4">
-<?php echo form_dropdown("profession",$profession,set_value('profession'),"class='chzn-select form-control'");?>
+<?php echo form_dropdown("profession",$profession,set_value('profession',$this->input->get('id')),"class='chzn-select form-control'");?>
 </div>
 </div>
 <div class=" form-group">

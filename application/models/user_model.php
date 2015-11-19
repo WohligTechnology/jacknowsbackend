@@ -220,6 +220,32 @@ class User_model extends CI_Model
 		
 		return $return;
 	} 
+     public function getcategorydropdown()
+	{
+		$query=$this->db->query("SELECT * FROM `expert_category`  ORDER BY `id` ASC")->result();
+		$return=array(
+		"" => ""
+		);
+		foreach($query as $row)
+		{
+			$return[$row->id]=$row->name;
+		}
+		
+		return $return;
+	}
+    public function getprofessiondropdown()
+	{
+		$query=$this->db->query("SELECT * FROM `expert_profession`  ORDER BY `id` ASC")->result();
+		$return=array(
+		"" => ""
+		);
+		foreach($query as $row)
+		{
+			$return[$row->id]=$row->name;
+		}
+		
+		return $return;
+	} 
     public function getgenderdropdown()
 	{
 		

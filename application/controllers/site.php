@@ -262,6 +262,9 @@ class Site extends CI_Controller
 		$data[ 'type' ] =$this->user_model->getameturetypedropdown();
         $data[ 'gender' ] =$this->user_model->getgenderdropdown();
 		$data['before']=$this->user_model->beforeedit($this->input->get('id'));
+		$data['before1']=$this->input->get('id');
+		$data['before2']=$this->input->get('id');
+		$data['before3']=$this->input->get('id');
 		$data['page']='edituser';
 		$data['page2']='block/userblock';
 		$data['title']='Edit User';
@@ -3384,9 +3387,13 @@ class Site extends CI_Controller
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofession";
+$data["page2"]="block/userblock";
+$data['before1']=$this->input->get('id');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
 $data["base_url"]=site_url("site/viewprofessionjson");
 $data["title"]="View profession";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewprofessionjson()
 {
@@ -3397,15 +3404,21 @@ $elements[0]->sort="1";
 $elements[0]->header="ID";
 $elements[0]->alias="id";
 $elements[1]=new stdClass();
-$elements[1]->field="`expert_profession`.`user`";
+$elements[1]->field="`user`.`name`";
 $elements[1]->sort="1";
 $elements[1]->header="User";
 $elements[1]->alias="user";
 $elements[2]=new stdClass();
-$elements[2]->field="`expert_profession`.`category`";
+$elements[2]->field="`expert_category`.`name`";
 $elements[2]->sort="1";
 $elements[2]->header="Category";
 $elements[2]->alias="category";
+    
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_profession`.`user`";
+$elements[3]->sort="1";
+$elements[3]->header="userid";
+$elements[3]->alias="userid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -3420,7 +3433,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_profession`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_profession` LEFT OUTER JOIN `user` ON `user`.`id`=`expert_profession`.`user` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_profession`.`category`");
 $this->load->view("json",$data);
 }
 
@@ -3430,6 +3443,8 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofession";
 $data["title"]="Create profession";
+$data['category']=$this->user_model->getcategorydropdown();
+$data['user']=$this->user_model->getuserdropdown();
 $this->load->view("template",$data);
 }
 public function createprofessionsubmit() 
@@ -3442,6 +3457,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createprofession";
+$data['category']=$this->user_model->getcategorydropdown();
+$data['user']=$this->user_model->getuserdropdown();
 $data["title"]="Create profession";
 $this->load->view("template",$data);
 }
@@ -3453,8 +3470,8 @@ if($this->profession_model->create($user,$category)==0)
 $data["alerterror"]="New profession could not be created.";
 else
 $data["alertsuccess"]="profession created Successfully.";
-$data["redirect"]="site/viewprofession";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofession?id=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function editprofession()
@@ -3462,9 +3479,17 @@ public function editprofession()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editprofession";
+$data["page2"]="block/professionblock";
 $data["title"]="Edit profession";
+$data['before']=$this->user_model->beforeedit($this->input->get('id'));
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('id');
+$data['category']=$this->user_model->getcategorydropdown();
+$data['user']=$this->user_model->getuserdropdown();
 $data["before"]=$this->profession_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editprofessionsubmit()
 {
@@ -3478,6 +3503,8 @@ if($this->form_validation->run()==FALSE)
 $data["alerterror"]=validation_errors();
 $data["page"]="editprofession";
 $data["title"]="Edit profession";
+$data['category']=$this->user_model->getcategorydropdown();
+    $data['user']=$this->user_model->getuserdropdown();
 $data["before"]=$this->profession_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
 }
@@ -3490,8 +3517,8 @@ if($this->profession_model->edit($id,$user,$category)==0)
 $data["alerterror"]="New profession could not be Updated.";
 else
 $data["alertsuccess"]="profession Updated Successfully.";
-$data["redirect"]="site/viewprofession";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofession?id=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deleteprofession()
@@ -3744,9 +3771,14 @@ public function viewprofessionexperience()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionexperience";
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('id');
 $data["base_url"]=site_url("site/viewprofessionexperiencejson");
 $data["title"]="View professionexperience";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewprofessionexperiencejson()
 {
@@ -3819,6 +3851,7 @@ public function createprofessionexperience()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofessionexperience";
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Create professionexperience";
 $this->load->view("template",$data);
 }
@@ -3838,6 +3871,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createprofessionexperience";
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Create professionexperience";
 $this->load->view("template",$data);
 }

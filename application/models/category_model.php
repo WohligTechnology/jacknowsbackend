@@ -36,5 +36,6 @@ public function delete($id)
 $query=$this->db->query("DELETE FROM `expert_category` WHERE `id`='$id'");
 return $query;
 }
+     
 }
 ?>

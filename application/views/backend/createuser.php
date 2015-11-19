@@ -151,6 +151,63 @@
 					<input type="text" id="normal-field" class="form-control" name="json" value="<?php echo set_value('json');?>">
 				  </div>
 				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label">gender</label>
+				  <div class="col-sm-4">
+					<?php
+						
+						echo form_dropdown('gender',$gender,set_value('gender'),'class="chzn-select form-control" 	data-placeholder="Choose a Accesslevel..."');
+					?>
+				  </div>
+				</div>
+                  <div class=" form-group">
+                                <label class="col-sm-2 control-label" for="normal-field">Address</label>
+                                <div class="col-sm-8">
+                                    <textarea name="address" id="" cols="20" rows="10" class="form-control tinymce"><?php echo set_value( 'address');?></textarea>
+                                </div>
+                            </div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">City</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="city" value="<?php echo set_value('city');?>">
+				  </div>
+				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">State</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="state" value="<?php echo set_value('state');?>">
+				  </div>
+				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">Pincode</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="pincode" value="<?php echo set_value('pincode');?>">
+				  </div>
+				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">Country</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="country" value="<?php echo set_value('country');?>">
+				  </div>
+				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">Twitter social</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="twittersocial" value="<?php echo set_value('twittersocial');?>">
+				  </div>
+				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">Youtube social</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="youtubesocial" value="<?php echo set_value('youtubesocial');?>">
+				  </div>
+				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">Facebook social</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="facebooksocial" value="<?php echo set_value('facebooksocial');?>">
+				  </div>
+				</div>
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label">&nbsp;</label>
 				  <div class="col-sm-4">

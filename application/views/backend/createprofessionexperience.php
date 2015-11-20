@@ -22,7 +22,7 @@ Create professionexperience </h3>
 <div class=" form-group">
 <label class="col-sm-2 control-label" for="normal-field">User</label>
 <div class="col-sm-4">
-<?php echo form_dropdown("user",$user,set_value('user'),"class='chzn-select form-control'");?>
+<?php echo form_dropdown("user",$user,set_value('user',$this->input->get('userid')),"class='chzn-select form-control'");?>
 </div>
 </div>
 <div class="form-group">
@@ -65,7 +65,7 @@ Create professionexperience </h3>
 <label class="col-sm-2 control-label" for="normal-field">&nbsp;</label>
 <div class="col-sm-4">
 <button type="submit" class="btn btn-primary">Save</button>
-<a href="<?php echo site_url("site/viewprofessionexperience"); ?>" class="btn btn-secondary">Cancel</a>
+<a href="<?php echo site_url("site/viewprofessionexperience?id=").$this->input->get('id')."&userid=".$this->input->get('userid'); ?>" class="btn btn-secondary">Cancel</a>
 </div>
 </div>
 </form>

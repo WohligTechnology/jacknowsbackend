@@ -3526,6 +3526,8 @@ public function deleteprofession()
 $access=array("1");
 $this->checkaccess($access);
 $this->profession_model->delete($this->input->get("id"));
+$id=$this->input->get("id");
+$userid=$this->input->get("userid");
 $data["redirect"]="site/viewprofession";
 $this->load->view("redirect",$data);
 }
@@ -3828,6 +3830,18 @@ $elements[8]->field="`expert_professionexperience`.`enddate`";
 $elements[8]->sort="1";
 $elements[8]->header="End Date";
 $elements[8]->alias="enddate";
+    
+$elements[9]=new stdClass();
+$elements[9]->field="`expert_professionexperience`.`profession`";
+$elements[9]->sort="1";
+$elements[9]->header="professionid";
+$elements[9]->alias="professionid";
+    
+$elements[10]=new stdClass();
+$elements[10]->field="`expert_professionexperience`.`user`";
+$elements[10]->sort="1";
+$elements[10]->header="userid";
+$elements[10]->alias="userid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -3852,8 +3866,14 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofessionexperience";
 $data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('id');
+$data["user"]=$this->user_model->getuserdropdown();
 $data["title"]="Create professionexperience";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createprofessionexperiencesubmit() 
 {
@@ -3871,6 +3891,7 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createprofessionexperience";
+$data["user"]=$this->user_model->getuserdropdown();
 $data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Create professionexperience";
 $this->load->view("template",$data);
@@ -3889,8 +3910,8 @@ if($this->professionexperience_model->create($profession,$user,$companyname,$job
 $data["alerterror"]="New professionexperience could not be created.";
 else
 $data["alertsuccess"]="professionexperience created Successfully.";
-$data["redirect"]="site/viewprofessionexperience";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionexperience?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function editprofessionexperience()
@@ -3898,9 +3919,16 @@ public function editprofessionexperience()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editprofessionexperience";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('professionid');
+$data['before3']=$this->input->get('professionid');
+$data['before4']=$this->input->get('professionid');
 $data["title"]="Edit professionexperience";
 $data["before"]=$this->professionexperience_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editprofessionexperiencesubmit()
 {
@@ -3919,6 +3947,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editprofessionexperience";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professionexperience";
 $data["before"]=$this->professionexperience_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -3938,8 +3968,8 @@ if($this->professionexperience_model->edit($id,$profession,$user,$companyname,$j
 $data["alerterror"]="New professionexperience could not be Updated.";
 else
 $data["alertsuccess"]="professionexperience Updated Successfully.";
-$data["redirect"]="site/viewprofessionexperience";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionexperience?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deleteprofessionexperience()
@@ -3948,7 +3978,7 @@ $access=array("1");
 $this->checkaccess($access);
 $this->professionexperience_model->delete($this->input->get("id"));
 $data["redirect"]="site/viewprofessionexperience";
-$this->load->view("redirect",$data);
+$this->load->view("redirect2",$data);
 }
 public function viewprofessionaward()
 {
@@ -3956,8 +3986,13 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionaward";
 $data["base_url"]=site_url("site/viewprofessionawardjson");
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('id');
 $data["title"]="View professionaward";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewprofessionawardjson()
 {
@@ -3992,6 +4027,17 @@ $elements[5]->field="`expert_professionaward`.`photo`";
 $elements[5]->sort="1";
 $elements[5]->header="photo";
 $elements[5]->alias="photo";
+    
+$elements[6]=new stdClass();
+$elements[6]->field="`expert_professionaward`.`user`";
+$elements[6]->sort="1";
+$elements[6]->header="userid";
+$elements[6]->alias="userid";
+$elements[7]=new stdClass();
+$elements[7]->field="`expert_professionaward`.`profession`";
+$elements[7]->sort="1";
+$elements[7]->header="Professionid";
+$elements[7]->alias="professionid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4015,8 +4061,15 @@ public function createprofessionaward()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofessionaward";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('id');
 $data["title"]="Create professionaward";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createprofessionawardsubmit() 
 {
@@ -4031,6 +4084,9 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createprofessionaward";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Create professionaward";
 $this->load->view("template",$data);
 }
@@ -4045,8 +4101,8 @@ if($this->professionaward_model->create($user,$profession,$website,$videolink,$p
 $data["alerterror"]="New professionaward could not be created.";
 else
 $data["alertsuccess"]="professionaward created Successfully.";
-$data["redirect"]="site/viewprofessionaward";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionaward?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function editprofessionaward()
@@ -4055,8 +4111,15 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editprofessionaward";
 $data["title"]="Edit professionaward";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('professionid');
+$data['before3']=$this->input->get('professionid');
+$data['before4']=$this->input->get('professionid');
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["before"]=$this->professionaward_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editprofessionawardsubmit()
 {
@@ -4072,6 +4135,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editprofessionaward";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professionaward";
 $data["before"]=$this->professionaward_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -4088,8 +4153,8 @@ if($this->professionaward_model->edit($id,$user,$profession,$website,$videolink,
 $data["alerterror"]="New professionaward could not be Updated.";
 else
 $data["alertsuccess"]="professionaward Updated Successfully.";
-$data["redirect"]="site/viewprofessionaward";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionaward?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deleteprofessionaward()

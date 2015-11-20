@@ -57,7 +57,7 @@
 <label class="col-sm-2 control-label" for="normal-field">&nbsp;</label>
 <div class="col-sm-4">
 <button type="submit" class="btn btn-primary">Save</button>
-<a href='<?php echo site_url("site/viewprofessionexperience"); ?>' class='btn btn-secondary'>Cancel</a>
+<a href='<?php echo site_url("site/viewprofessionexperience?id=").$this->input->get('professionid')."&userid=".$this->input->get('userid'); ?>' class='btn btn-secondary'>Cancel</a>
 </div>
 </div>
 </form>

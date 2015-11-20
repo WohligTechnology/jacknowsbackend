@@ -912,4 +912,9 @@ $this->load->view("json",$data);
         $data["message"] = $this->restapi_model->loginuser($email, $password);
         $this->load->view("json", $data);
     }
+    public function logout() {
+        $this->session->sess_destroy();
+        $data['message'] = true;
+        $this->load->view('json', $data);
+    }
 } ?>

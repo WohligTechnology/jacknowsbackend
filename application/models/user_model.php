@@ -241,7 +241,7 @@ class User_model extends CI_Model
 		);
 		foreach($query as $row)
 		{
-			$return[$row->id]=$row->name;
+			$return[$row->id]=$row->id;
 		}
 		
 		return $return;

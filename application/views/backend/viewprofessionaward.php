@@ -1,5 +1,5 @@
 <div id="page-title">
-<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createuser"); ?>">Create</a>
+<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createprofessionaward?id=").$this->input->get('id')."&userid=".$this->input->get('userid'); ?>">Create</a>
 <h1 class="page-header text-overflow">professionaward Details </h1>
 </div>
 <div id="page-content">
@@ -35,7 +35,7 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.profession + "</td><td>" + resultrow.website + "</td><td>" + resultrow.videolink + "</td><td>" + resultrow.photo + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionaward?id=');?>"+resultrow.id+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deleteprofessionaward?id='); ?>"+resultrow.id+"'><i class='icon-trash '></i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.profession + "</td><td>" + resultrow.website + "</td><td>" + resultrow.videolink + "</td><td>" + resultrow.photo + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionaward?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deleteprofessionaward?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

@@ -897,7 +897,7 @@ $id=$this->input->get_post("id");
 $data["message"]=$this->certification_model->getsinglecertification($id);
 $this->load->view("json",$data);
 }
-    function registerUser() {
+    function registeruser() {
         $data = json_decode(file_get_contents('php://input'), true);
         $name=$data['name'];
         $email=$data['email'];
@@ -917,4 +917,23 @@ $this->load->view("json",$data);
         $data['message'] = true;
         $this->load->view('json', $data);
     }
+    function editPersonalDetails() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id=$data['id'];
+        $firstname=$data['firstname'];
+        $lastname=$data['lastname'];
+        $email=$data['email'];
+        $gender=$data['gender'];
+        $address=$data['address'];
+        $country=$data['country'];
+        $state=$data['state'];
+        $city=$data['city'];
+        $pincode=$data['pincode'];
+        $twittersocial=$data['twittersocial'];
+        $youtubesocial=$data['youtubesocial'];
+        $facebooksocial=$data['facebooksocial'];
+        $data["message"] = $this->restapi_model->editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial);
+        $this->load->view("json", $data);
+    }
+    
 } ?>

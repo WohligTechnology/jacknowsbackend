@@ -3,7 +3,7 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class restapi_model extends CI_Model
 {
-    public function registerUser($name, $email, $password)
+    public function registeruser($name, $email, $password)
     {
         $newdata=0;
         $password=md5($password);
@@ -56,6 +56,31 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         else
         return false;
     }
+    
+    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial)
+	{
+        
+		$data  = array(
+			'firstname' => $firstname,
+			'lastname' => $lastname,
+			'email' => $email,
+			'gender' => $gender,
+            'address'=> $address,
+            'country'=> $country,
+            'state'=> $state,
+            'city'=> $city,
+            'pincode'=> $pincode,
+            'twittersocial'=>$twittersocial,
+            'youtubesocial'=>$youtubesocial,
+            'facebooksocial'=>$facebooksocial
+		);
+		$this->db->where( 'id', $id );
+		$query=$this->db->update( 'user', $data );
+        if($query)
+		return 1;
+        else
+        return 0;
+	}
    
     
 }

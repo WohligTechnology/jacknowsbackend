@@ -1,5 +1,5 @@
 <div id="page-title">
-<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createuser"); ?>">Create</a>
+<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createhobby?id=").$this->input->get('id'); ?>">Create</a>
 <h1 class="page-header text-overflow">hobby Details </h1>
 </div>
 <div id="page-content">
@@ -35,9 +35,8 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.category + "</td><td>" + resultrow.expinyrs + "</td><td>" + resultrow.description + "</td><td>" + resultrow.skills + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/edithobby?id=');?>"+resultrow.id+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deletehobby?id='); ?>"+resultrow.id+"'><i class='icon-trash '></i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.category + "</td><td>" + resultrow.expinyrs + "</td><td>" + resultrow.description + "</td><td>" + resultrow.skills + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/edithobby?id=');?>"+resultrow.id+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deletehobby?id='); ?>"+resultrow.id+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>
-</div>
 </div>

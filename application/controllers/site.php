@@ -3528,8 +3528,8 @@ $this->checkaccess($access);
 $this->profession_model->delete($this->input->get("id"));
 $id=$this->input->get("id");
 $userid=$this->input->get("userid");
-$data["redirect"]="site/viewprofession";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofession?id=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewcategory()
 {
@@ -3902,10 +3902,44 @@ $profession=$this->input->get_post("profession");
 $user=$this->input->get_post("user");
 $companyname=$this->input->get_post("companyname");
 $jobtitle=$this->input->get_post("jobtitle");
-$companylogo=$this->input->get_post("companylogo");
+//$companylogo=$this->input->get_post("companylogo");
 $jobdescription=$this->input->get_post("jobdescription");
 $startdate=$this->input->get_post("startdate");
 $enddate=$this->input->get_post("enddate");
+    $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$companylogo="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$companylogo=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $companylogo=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
 if($this->professionexperience_model->create($profession,$user,$companyname,$jobtitle,$companylogo,$jobdescription,$startdate,$enddate)==0)
 $data["alerterror"]="New professionexperience could not be created.";
 else
@@ -3960,10 +3994,51 @@ $profession=$this->input->get_post("profession");
 $user=$this->input->get_post("user");
 $companyname=$this->input->get_post("companyname");
 $jobtitle=$this->input->get_post("jobtitle");
-$companylogo=$this->input->get_post("companylogo");
+//$companylogo=$this->input->get_post("companylogo");
 $jobdescription=$this->input->get_post("jobdescription");
 $startdate=$this->input->get_post("startdate");
 $enddate=$this->input->get_post("enddate");
+    $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$companylogo="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$companylogo=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $companylogo=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
+            if($companylogo=="")
+            {
+            $companylogo=$this->professionexperience_model->getimagebyid($id);
+               // print_r($companylogo);
+                $companylogo=$companylogo->companylogo;
+            }
 if($this->professionexperience_model->edit($id,$profession,$user,$companyname,$jobtitle,$companylogo,$jobdescription,$startdate,$enddate)==0)
 $data["alerterror"]="New professionexperience could not be Updated.";
 else
@@ -3977,7 +4052,9 @@ public function deleteprofessionexperience()
 $access=array("1");
 $this->checkaccess($access);
 $this->professionexperience_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewprofessionexperience";
+$professionid=$this->input->get("professionid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewprofessionexperience?id=".$professionid."&userid=".$userid;
 $this->load->view("redirect2",$data);
 }
 public function viewprofessionaward()
@@ -4096,7 +4173,41 @@ $user=$this->input->get_post("user");
 $profession=$this->input->get_post("profession");
 $website=$this->input->get_post("website");
 $videolink=$this->input->get_post("videolink");
-$photo=$this->input->get_post("photo");
+//$photo=$this->input->get_post("photo");
+$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$photo="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$photo=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $photo=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
 if($this->professionaward_model->create($user,$profession,$website,$videolink,$photo)==0)
 $data["alerterror"]="New professionaward could not be created.";
 else
@@ -4148,7 +4259,47 @@ $user=$this->input->get_post("user");
 $profession=$this->input->get_post("profession");
 $website=$this->input->get_post("website");
 $videolink=$this->input->get_post("videolink");
-$photo=$this->input->get_post("photo");
+//$photo=$this->input->get_post("photo");
+    $config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$photo="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$photo=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $photo=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
+            if($photo=="")
+            {
+            $photo=$this->professionaward_model->getimagebyid($id);
+               // print_r($photo);
+                $photo=$photo->photo;
+            }
 if($this->professionaward_model->edit($id,$user,$profession,$website,$videolink,$photo)==0)
 $data["alerterror"]="New professionaward could not be Updated.";
 else
@@ -4162,17 +4313,23 @@ public function deleteprofessionaward()
 $access=array("1");
 $this->checkaccess($access);
 $this->professionaward_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewprofessionaward";
-$this->load->view("redirect",$data);
+$professionid=$this->input->get("professionid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewprofessionaward?id=".$professionid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewhobby()
 {
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewhobby";
+$data["page2"]="block/userblock";
+$data['before1']=$this->input->get('id');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
 $data["base_url"]=site_url("site/viewhobbyjson");
 $data["title"]="View hobby";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewhobbyjson()
 {
@@ -4207,6 +4364,12 @@ $elements[5]->field="`expert_hobby`.`skills`";
 $elements[5]->sort="1";
 $elements[5]->header="Skills";
 $elements[5]->alias="skills";
+    
+$elements[6]=new stdClass();
+$elements[6]->field="`expert_hobby`.`user`";
+$elements[6]->sort="1";
+$elements[6]->header="Userid";
+$elements[6]->alias="userid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4230,8 +4393,14 @@ public function createhobby()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createhobby";
+$data["page2"]="block/userblock";
+$data['before1']=$this->input->get('id');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['category']=$this->user_model->getcategorydropdown();
+$data['user']=$this->user_model->getuserdropdown();
 $data["title"]="Create hobby";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createhobbysubmit() 
 {
@@ -4246,6 +4415,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createhobby";
+$data['user']=$this->user_model->getuserdropdown();
+$data['category']=$this->user_model->getcategorydropdown();
 $data["title"]="Create hobby";
 $this->load->view("template",$data);
 }
@@ -4260,8 +4431,8 @@ if($this->hobby_model->create($user,$category,$expinyrs,$description,$skills)==0
 $data["alerterror"]="New hobby could not be created.";
 else
 $data["alertsuccess"]="hobby created Successfully.";
-$data["redirect"]="site/viewhobby";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobby?id=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function edithobby()
@@ -4270,8 +4441,23 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="edithobby";
 $data["title"]="Edit hobby";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['category']=$this->user_model->getcategorydropdown();
+$data['user']=$this->user_model->getuserdropdown();
 $data["before"]=$this->hobby_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function edithobbysubmit()
 {
@@ -4287,6 +4473,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="edithobby";
+$data['category']=$this->user_model->getcategorydropdown();
+$data['user']=$this->user_model->getuserdropdown();
 $data["title"]="Edit hobby";
 $data["before"]=$this->hobby_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -4303,8 +4491,8 @@ if($this->hobby_model->edit($id,$user,$category,$expinyrs,$description,$skills)=
 $data["alerterror"]="New hobby could not be Updated.";
 else
 $data["alertsuccess"]="hobby Updated Successfully.";
-$data["redirect"]="site/viewhobby";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobby?id=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletehobby()
@@ -4312,17 +4500,31 @@ public function deletehobby()
 $access=array("1");
 $this->checkaccess($access);
 $this->hobby_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewhobby";
-$this->load->view("redirect",$data);
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewhobby?id=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewhobbyawards()
 {
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewhobbyawards";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["base_url"]=site_url("site/viewhobbyawardsjson");
 $data["title"]="View hobbyawards";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewhobbyawardsjson()
 {
@@ -4347,6 +4549,17 @@ $elements[3]->field="`expert_hobbyawards`.`awards`";
 $elements[3]->sort="1";
 $elements[3]->header="Awards";
 $elements[3]->alias="awards";
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_hobbyawards`.`user`";
+$elements[4]->sort="1";
+$elements[4]->header="Userid";
+$elements[4]->alias="userid";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_hobbyawards`.`hobby`";
+$elements[5]->sort="1";
+$elements[5]->header="Hobbyid";
+$elements[5]->alias="hobbyid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4370,8 +4583,23 @@ public function createhobbyawards()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createhobbyawards";
+$data["page2"]="block/hobbyblock";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["title"]="Create hobbyawards";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createhobbyawardssubmit() 
 {
@@ -4383,6 +4611,8 @@ $this->form_validation->set_rules("awards","Awards","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["page"]="createhobbyawards";
 $data["title"]="Create hobbyawards";
 $this->load->view("template",$data);
@@ -4396,8 +4626,8 @@ if($this->hobbyawards_model->create($user,$hobby,$awards)==0)
 $data["alerterror"]="New hobbyawards could not be created.";
 else
 $data["alertsuccess"]="hobbyawards created Successfully.";
-$data["redirect"]="site/viewhobbyawards";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyawards?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function edithobbyawards()
@@ -4406,8 +4636,23 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="edithobbyawards";
 $data["title"]="Edit hobbyawards";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["before"]=$this->hobbyawards_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function edithobbyawardssubmit()
 {
@@ -4421,6 +4666,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="edithobbyawards";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Edit hobbyawards";
 $data["before"]=$this->hobbyawards_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -4435,8 +4682,8 @@ if($this->hobbyawards_model->edit($id,$user,$hobby,$awards)==0)
 $data["alerterror"]="New hobbyawards could not be Updated.";
 else
 $data["alertsuccess"]="hobbyawards Updated Successfully.";
-$data["redirect"]="site/viewhobbyawards";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyawards?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletehobbyawards()
@@ -4444,17 +4691,32 @@ public function deletehobbyawards()
 $access=array("1");
 $this->checkaccess($access);
 $this->hobbyawards_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewhobbyawards";
-$this->load->view("redirect",$data);
+$hobbyid=$this->input->get("hobbyid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewhobbyawards?id=".$hobbyid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewhobbyeducation()
 {
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewhobbyeducation";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["base_url"]=site_url("site/viewhobbyeducationjson");
 $data["title"]="View hobbyeducation";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewhobbyeducationjson()
 {
@@ -4489,6 +4751,16 @@ $elements[5]->field="`expert_hobbyeducation`.`yearofpassing`";
 $elements[5]->sort="1";
 $elements[5]->header="Year of Passing";
 $elements[5]->alias="yearofpassing";
+$elements[6]=new stdClass();
+$elements[6]->field="`expert_hobbyeducation`.`user`";
+$elements[6]->sort="1";
+$elements[6]->header="Userid";
+$elements[6]->alias="userid";
+$elements[7]=new stdClass();
+$elements[7]->field="`expert_hobbyeducation`.`hobby`";
+$elements[7]->sort="1";
+$elements[7]->header="Hobbyid";
+$elements[7]->alias="hobbyid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4512,8 +4784,23 @@ public function createhobbyeducation()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createhobbyeducation";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Create hobbyeducation";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createhobbyeducationsubmit() 
 {
@@ -4528,6 +4815,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createhobbyeducation";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Create hobbyeducation";
 $this->load->view("template",$data);
 }
@@ -4542,8 +4831,8 @@ if($this->hobbyeducation_model->create($user,$hobby,$degree,$institute,$yearofpa
 $data["alerterror"]="New hobbyeducation could not be created.";
 else
 $data["alertsuccess"]="hobbyeducation created Successfully.";
-$data["redirect"]="site/viewhobbyeducation";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyeducation?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function edithobbyeducation()
@@ -4552,8 +4841,23 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="edithobbyeducation";
 $data["title"]="Edit hobbyeducation";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["before"]=$this->hobbyeducation_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function edithobbyeducationsubmit()
 {
@@ -4569,6 +4873,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="edithobbyeducation";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Edit hobbyeducation";
 $data["before"]=$this->hobbyeducation_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -4585,8 +4891,8 @@ if($this->hobbyeducation_model->edit($id,$user,$hobby,$degree,$institute,$yearof
 $data["alerterror"]="New hobbyeducation could not be Updated.";
 else
 $data["alertsuccess"]="hobbyeducation Updated Successfully.";
-$data["redirect"]="site/viewhobbyeducation";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyeducation?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletehobbyeducation()
@@ -4594,17 +4900,32 @@ public function deletehobbyeducation()
 $access=array("1");
 $this->checkaccess($access);
 $this->hobbyeducation_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewhobbyeducation";
-$this->load->view("redirect",$data);
+$hobbyid=$this->input->get("hobbyid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewhobbyeducation?id=".$hobbyid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewhobbywebsite()
 {
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewhobbywebsite";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["base_url"]=site_url("site/viewhobbywebsitejson");
 $data["title"]="View hobbywebsite";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewhobbywebsitejson()
 {
@@ -4629,6 +4950,17 @@ $elements[3]->field="`expert_hobbywebsite`.`website`";
 $elements[3]->sort="1";
 $elements[3]->header="Website";
 $elements[3]->alias="website";
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_hobbywebsite`.`user`";
+$elements[4]->sort="1";
+$elements[4]->header="Userid";
+$elements[4]->alias="userid";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_hobbywebsite`.`hobby`";
+$elements[5]->sort="1";
+$elements[5]->header="Hobbyid";
+$elements[5]->alias="hobbyid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4653,7 +4985,22 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createhobbywebsite";
 $data["title"]="Create hobbywebsite";
-$this->load->view("template",$data);
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
+$this->load->view("templatewith2",$data);
 }
 public function createhobbywebsitesubmit() 
 {
@@ -4666,6 +5013,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createhobbywebsite";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Create hobbywebsite";
 $this->load->view("template",$data);
 }
@@ -4678,8 +5027,8 @@ if($this->hobbywebsite_model->create($user,$hobby,$website)==0)
 $data["alerterror"]="New hobbywebsite could not be created.";
 else
 $data["alertsuccess"]="hobbywebsite created Successfully.";
-$data["redirect"]="site/viewhobbywebsite";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbywebsite?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function edithobbywebsite()
@@ -4687,9 +5036,24 @@ public function edithobbywebsite()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="edithobbywebsite";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["title"]="Edit hobbywebsite";
 $data["before"]=$this->hobbywebsite_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function edithobbywebsitesubmit()
 {
@@ -4703,6 +5067,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="edithobbywebsite";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Edit hobbywebsite";
 $data["before"]=$this->hobbywebsite_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -4717,8 +5083,8 @@ if($this->hobbywebsite_model->edit($id,$user,$hobby,$website)==0)
 $data["alerterror"]="New hobbywebsite could not be Updated.";
 else
 $data["alertsuccess"]="hobbywebsite Updated Successfully.";
-$data["redirect"]="site/viewhobbywebsite";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbywebsite?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletehobbywebsite()
@@ -4726,17 +5092,32 @@ public function deletehobbywebsite()
 $access=array("1");
 $this->checkaccess($access);
 $this->hobbywebsite_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewhobbywebsite";
-$this->load->view("redirect",$data);
+$hobbyid=$this->input->get("hobbyid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewhobbywebsite?id=".$hobbyid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewhobbyvideolinks()
 {
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewhobbyvideolinks";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["base_url"]=site_url("site/viewhobbyvideolinksjson");
 $data["title"]="View hobbyvideolinks";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewhobbyvideolinksjson()
 {
@@ -4761,6 +5142,16 @@ $elements[3]->field="`expert_hobbyvideolinks`.`videolink`";
 $elements[3]->sort="1";
 $elements[3]->header="Video Link";
 $elements[3]->alias="videolink";
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_hobbyvideolinks`.`user`";
+$elements[4]->sort="1";
+$elements[4]->header="Userid";
+$elements[4]->alias="userid";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_hobbyvideolinks`.`hobby`";
+$elements[5]->sort="1";
+$elements[5]->header="Hobbyid";
+$elements[5]->alias="hobbyid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4785,7 +5176,22 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createhobbyvideolinks";
 $data["title"]="Create hobbyvideolinks";
-$this->load->view("template",$data);
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
+$this->load->view("templatewith2",$data);
 }
 public function createhobbyvideolinkssubmit() 
 {
@@ -4798,6 +5204,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createhobbyvideolinks";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Create hobbyvideolinks";
 $this->load->view("template",$data);
 }
@@ -4810,8 +5218,8 @@ if($this->hobbyvideolinks_model->create($user,$hobby,$videolink)==0)
 $data["alerterror"]="New hobbyvideolinks could not be created.";
 else
 $data["alertsuccess"]="hobbyvideolinks created Successfully.";
-$data["redirect"]="site/viewhobbyvideolinks";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyvideolinks?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function edithobbyvideolinks()
@@ -4819,9 +5227,24 @@ public function edithobbyvideolinks()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="edithobbyvideolinks";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["title"]="Edit hobbyvideolinks";
 $data["before"]=$this->hobbyvideolinks_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function edithobbyvideolinkssubmit()
 {
@@ -4835,6 +5258,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="edithobbyvideolinks";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Edit hobbyvideolinks";
 $data["before"]=$this->hobbyvideolinks_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -4849,8 +5274,8 @@ if($this->hobbyvideolinks_model->edit($id,$user,$hobby,$videolink)==0)
 $data["alerterror"]="New hobbyvideolinks could not be Updated.";
 else
 $data["alertsuccess"]="hobbyvideolinks Updated Successfully.";
-$data["redirect"]="site/viewhobbyvideolinks";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyvideolinks?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletehobbyvideolinks()
@@ -4858,17 +5283,32 @@ public function deletehobbyvideolinks()
 $access=array("1");
 $this->checkaccess($access);
 $this->hobbyvideolinks_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewhobbyvideolinks";
-$this->load->view("redirect",$data);
+$hobbyid=$this->input->get("hobbyid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewhobbyvideolinks?id=".$hobbyid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewhobbyphotos()
 {
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewhobbyphotos";
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["base_url"]=site_url("site/viewhobbyphotosjson");
 $data["title"]="View hobbyphotos";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewhobbyphotosjson()
 {
@@ -4893,6 +5333,17 @@ $elements[3]->field="`expert_hobbyphotos`.`image`";
 $elements[3]->sort="1";
 $elements[3]->header="Image";
 $elements[3]->alias="image";
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_hobbyphotos`.`user`";
+$elements[4]->sort="1";
+$elements[4]->header="Userid";
+$elements[4]->alias="userid";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_hobbyphotos`.`hobby`";
+$elements[5]->sort="1";
+$elements[5]->header="Hobbyid";
+$elements[5]->alias="hobbyid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4917,7 +5368,22 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createhobbyphotos";
 $data["title"]="Create hobbyphotos";
-$this->load->view("template",$data);
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
+$this->load->view("templatewith2",$data);
 }
 public function createhobbyphotossubmit() 
 {
@@ -4930,6 +5396,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createhobbyphotos";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["title"]="Create hobbyphotos";
 $this->load->view("template",$data);
 }
@@ -4937,13 +5405,47 @@ else
 {
 $user=$this->input->get_post("user");
 $hobby=$this->input->get_post("hobby");
-$image=$this->input->get_post("image");
+//$image=$this->input->get_post("image");
+    $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
 if($this->hobbyphotos_model->create($user,$hobby,$image)==0)
 $data["alerterror"]="New hobbyphotos could not be created.";
 else
 $data["alertsuccess"]="hobbyphotos created Successfully.";
-$data["redirect"]="site/viewhobbyphotos";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyphotos?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function edithobbyphotos()
@@ -4951,9 +5453,24 @@ public function edithobbyphotos()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="edithobbyphotos";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
 $data["title"]="Edit hobbyphotos";
 $data["before"]=$this->hobbyphotos_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function edithobbyphotossubmit()
 {
@@ -4966,6 +5483,8 @@ $this->form_validation->set_rules("image","Image","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["user"]=$this->user_model->getuserdropdown();
+$data["hobby"]=$this->user_model->gethobbydropdown();
 $data["page"]="edithobbyphotos";
 $data["title"]="Edit hobbyphotos";
 $data["before"]=$this->hobbyphotos_model->beforeedit($this->input->get("id"));
@@ -4976,13 +5495,54 @@ else
 $id=$this->input->get_post("id");
 $user=$this->input->get_post("user");
 $hobby=$this->input->get_post("hobby");
-$image=$this->input->get_post("image");
+//$image=$this->input->get_post("image");
+$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
+            if($image=="")
+            {
+            $image=$this->hobbyphotos_model->getimagebyid($id);
+               // print_r($image);
+                $image=$image->image;
+            }
 if($this->hobbyphotos_model->edit($id,$user,$hobby,$image)==0)
 $data["alerterror"]="New hobbyphotos could not be Updated.";
 else
 $data["alertsuccess"]="hobbyphotos Updated Successfully.";
-$data["redirect"]="site/viewhobbyphotos";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewhobbyphotos?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deletehobbyphotos()
@@ -4990,8 +5550,10 @@ public function deletehobbyphotos()
 $access=array("1");
 $this->checkaccess($access);
 $this->hobbyphotos_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewhobbyphotos";
-$this->load->view("redirect",$data);
+$hobbyid=$this->input->get("hobbyid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewhobbyphotos?id=".$hobbyid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 }
 ?>

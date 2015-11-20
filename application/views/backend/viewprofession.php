@@ -32,9 +32,8 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.category + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofession?id=');?>"+resultrow.id+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deleteprofession?id='); ?>"+resultrow.id+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.category + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofession?id=');?>"+resultrow.id+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofession?id='); ?>"+resultrow.id+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>
-</div>
 </div>

@@ -39,7 +39,7 @@
     <script>
         function drawtable(resultrow) {
             var details="<a class='btn btn-primary btn-labeled fa fa-plus margined' href='<?php echo site_url("site/viewdetailsofbooking?id="); ?>"+resultrow.id+"'>View Details</a>";
-            return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.fromusername + "</td><td>" + resultrow.tousername + "</td><td>" + resultrow.date + "</td><td>" + resultrow.starttime + "</td><td>" + resultrow.endtime + "</td><td>" + resultrow.status + "</td><td>" + details + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editbooking?id=');?>" + resultrow.id + "'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deletebooking?id='); ?>" + resultrow.id + "'><i class='icon-trash '></i></a></td></tr>";
+            return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.fromusername + "</td><td>" + resultrow.tousername + "</td><td>" + resultrow.date + "</td><td>" + resultrow.starttime + "</td><td>" + resultrow.endtime + "</td><td>" + resultrow.status + "</td><td>" + details + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editbooking?id=');?>" + resultrow.id + "'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deletebooking?id='); ?>" + resultrow.id + "'><i class='icon-trash '></i></a></td></tr>";
         }
         generatejquery("<?php echo $base_url;?>");
     </script>

@@ -35,9 +35,13 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.profession + "</td><td>" + resultrow.website + "</td><td>" + resultrow.videolink + "</td><td>" + resultrow.photo + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionaward?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deleteprofessionaward?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
+    var photo="<a href='<?php echo base_url('uploads').'/'; ?>"+resultrow.photo+"' target='_blank'><img src='<?php echo base_url('uploads').'/'; ?>"+resultrow.photo+"' width='80px' height='80px'></a>";
+                if(resultrow.photo=="")
+                {
+                photo="No Receipt Available";
+                }
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.profession + "</td><td>" + resultrow.website + "</td><td>" + resultrow.videolink + "</td><td>" + photo + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionaward?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofessionaward?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>
-</div>
 </div>

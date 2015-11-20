@@ -1,5 +1,5 @@
 <div id="page-title">
-<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createuser"); ?>">Create</a>
+<a class="btn btn-primary btn-labeled fa fa-plus margined pull-right" href="<?php echo site_url("site/createhobbyphotos?id=").$this->input->get('id')."&userid=".$this->input->get('userid'); ?>">Create</a>
 <h1 class="page-header text-overflow">hobbyphotos Details </h1>
 </div>
 <div id="page-content">
@@ -33,9 +33,13 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.hobby + "</td><td>" + resultrow.image + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/edithobbyphotos?id=');?>"+resultrow.id+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deletehobbyphotos?id='); ?>"+resultrow.id+"'><i class='icon-trash '></i></a></td></tr>";
+    var image="<a href='<?php echo base_url('uploads').'/'; ?>"+resultrow.image+"' target='_blank'><img src='<?php echo base_url('uploads').'/'; ?>"+resultrow.image+"' width='80px' height='80px'></a>";
+                if(resultrow.image=="")
+                {
+                image="No Receipt Available";
+                }
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.hobby + "</td><td>" + image + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/edithobbyphotos?id=');?>"+resultrow.id+"&hobbyid="+resultrow.hobbyid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deletehobbyphotos?id='); ?>"+resultrow.id+"&hobbyid="+resultrow.hobbyid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>
-</div>
 </div>

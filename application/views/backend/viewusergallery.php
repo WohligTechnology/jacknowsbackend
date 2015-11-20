@@ -46,7 +46,7 @@
                 resultrow.type="Audio";
             else if(resultrow.type==2)
                 resultrow.type="Video";
-            return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.type + "</td><td>" + resultrow.image + "</td><td>" + resultrow.audio + "</td><td>" + resultrow.video + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editusergallery?id=');?>" + resultrow.user + "&galleryid="+resultrow.id+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=return confirm(\"Are you sure you want to delete?\") href='<?php echo site_url('site/deleteusergallery?id='); ?>" + resultrow.user + "&galleryid="+resultrow.id+"'><i class='icon-trash '></i></a></td></tr>";
+            return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.type + "</td><td>" + resultrow.image + "</td><td>" + resultrow.audio + "</td><td>" + resultrow.video + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editusergallery?id=');?>" + resultrow.user + "&galleryid="+resultrow.id+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteusergallery?id='); ?>" + resultrow.user + "&galleryid="+resultrow.id+"'><i class='icon-trash '></i></a></td></tr>";
         }
         generatejquery("<?php echo $base_url;?>");
     </script>

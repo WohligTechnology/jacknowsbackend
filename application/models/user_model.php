@@ -233,6 +233,19 @@ class User_model extends CI_Model
 		
 		return $return;
 	}
+    public function gethobbydropdown()
+	{
+		$query=$this->db->query("SELECT * FROM `expert_hobby`  ORDER BY `id` ASC")->result();
+		$return=array(
+		"" => ""
+		);
+		foreach($query as $row)
+		{
+			$return[$row->id]=$row->id;
+		}
+		
+		return $return;
+	}
     public function getprofessiondropdown()
 	{
 		$query=$this->db->query("SELECT * FROM `expert_profession`  ORDER BY `id` ASC")->result();

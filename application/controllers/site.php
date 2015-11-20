@@ -5555,5 +5555,553 @@ $userid=$this->input->get("userid");
 $data["redirect"]="site/viewhobbyphotos?id=".$hobbyid."&userid=".$userid;
 $this->load->view("redirect2",$data);
 }
+    //new tables for profession
+    
+    public function viewprofessionwebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofessionwebsite";
+$data["base_url"]=site_url("site/viewprofessionwebsitejson");
+$data["title"]="View professionwebsite";
+$this->load->view("template",$data);
+}
+function viewprofessionwebsitejson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_professionwebsite`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_professionwebsite`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_professionwebsite`.`profession`";
+$elements[2]->sort="1";
+$elements[2]->header="Profession";
+$elements[2]->alias="profession";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professionwebsite`.`website`";
+$elements[3]->sort="1";
+$elements[3]->header="Website";
+$elements[3]->alias="website";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionwebsite`");
+$this->load->view("json",$data);
+}
+
+public function createprofessionwebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofessionwebsite";
+$data["title"]="Create professionwebsite";
+$this->load->view("template",$data);
+}
+public function createprofessionwebsitesubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("website","Website","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofessionwebsite";
+$data["title"]="Create professionwebsite";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$website=$this->input->get_post("website");
+if($this->professionwebsite_model->create($user,$profession,$website)==0)
+$data["alerterror"]="New professionwebsite could not be created.";
+else
+$data["alertsuccess"]="professionwebsite created Successfully.";
+$data["redirect"]="site/viewprofessionwebsite";
+$this->load->view("redirect",$data);
+}
+}
+public function editprofessionwebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofessionwebsite";
+$data["title"]="Edit professionwebsite";
+$data["before"]=$this->professionwebsite_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editprofessionwebsitesubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("website","Website","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofessionwebsite";
+$data["title"]="Edit professionwebsite";
+$data["before"]=$this->professionwebsite_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$website=$this->input->get_post("website");
+if($this->professionwebsite_model->edit($id,$user,$profession,$website)==0)
+$data["alerterror"]="New professionwebsite could not be Updated.";
+else
+$data["alertsuccess"]="professionwebsite Updated Successfully.";
+$data["redirect"]="site/viewprofessionwebsite";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteprofessionwebsite()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->professionwebsite_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewprofessionwebsite";
+$this->load->view("redirect",$data);
+}
+public function viewprofessioneducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofessioneducation";
+$data["base_url"]=site_url("site/viewprofessioneducationjson");
+$data["title"]="View professioneducation";
+$this->load->view("template",$data);
+}
+function viewprofessioneducationjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_professioneducation`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_professioneducation`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_professioneducation`.`profession`";
+$elements[2]->sort="1";
+$elements[2]->header="Profession";
+$elements[2]->alias="profession";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professioneducation`.`degree`";
+$elements[3]->sort="1";
+$elements[3]->header="Degree";
+$elements[3]->alias="degree";
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professioneducation`.`institute`";
+$elements[4]->sort="1";
+$elements[4]->header="Institute";
+$elements[4]->alias="institute";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professioneducation`.`yearofpassing`";
+$elements[5]->sort="1";
+$elements[5]->header="Year of Passing";
+$elements[5]->alias="yearofpassing";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professioneducation`");
+$this->load->view("json",$data);
+}
+
+public function createprofessioneducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofessioneducation";
+$data["title"]="Create professioneducation";
+$this->load->view("template",$data);
+}
+public function createprofessioneducationsubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("degree","Degree","trim");
+$this->form_validation->set_rules("institute","Institute","trim");
+$this->form_validation->set_rules("yearofpassing","Year of Passing","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofessioneducation";
+$data["title"]="Create professioneducation";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$degree=$this->input->get_post("degree");
+$institute=$this->input->get_post("institute");
+$yearofpassing=$this->input->get_post("yearofpassing");
+if($this->professioneducation_model->create($user,$profession,$degree,$institute,$yearofpassing)==0)
+$data["alerterror"]="New professioneducation could not be created.";
+else
+$data["alertsuccess"]="professioneducation created Successfully.";
+$data["redirect"]="site/viewprofessioneducation";
+$this->load->view("redirect",$data);
+}
+}
+public function editprofessioneducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofessioneducation";
+$data["title"]="Edit professioneducation";
+$data["before"]=$this->professioneducation_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editprofessioneducationsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("degree","Degree","trim");
+$this->form_validation->set_rules("institute","Institute","trim");
+$this->form_validation->set_rules("yearofpassing","Year of Passing","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofessioneducation";
+$data["title"]="Edit professioneducation";
+$data["before"]=$this->professioneducation_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$degree=$this->input->get_post("degree");
+$institute=$this->input->get_post("institute");
+$yearofpassing=$this->input->get_post("yearofpassing");
+if($this->professioneducation_model->edit($id,$user,$profession,$degree,$institute,$yearofpassing)==0)
+$data["alerterror"]="New professioneducation could not be Updated.";
+else
+$data["alertsuccess"]="professioneducation Updated Successfully.";
+$data["redirect"]="site/viewprofessioneducation";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteprofessioneducation()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->professioneducation_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewprofessioneducation";
+$this->load->view("redirect",$data);
+}
+public function viewprofessionvideolink()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofessionvideolink";
+$data["base_url"]=site_url("site/viewprofessionvideolinkjson");
+$data["title"]="View professionvideolink";
+$this->load->view("template",$data);
+}
+function viewprofessionvideolinkjson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_professionvideolink`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_professionvideolink`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_professionvideolink`.`profession`";
+$elements[2]->sort="1";
+$elements[2]->header="Profession";
+$elements[2]->alias="profession";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professionvideolink`.`videolink`";
+$elements[3]->sort="1";
+$elements[3]->header="Video Link";
+$elements[3]->alias="videolink";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionvideolink`");
+$this->load->view("json",$data);
+}
+
+public function createprofessionvideolink()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofessionvideolink";
+$data["title"]="Create professionvideolink";
+$this->load->view("template",$data);
+}
+public function createprofessionvideolinksubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofessionvideolink";
+$data["title"]="Create professionvideolink";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$videolink=$this->input->get_post("videolink");
+if($this->professionvideolink_model->create($user,$profession,$videolink)==0)
+$data["alerterror"]="New professionvideolink could not be created.";
+else
+$data["alertsuccess"]="professionvideolink created Successfully.";
+$data["redirect"]="site/viewprofessionvideolink";
+$this->load->view("redirect",$data);
+}
+}
+public function editprofessionvideolink()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofessionvideolink";
+$data["title"]="Edit professionvideolink";
+$data["before"]=$this->professionvideolink_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editprofessionvideolinksubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofessionvideolink";
+$data["title"]="Edit professionvideolink";
+$data["before"]=$this->professionvideolink_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$videolink=$this->input->get_post("videolink");
+if($this->professionvideolink_model->edit($id,$user,$profession,$videolink)==0)
+$data["alerterror"]="New professionvideolink could not be Updated.";
+else
+$data["alertsuccess"]="professionvideolink Updated Successfully.";
+$data["redirect"]="site/viewprofessionvideolink";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteprofessionvideolink()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->professionvideolink_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewprofessionvideolink";
+$this->load->view("redirect",$data);
+}
+public function viewprofessionphoto()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofessionphoto";
+$data["base_url"]=site_url("site/viewprofessionphotojson");
+$data["title"]="View professionphoto";
+$this->load->view("template",$data);
+}
+function viewprofessionphotojson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_professionphoto`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_professionphoto`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_professionphoto`.`profession`";
+$elements[2]->sort="1";
+$elements[2]->header="Profession";
+$elements[2]->alias="profession";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professionphoto`.`image`";
+$elements[3]->sort="1";
+$elements[3]->header="Image";
+$elements[3]->alias="image";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionphoto`");
+$this->load->view("json",$data);
+}
+
+public function createprofessionphoto()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofessionphoto";
+$data["title"]="Create professionphoto";
+$this->load->view("template",$data);
+}
+public function createprofessionphotosubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("image","Image","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofessionphoto";
+$data["title"]="Create professionphoto";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$image=$this->input->get_post("image");
+if($this->professionphoto_model->create($user,$profession,$image)==0)
+$data["alerterror"]="New professionphoto could not be created.";
+else
+$data["alertsuccess"]="professionphoto created Successfully.";
+$data["redirect"]="site/viewprofessionphoto";
+$this->load->view("redirect",$data);
+}
+}
+public function editprofessionphoto()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofessionphoto";
+$data["title"]="Edit professionphoto";
+$data["before"]=$this->professionphoto_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+public function editprofessionphotosubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("image","Image","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofessionphoto";
+$data["title"]="Edit professionphoto";
+$data["before"]=$this->professionphoto_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$image=$this->input->get_post("image");
+if($this->professionphoto_model->edit($id,$user,$profession,$image)==0)
+$data["alerterror"]="New professionphoto could not be Updated.";
+else
+$data["alertsuccess"]="professionphoto Updated Successfully.";
+$data["redirect"]="site/viewprofessionphoto";
+$this->load->view("redirect",$data);
+}
+}
+public function deleteprofessionphoto()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->professionphoto_model->delete($this->input->get("id"));
+$data["redirect"]="site/viewprofessionphoto";
+$this->load->view("redirect",$data);
+}
 }
 ?>

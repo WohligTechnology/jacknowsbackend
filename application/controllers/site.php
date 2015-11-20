@@ -3485,7 +3485,17 @@ $data['before']=$this->user_model->beforeedit($this->input->get('id'));
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
 $data['before3']=$this->input->get('id');
-$data['before4']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data['category']=$this->user_model->getcategorydropdown();
 $data['user']=$this->user_model->getuserdropdown();
 $data["before"]=$this->profession_model->beforeedit($this->input->get("id"));
@@ -3777,7 +3787,17 @@ $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
 $data['before3']=$this->input->get('id');
-$data['before4']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["base_url"]=site_url("site/viewprofessionexperiencejson");
 $data["title"]="View professionexperience";
 $this->load->view("templatewith2",$data);
@@ -3870,7 +3890,17 @@ $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
 $data['before3']=$this->input->get('id');
-$data['before4']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["user"]=$this->user_model->getuserdropdown();
 $data["title"]="Create professionexperience";
 $this->load->view("templatewith2",$data);
@@ -3957,9 +3987,19 @@ $data["user"]=$this->user_model->getuserdropdown();
 $data['profession']=$this->user_model->getprofessiondropdown();
 $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
-$data['before2']=$this->input->get('professionid');
-$data['before3']=$this->input->get('professionid');
-$data['before4']=$this->input->get('professionid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="Edit professionexperience";
 $data["before"]=$this->professionexperience_model->beforeedit($this->input->get("id"));
 $this->load->view("templatewith2",$data);
@@ -4067,7 +4107,17 @@ $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
 $data['before3']=$this->input->get('id');
-$data['before4']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="View professionaward";
 $this->load->view("templatewith2",$data);
 }
@@ -4144,7 +4194,17 @@ $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
 $data['before3']=$this->input->get('id');
-$data['before4']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="Create professionaward";
 $this->load->view("templatewith2",$data);
 }
@@ -4225,9 +4285,19 @@ $data["title"]="Edit professionaward";
 $data["user"]=$this->user_model->getuserdropdown();
 $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
-$data['before2']=$this->input->get('professionid');
-$data['before3']=$this->input->get('professionid');
-$data['before4']=$this->input->get('professionid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data['profession']=$this->user_model->getprofessiondropdown();
 $data["before"]=$this->professionaward_model->beforeedit($this->input->get("id"));
 $this->load->view("templatewith2",$data);
@@ -5563,8 +5633,23 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionwebsite";
 $data["base_url"]=site_url("site/viewprofessionwebsitejson");
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="View professionwebsite";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewprofessionwebsitejson()
 {
@@ -5589,6 +5674,18 @@ $elements[3]->field="`expert_professionwebsite`.`website`";
 $elements[3]->sort="1";
 $elements[3]->header="Website";
 $elements[3]->alias="website";
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professionwebsite`.`profession`";
+$elements[4]->sort="1";
+$elements[4]->header="professionid";
+$elements[4]->alias="professionid";
+    
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professionwebsite`.`user`";
+$elements[5]->sort="1";
+$elements[5]->header="userid";
+$elements[5]->alias="userid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -5612,8 +5709,25 @@ public function createprofessionwebsite()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofessionwebsite";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="Create professionwebsite";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createprofessionwebsitesubmit() 
 {
@@ -5625,6 +5739,8 @@ $this->form_validation->set_rules("website","Website","trim");
 if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["page"]="createprofessionwebsite";
 $data["title"]="Create professionwebsite";
 $this->load->view("template",$data);
@@ -5638,8 +5754,8 @@ if($this->professionwebsite_model->create($user,$profession,$website)==0)
 $data["alerterror"]="New professionwebsite could not be created.";
 else
 $data["alertsuccess"]="professionwebsite created Successfully.";
-$data["redirect"]="site/viewprofessionwebsite";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionwebsite?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function editprofessionwebsite()
@@ -5647,9 +5763,26 @@ public function editprofessionwebsite()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editprofessionwebsite";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professionwebsite";
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["before"]=$this->professionwebsite_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editprofessionwebsitesubmit()
 {
@@ -5663,6 +5796,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editprofessionwebsite";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professionwebsite";
 $data["before"]=$this->professionwebsite_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -5677,8 +5812,8 @@ if($this->professionwebsite_model->edit($id,$user,$profession,$website)==0)
 $data["alerterror"]="New professionwebsite could not be Updated.";
 else
 $data["alertsuccess"]="professionwebsite Updated Successfully.";
-$data["redirect"]="site/viewprofessionwebsite";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionwebsite?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deleteprofessionwebsite()
@@ -5686,8 +5821,10 @@ public function deleteprofessionwebsite()
 $access=array("1");
 $this->checkaccess($access);
 $this->professionwebsite_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewprofessionwebsite";
-$this->load->view("redirect",$data);
+$professionid=$this->input->get("professionid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewprofessionwebsite?id=".$professionid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewprofessioneducation()
 {
@@ -5695,8 +5832,23 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessioneducation";
 $data["base_url"]=site_url("site/viewprofessioneducationjson");
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="View professioneducation";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewprofessioneducationjson()
 {
@@ -5731,6 +5883,18 @@ $elements[5]->field="`expert_professioneducation`.`yearofpassing`";
 $elements[5]->sort="1";
 $elements[5]->header="Year of Passing";
 $elements[5]->alias="yearofpassing";
+
+$elements[6]=new stdClass();
+$elements[6]->field="`expert_professioneducation`.`profession`";
+$elements[6]->sort="1";
+$elements[6]->header="professionid";
+$elements[6]->alias="professionid";
+    
+$elements[7]=new stdClass();
+$elements[7]->field="`expert_professioneducation`.`user`";
+$elements[7]->sort="1";
+$elements[7]->header="userid";
+$elements[7]->alias="userid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -5754,8 +5918,25 @@ public function createprofessioneducation()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofessioneducation";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="Create professioneducation";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createprofessioneducationsubmit() 
 {
@@ -5770,6 +5951,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createprofessioneducation";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Create professioneducation";
 $this->load->view("template",$data);
 }
@@ -5784,8 +5967,8 @@ if($this->professioneducation_model->create($user,$profession,$degree,$institute
 $data["alerterror"]="New professioneducation could not be created.";
 else
 $data["alertsuccess"]="professioneducation created Successfully.";
-$data["redirect"]="site/viewprofessioneducation";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessioneducation?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function editprofessioneducation()
@@ -5793,9 +5976,26 @@ public function editprofessioneducation()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editprofessioneducation";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professioneducation";
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["before"]=$this->professioneducation_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editprofessioneducationsubmit()
 {
@@ -5811,6 +6011,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editprofessioneducation";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professioneducation";
 $data["before"]=$this->professioneducation_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -5836,17 +6038,34 @@ public function deleteprofessioneducation()
 $access=array("1");
 $this->checkaccess($access);
 $this->professioneducation_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewprofessioneducation";
-$this->load->view("redirect",$data);
+$professionid=$this->input->get("professionid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewprofessioneducation?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 public function viewprofessionvideolink()
 {
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionvideolink";
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["base_url"]=site_url("site/viewprofessionvideolinkjson");
 $data["title"]="View professionvideolink";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewprofessionvideolinkjson()
 {
@@ -5871,6 +6090,18 @@ $elements[3]->field="`expert_professionvideolink`.`videolink`";
 $elements[3]->sort="1";
 $elements[3]->header="Video Link";
 $elements[3]->alias="videolink";
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professionvideolink`.`profession`";
+$elements[4]->sort="1";
+$elements[4]->header="professionid";
+$elements[4]->alias="professionid";
+    
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professionvideolink`.`user`";
+$elements[5]->sort="1";
+$elements[5]->header="userid";
+$elements[5]->alias="userid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -5895,7 +6126,24 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofessionvideolink";
 $data["title"]="Create professionvideolink";
-$this->load->view("template",$data);
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$this->load->view("templatewith2",$data);
 }
 public function createprofessionvideolinksubmit() 
 {
@@ -5908,6 +6156,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createprofessionvideolink";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Create professionvideolink";
 $this->load->view("template",$data);
 }
@@ -5920,8 +6170,8 @@ if($this->professionvideolink_model->create($user,$profession,$videolink)==0)
 $data["alerterror"]="New professionvideolink could not be created.";
 else
 $data["alertsuccess"]="professionvideolink created Successfully.";
-$data["redirect"]="site/viewprofessionvideolink";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionvideolink?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function editprofessionvideolink()
@@ -5930,8 +6180,25 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editprofessionvideolink";
 $data["title"]="Edit professionvideolink";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["before"]=$this->professionvideolink_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editprofessionvideolinksubmit()
 {
@@ -5945,6 +6212,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editprofessionvideolink";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professionvideolink";
 $data["before"]=$this->professionvideolink_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -5959,8 +6228,8 @@ if($this->professionvideolink_model->edit($id,$user,$profession,$videolink)==0)
 $data["alerterror"]="New professionvideolink could not be Updated.";
 else
 $data["alertsuccess"]="professionvideolink Updated Successfully.";
-$data["redirect"]="site/viewprofessionvideolink";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionvideolink?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deleteprofessionvideolink()
@@ -5968,8 +6237,10 @@ public function deleteprofessionvideolink()
 $access=array("1");
 $this->checkaccess($access);
 $this->professionvideolink_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewprofessionvideolink";
-$this->load->view("redirect",$data);
+$professionid=$this->input->get("professionid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewprofessionvideolink?id=".$professionid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 public function viewprofessionphoto()
 {
@@ -5977,8 +6248,23 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionphoto";
 $data["base_url"]=site_url("site/viewprofessionphotojson");
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="View professionphoto";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 function viewprofessionphotojson()
 {
@@ -6003,6 +6289,18 @@ $elements[3]->field="`expert_professionphoto`.`image`";
 $elements[3]->sort="1";
 $elements[3]->header="Image";
 $elements[3]->alias="image";
+
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professionphoto`.`profession`";
+$elements[4]->sort="1";
+$elements[4]->header="professionid";
+$elements[4]->alias="professionid";
+    
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professionphoto`.`user`";
+$elements[5]->sort="1";
+$elements[5]->header="userid";
+$elements[5]->alias="userid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -6026,8 +6324,25 @@ public function createprofessionphoto()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="createprofessionphoto";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["title"]="Create professionphoto";
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function createprofessionphotosubmit() 
 {
@@ -6040,6 +6355,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="createprofessionphoto";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Create professionphoto";
 $this->load->view("template",$data);
 }
@@ -6047,13 +6364,47 @@ else
 {
 $user=$this->input->get_post("user");
 $profession=$this->input->get_post("profession");
-$image=$this->input->get_post("image");
+//$image=$this->input->get_post("image");
+$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
 if($this->professionphoto_model->create($user,$profession,$image)==0)
 $data["alerterror"]="New professionphoto could not be created.";
 else
 $data["alertsuccess"]="professionphoto created Successfully.";
-$data["redirect"]="site/viewprofessionphoto";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionphoto?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function editprofessionphoto()
@@ -6062,8 +6413,25 @@ $access=array("1");
 $this->checkaccess($access);
 $data["page"]="editprofessionphoto";
 $data["title"]="Edit professionphoto";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
 $data["before"]=$this->professionphoto_model->beforeedit($this->input->get("id"));
-$this->load->view("template",$data);
+$this->load->view("templatewith2",$data);
 }
 public function editprofessionphotosubmit()
 {
@@ -6077,6 +6445,8 @@ if($this->form_validation->run()==FALSE)
 {
 $data["alerterror"]=validation_errors();
 $data["page"]="editprofessionphoto";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
 $data["title"]="Edit professionphoto";
 $data["before"]=$this->professionphoto_model->beforeedit($this->input->get("id"));
 $this->load->view("template",$data);
@@ -6086,13 +6456,54 @@ else
 $id=$this->input->get_post("id");
 $user=$this->input->get_post("user");
 $profession=$this->input->get_post("profession");
-$image=$this->input->get_post("image");
+//$image=$this->input->get_post("image");
+ $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                    //return false;
+                }  
+                else
+                {
+                    //print_r($this->image_lib->dest_image);
+                    //dest_image
+                    $image=$this->image_lib->dest_image;
+                    //return false;
+                }
+                
+			}
+            
+            if($image=="")
+            {
+            $image=$this->professionphoto_model->getimagebyid($id);
+               // print_r($image);
+                $image=$image->image;
+            }
 if($this->professionphoto_model->edit($id,$user,$profession,$image)==0)
 $data["alerterror"]="New professionphoto could not be Updated.";
 else
 $data["alertsuccess"]="professionphoto Updated Successfully.";
-$data["redirect"]="site/viewprofessionphoto";
-$this->load->view("redirect",$data);
+$data["redirect"]="site/viewprofessionphoto?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
 }
 }
 public function deleteprofessionphoto()
@@ -6100,8 +6511,10 @@ public function deleteprofessionphoto()
 $access=array("1");
 $this->checkaccess($access);
 $this->professionphoto_model->delete($this->input->get("id"));
-$data["redirect"]="site/viewprofessionphoto";
-$this->load->view("redirect",$data);
+$professionid=$this->input->get("professionid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewprofessionphoto?id=".$professionid."&userid=".$userid;
+$this->load->view("redirect2",$data);
 }
 }
 ?>

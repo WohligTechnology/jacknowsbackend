@@ -82,7 +82,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         return 0;
 	}
     
-    public function editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos){
+    public function editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos,$skills){
         
         $query=$this->db->query("SELECT * FROM `expert_category` WHERE `name` LIKE '$category'")->row();
         $categoryid=$query->id;
@@ -97,6 +97,13 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
          $data=array("user" => $id,"profession" => $professionid,"award" => $awards[$i]['awards']);
         $query=$this->db->insert( "expert_professionaward", $data );
         $awardid=$this->db->insert_id();
+            
+        } 
+        // SKILLS
+        for($i=0; $i<count($skills); $i++){
+         $data=array("user" => $id,"profession" => $professionid,"skills" => $skills[$i]['text']);
+        $query=$this->db->insert( "expert_professionskill", $data );
+        $skillid=$this->db->insert_id();
             
         }
 
@@ -157,6 +164,14 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
 //        
         $this->db->query("INSERT INTO `expert_hobby`( `user`, `category`,`description`,`expinyrs`) VALUE('$id','$categoryid','$description','$yoexp')");
         $hobbyid=$this->db->insert_id();
+        
+        // Skills
+        for($i=0; $i<count($skills); $i++){
+         $data=array("user" => $id,"hobby" => $hobbyid,"skills" => $skills[$i]['text']);
+        $query=$this->db->insert( "expert_hobbyskill", $data );
+        $skillsid=$this->db->insert_id();
+            
+        }
         
         // AWARDS
         for($i=0; $i<count($awards); $i++){

@@ -946,7 +946,8 @@ $this->load->view("json",$data);
         $description=$data['description'];
         $category=$data['category'];
         $photos=$data['photos'];
-        $data["message"] = $this->restapi_model->editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos);
+        $skills=$data['skills'];
+        $data["message"] = $this->restapi_model->editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos,$skills);
         $this->load->view("json", $data);
     } 
     function editHobbyDetails() {

@@ -25,24 +25,14 @@ Create professionaward </h3>
 <?php echo form_dropdown("profession",$profession,set_value('profession',$this->input->get('id')),"class='chzn-select form-control'");?>
 </div>
 </div>
+
 <div class="form-group">
-<label class="col-sm-2 control-label" for="normal-field">Website</label>
+<label class="col-sm-2 control-label" for="normal-field">Award</label>
 <div class="col-sm-4">
-<input type="text" id="normal-field" class="form-control" name="website" value='<?php echo set_value('website');?>'>
+<input type="text" id="normal-field" class="form-control" name="award" value='<?php echo set_value('award');?>'>
 </div>
 </div>
-<div class="form-group">
-<label class="col-sm-2 control-label" for="normal-field">Video Link</label>
-<div class="col-sm-4">
-<input type="text" id="normal-field" class="form-control" name="videolink" value='<?php echo set_value('videolink');?>'>
-</div>
-</div>
-<div class=" form-group">
-<label class="col-sm-2 control-label" for="normal-field">photo</label>
-<div class="col-sm-4">
-<input type="file" id="normal-field" class="form-control" name="photo" value='<?php echo set_value('photo');?>'>
-</div>
-</div>
+
 <div class="form-group">
 <label class="col-sm-2 control-label" for="normal-field">&nbsp;</label>
 <div class="col-sm-4">

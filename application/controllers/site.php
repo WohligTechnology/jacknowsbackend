@@ -3466,7 +3466,8 @@ else
 {
 $user=$this->input->get_post("user");
 $category=$this->input->get_post("category");
-if($this->profession_model->create($user,$category)==0)
+$description=$this->input->get_post("description");
+if($this->profession_model->create($user,$category,$description)==0)
 $data["alerterror"]="New profession could not be created.";
 else
 $data["alertsuccess"]="profession created Successfully.";
@@ -3523,7 +3524,8 @@ else
 $id=$this->input->get_post("id");
 $user=$this->input->get_post("user");
 $category=$this->input->get_post("category");
-if($this->profession_model->edit($id,$user,$category)==0)
+$description=$this->input->get_post("description");
+if($this->profession_model->edit($id,$user,$category,$description)==0)
 $data["alerterror"]="New profession could not be Updated.";
 else
 $data["alertsuccess"]="profession Updated Successfully.";
@@ -4139,32 +4141,24 @@ $elements[2]->field="`expert_professionaward`.`profession`";
 $elements[2]->sort="1";
 $elements[2]->header="Profession";
 $elements[2]->alias="profession";
-$elements[3]=new stdClass();
-$elements[3]->field="`expert_professionaward`.`website`";
-$elements[3]->sort="1";
-$elements[3]->header="Website";
-$elements[3]->alias="website";
-$elements[4]=new stdClass();
-$elements[4]->field="`expert_professionaward`.`videolink`";
-$elements[4]->sort="1";
-$elements[4]->header="Video Link";
-$elements[4]->alias="videolink";
-$elements[5]=new stdClass();
-$elements[5]->field="`expert_professionaward`.`photo`";
-$elements[5]->sort="1";
-$elements[5]->header="photo";
-$elements[5]->alias="photo";
     
-$elements[6]=new stdClass();
-$elements[6]->field="`expert_professionaward`.`user`";
-$elements[6]->sort="1";
-$elements[6]->header="userid";
-$elements[6]->alias="userid";
-$elements[7]=new stdClass();
-$elements[7]->field="`expert_professionaward`.`profession`";
-$elements[7]->sort="1";
-$elements[7]->header="Professionid";
-$elements[7]->alias="professionid";
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professionaward`.`award`";
+$elements[3]->sort="1";
+$elements[3]->header="award";
+$elements[3]->alias="award";
+
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professionaward`.`user`";
+$elements[4]->sort="1";
+$elements[4]->header="userid";
+$elements[4]->alias="userid";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professionaward`.`profession`";
+$elements[5]->sort="1";
+$elements[5]->header="Professionid";
+$elements[5]->alias="professionid";
 $search=$this->input->get_post("search");
 $pageno=$this->input->get_post("pageno");
 $orderby=$this->input->get_post("orderby");
@@ -4231,44 +4225,9 @@ else
 {
 $user=$this->input->get_post("user");
 $profession=$this->input->get_post("profession");
-$website=$this->input->get_post("website");
-$videolink=$this->input->get_post("videolink");
-//$photo=$this->input->get_post("photo");
-$config['upload_path'] = './uploads/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$this->load->library('upload', $config);
-			$filename="image";
-			$photo="";
-			if (  $this->upload->do_upload($filename))
-			{
-				$uploaddata = $this->upload->data();
-				$photo=$uploaddata['file_name'];
-                
-                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
-                $config_r['maintain_ratio'] = TRUE;
-                $config_t['create_thumb'] = FALSE;///add this
-                $config_r['width']   = 800;
-                $config_r['height'] = 800;
-                $config_r['quality']    = 100;
-                //end of configs
+$award=$this->input->get_post("award");
 
-                $this->load->library('image_lib', $config_r); 
-                $this->image_lib->initialize($config_r);
-                if(!$this->image_lib->resize())
-                {
-                    echo "Failed." . $this->image_lib->display_errors();
-                    //return false;
-                }  
-                else
-                {
-                    //print_r($this->image_lib->dest_image);
-                    //dest_image
-                    $photo=$this->image_lib->dest_image;
-                    //return false;
-                }
-                
-			}
-if($this->professionaward_model->create($user,$profession,$website,$videolink,$photo)==0)
+if($this->professionaward_model->create($user,$profession,$award)==0)
 $data["alerterror"]="New professionaward could not be created.";
 else
 $data["alertsuccess"]="professionaward created Successfully.";
@@ -4327,50 +4286,9 @@ else
 $id=$this->input->get_post("id");
 $user=$this->input->get_post("user");
 $profession=$this->input->get_post("profession");
-$website=$this->input->get_post("website");
-$videolink=$this->input->get_post("videolink");
-//$photo=$this->input->get_post("photo");
-    $config['allowed_types'] = 'gif|jpg|png|jpeg';
-			$this->load->library('upload', $config);
-			$filename="image";
-			$photo="";
-			if (  $this->upload->do_upload($filename))
-			{
-				$uploaddata = $this->upload->data();
-				$photo=$uploaddata['file_name'];
-                
-                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
-                $config_r['maintain_ratio'] = TRUE;
-                $config_t['create_thumb'] = FALSE;///add this
-                $config_r['width']   = 800;
-                $config_r['height'] = 800;
-                $config_r['quality']    = 100;
-                //end of configs
+$award=$this->input->get_post("award");
 
-                $this->load->library('image_lib', $config_r); 
-                $this->image_lib->initialize($config_r);
-                if(!$this->image_lib->resize())
-                {
-                    echo "Failed." . $this->image_lib->display_errors();
-                    //return false;
-                }  
-                else
-                {
-                    //print_r($this->image_lib->dest_image);
-                    //dest_image
-                    $photo=$this->image_lib->dest_image;
-                    //return false;
-                }
-                
-			}
-            
-            if($photo=="")
-            {
-            $photo=$this->professionaward_model->getimagebyid($id);
-               // print_r($photo);
-                $photo=$photo->photo;
-            }
-if($this->professionaward_model->edit($id,$user,$profession,$website,$videolink,$photo)==0)
+if($this->professionaward_model->edit($id,$user,$profession,$award)==0)
 $data["alerterror"]="New professionaward could not be Updated.";
 else
 $data["alertsuccess"]="professionaward Updated Successfully.";

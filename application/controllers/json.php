@@ -937,6 +937,7 @@ $this->load->view("json",$data);
     }
     function editProfessionDetails() {
         $data = json_decode(file_get_contents('php://input'), true);
+//        print_r($data);
         $id=$data['id'];
         $awards=$data['awards'];
         $qualification=$data['qualification'];
@@ -944,7 +945,9 @@ $this->load->view("json",$data);
         $websites=$data['websites'];
         $videos=$data['videos'];
         $description=$data['description'];
-        $data["message"] = $this->restapi_model->editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description);
+        $category=$data['category'];
+        $photos=$data['photos'];
+        $data["message"] = $this->restapi_model->editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos);
         $this->load->view("json", $data);
     }
     

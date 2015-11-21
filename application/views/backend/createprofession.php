@@ -25,6 +25,12 @@ Create profession </h3>
 <?php echo form_dropdown("category",$category,set_value('category'),"class='chzn-select form-control'");?>
 </div>
 </div>
+<div class=" form-group">
+<label class="col-sm-2 control-label" for="normal-field">Profession</label>
+<div class="col-sm-8">
+<textarea name="profession" id="" cols="20" rows="10" class="form-control tinymce"><?php echo set_value( 'profession');?></textarea>
+</div>
+</div>
 <div class="form-group">
 <label class="col-sm-2 control-label" for="normal-field">&nbsp;</label>
 <div class="col-sm-4">

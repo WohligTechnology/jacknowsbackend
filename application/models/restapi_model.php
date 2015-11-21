@@ -82,24 +82,69 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         return 0;
 	}
     
-    public function editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description){
-//        echo $id;
-//        print_r($awards);
-//        print_r($qualification);
-//        print_r($experience);
-//        print_r($websites);
-//        print_r($videos);
-//        echo $description;
+    public function editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos){
+        
+        $query=$this->db->query("SELECT * FROM `expert_category` WHERE `name` LIKE '$category'")->row();
+        $categoryid=$query->id;
 //        
-//        echo "  countofaward".count($awards);
-//        echo "   countofqua".count($qualification);
-//        echo "    countofexp".count($experience);
-//        echo "   countofweb".count($websites);
-//        echo "   countofvideo".count($videos);
+//        // PROFESSION
 //        
-//        foreach(
-//        
-//        )
+        $this->db->query("INSERT INTO `expert_profession`( `user`, `category`,`description`) VALUE('$id','$categoryid','$description')");
+        $professionid=$this->db->insert_id();
+        
+        // AWARDS
+        for($i=0; $i<count($awards); $i++){
+         $data=array("user" => $id,"profession" => $professionid,"award" => $awards[$i]['awards']);
+        $query=$this->db->insert( "expert_professionaward", $data );
+        $awardid=$this->db->insert_id();
+            
+        }
+
+        
+//        //QUALIFICATION
+        print_r($qualification);
+          for($i=0; $i<count($qualification); $i++){
+         $data=array("user" => $id,"profession" => $professionid,"degree" => $qualification[$i]['degree'],"institute" => $qualification[$i]['institute'],"yearofpassing" => $qualification[$i]['year']);
+        $query=$this->db->insert( "expert_professioneducation", $data );
+        $qualificationid=$this->db->insert_id();
+            
+        }
+
+        
+//        // WORK EXPERIENCE
+        
+         for($i=0; $i<count($experience); $i++){
+         $data=array("user" => $id,"profession" => $professionid,"companyname" => $experience[$i]['companyname'],"jobtitle" => $experience[$i]['jobtitle'],"companylogo" => $experience[$i]['joblogo'],"jobdescription" => $experience[$i]['jobdesc'],"startdate" => $experience[$i]['startdate'],"enddate" => $experience[$i]['enddate']);
+        $query=$this->db->insert( "expert_professionexperience", $data );
+        $qualificationid=$this->db->insert_id();
+            
+        }
+        for($i=0; $i<count($photos); $i++){
+         $data=array("user" => $id,"profession" => $professionid,"image" => $photos[$i]);
+        $query=$this->db->insert( "expert_professionphoto", $data );
+        $photoid=$this->db->insert_id();
+            
+        }
+        
+         // VIDEOLINKS
+        
+        for($i=0; $i<count($videos); $i++){
+         $data=array("user" => $id,"profession" => $professionid,"videolink" => $videos[$i]['videos']);
+        $query=$this->db->insert( "expert_professionvideolink", $data );
+        $videosid=$this->db->insert_id();
+            
+        }
+
+        // WEBSITE
+            
+         for($i=0; $i<count($websites); $i++){
+         $data=array("user" => $id,"profession" => $professionid,"website" => $websites[$i]['websites']);
+        $query=$this->db->insert( "expert_professionwebsite", $data );
+        $videosid=$this->db->insert_id();
+            
+        }
+
+        return 1;
         
     }
    

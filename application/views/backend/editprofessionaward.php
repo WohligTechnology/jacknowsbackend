@@ -18,30 +18,11 @@
 </div>
 </div>
 <div class="form-group">
-<label class="col-sm-2 control-label" for="normal-field">Website</label>
+<label class="col-sm-2 control-label" for="normal-field">Award</label>
 <div class="col-sm-4">
-<input type="text" id="normal-field" class="form-control" name="website" value='<?php echo set_value('website',$before->website);?>'>
+<input type="text" id="normal-field" class="form-control" name="award" value='<?php echo set_value('award',$before->award);?>'>
 </div>
 </div>
-<div class="form-group">
-<label class="col-sm-2 control-label" for="normal-field">Video Link</label>
-<div class="col-sm-4">
-<input type="text" id="normal-field" class="form-control" name="videolink" value='<?php echo set_value('videolink',$before->videolink);?>'>
-</div>
-</div>
-<div class=" form-group">
-				  <label class="col-sm-2 control-label" for="normal-field">Photo</label>
-				  <div class="col-sm-4">
-					<input type="file" id="normal-field" class="form-control" name="photo" value="<?php echo set_value('photo',$before->photo);?>">
-					<?php if($before->photo == "")
-						 { }
-						 else
-						 { ?>
-							<img src="<?php echo base_url('uploads')."/".$before->photo; ?>" width="140px" height="140px">
-						<?php }
-					?>
-				  </div>
-				</div>
 <div class="form-group">
 <label class="col-sm-2 control-label" for="normal-field">&nbsp;</label>
 <div class="col-sm-4">

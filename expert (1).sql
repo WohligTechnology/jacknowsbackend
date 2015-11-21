@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.1.1
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2015 at 04:27 PM
--- Server version: 5.5.32
--- PHP Version: 5.4.19
+-- Generation Time: Nov 21, 2015 at 07:03 AM
+-- Server version: 5.6.24
+-- PHP Version: 5.5.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `expert_booking` (
 --
 
 INSERT INTO `expert_booking` (`id`, `fromuser`, `touser`, `date`, `starttime`, `endtime`, `status`) VALUES
-(1, 5, 7, '2015-09-19', '12:00', '01:00', 2);
+(1, 1, 26, '2015-09-19', '12:00', '01:00', 1);
 
 -- --------------------------------------------------------
 
@@ -85,6 +85,28 @@ INSERT INTO `expert_bookingstatus` (`id`, `name`) VALUES
 (3, 'Complete'),
 (4, 'Failed'),
 (5, 'Canceled');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_category`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_category` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_category`
+--
+
+INSERT INTO `expert_category` (`id`, `name`) VALUES
+(1, 'Career Counselling'),
+(2, 'Travel'),
+(3, 'Health'),
+(4, 'Life style'),
+(5, 'Others');
 
 -- --------------------------------------------------------
 
@@ -160,6 +182,130 @@ INSERT INTO `expert_education` (`id`, `educationid`, `user`, `schoolname`, `fiel
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `expert_hobby`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_hobby` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `category` int(11) NOT NULL,
+  `expinyrs` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `skills` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_hobby`
+--
+
+INSERT INTO `expert_hobby` (`id`, `user`, `category`, `expinyrs`, `description`, `skills`) VALUES
+(1, 34, 3, '3', 'dfgh', 'ret4er');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_hobbyawards`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_hobbyawards` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `hobby` int(11) NOT NULL,
+  `awards` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_hobbyawards`
+--
+
+INSERT INTO `expert_hobbyawards` (`id`, `user`, `hobby`, `awards`) VALUES
+(1, 34, 1, 'dfdafadf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_hobbyeducation`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_hobbyeducation` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `hobby` int(11) NOT NULL,
+  `degree` varchar(255) NOT NULL,
+  `institute` varchar(255) NOT NULL,
+  `yearofpassing` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_hobbyeducation`
+--
+
+INSERT INTO `expert_hobbyeducation` (`id`, `user`, `hobby`, `degree`, `institute`, `yearofpassing`) VALUES
+(1, 34, 1, 'Engineering', 'Sigce', '2014');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_hobbyphotos`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_hobbyphotos` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `hobby` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_hobbyphotos`
+--
+
+INSERT INTO `expert_hobbyphotos` (`id`, `user`, `hobby`, `image`) VALUES
+(1, 34, 1, 'images_(1)1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_hobbyvideolinks`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_hobbyvideolinks` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `hobby` int(11) NOT NULL,
+  `videolink` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_hobbyvideolinks`
+--
+
+INSERT INTO `expert_hobbyvideolinks` (`id`, `user`, `hobby`, `videolink`) VALUES
+(1, 34, 1, 'dfjddsf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_hobbywebsite`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_hobbywebsite` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `hobby` int(11) NOT NULL,
+  `website` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_hobbywebsite`
+--
+
+INSERT INTO `expert_hobbywebsite` (`id`, `user`, `hobby`, `website`) VALUES
+(1, 34, 1, 'www.wohlig.com');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `expert_language`
 --
 
@@ -211,6 +357,155 @@ INSERT INTO `expert_patent` (`id`, `patentid`, `user`, `title`, `summary`, `numb
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `expert_profession`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_profession` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `category` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_profession`
+--
+
+INSERT INTO `expert_profession` (`id`, `user`, `category`) VALUES
+(1, 34, 3),
+(2, 34, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_professionaward`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_professionaward` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `profession` int(11) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `videolink` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_professionaward`
+--
+
+INSERT INTO `expert_professionaward` (`id`, `user`, `profession`, `website`, `videolink`, `photo`) VALUES
+(1, 34, 2, 'www.wohlig.com', 'ADSdfshfd', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_professioneducation`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_professioneducation` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `profession` int(11) NOT NULL,
+  `degree` varchar(255) NOT NULL,
+  `institute` varchar(255) NOT NULL,
+  `yearofpassing` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_professioneducation`
+--
+
+INSERT INTO `expert_professioneducation` (`id`, `user`, `profession`, `degree`, `institute`, `yearofpassing`) VALUES
+(1, 34, 2, 'fdfdaf', 'dfd', 'dfd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_professionexperience`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_professionexperience` (
+  `id` int(11) NOT NULL,
+  `profession` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `companyname` varchar(255) NOT NULL,
+  `jobtitle` varchar(255) NOT NULL,
+  `companylogo` varchar(255) NOT NULL,
+  `jobdescription` text NOT NULL,
+  `startdate` date NOT NULL,
+  `enddate` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_professionexperience`
+--
+
+INSERT INTO `expert_professionexperience` (`id`, `profession`, `user`, `companyname`, `jobtitle`, `companylogo`, `jobdescription`, `startdate`, `enddate`) VALUES
+(1, 2, 34, 'wohlig', 'developer', '0', 'developer developer', '2015-11-27', '2015-11-30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_professionphoto`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_professionphoto` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `profession` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_professionphoto`
+--
+
+INSERT INTO `expert_professionphoto` (`id`, `user`, `profession`, `image`) VALUES
+(1, 34, 1, 'images.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_professionvideolink`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_professionvideolink` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `profession` int(11) NOT NULL,
+  `videolink` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_professionvideolink`
+--
+
+INSERT INTO `expert_professionvideolink` (`id`, `user`, `profession`, `videolink`) VALUES
+(1, 34, 1, 'sadfsd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_professionwebsite`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_professionwebsite` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `profession` int(11) NOT NULL,
+  `website` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_professionwebsite`
+--
+
+INSERT INTO `expert_professionwebsite` (`id`, `user`, `profession`, `website`) VALUES
+(1, 34, 1, 'www.wohlig.com');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `expert_publication`
 --
 
@@ -251,7 +546,7 @@ CREATE TABLE IF NOT EXISTS `expert_question` (
 --
 
 INSERT INTO `expert_question` (`id`, `fromuser`, `question`) VALUES
-(1, 6, 'What are advantages of laravel over codeigniter?');
+(1, 26, 'What are advantages of laravel over codeigniter?');
 
 -- --------------------------------------------------------
 
@@ -264,15 +559,15 @@ CREATE TABLE IF NOT EXISTS `expert_questionuser` (
   `question` int(11) NOT NULL,
   `touser` int(11) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `expert_questionuser`
 --
 
 INSERT INTO `expert_questionuser` (`id`, `question`, `touser`, `status`) VALUES
-(2, 1, 13, 2),
-(3, 1, 5, 1);
+(2, 1, 1, 2),
+(4, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -326,14 +621,27 @@ CREATE TABLE IF NOT EXISTS `expert_transaction` (
   `touser` int(11) NOT NULL,
   `amount` double NOT NULL,
   `type` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `expert_transaction`
 --
 
 INSERT INTO `expert_transaction` (`id`, `fromuser`, `touser`, `amount`, `type`) VALUES
-(1, 1, 13, 200001, '0');
+(1, 1, 26, 200001, '0'),
+(2, 26, 1, 87000, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expert_usercategory`
+--
+
+CREATE TABLE IF NOT EXISTS `expert_usercategory` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `category` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -395,7 +703,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `isactive` int(11) NOT NULL,
   `order` int(11) NOT NULL,
   `icon` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menu`
@@ -406,7 +714,9 @@ INSERT INTO `menu` (`id`, `name`, `description`, `keyword`, `url`, `linktype`, `
 (4, 'Dashboard', '', '', 'site/index', 1, 0, 1, 0, 'icon-dashboard'),
 (6, 'Booking', '', '', 'site/viewbooking', 1, 0, 1, 2, 'icon-user'),
 (7, 'Transaction', '', '', 'site/viewtransaction', 1, 0, 1, 3, 'icon-user'),
-(8, 'Question', '', '', 'site/viewquestion', 1, 0, 1, 4, 'icon-user');
+(8, 'Question', '', '', 'site/viewquestion', 1, 0, 1, 4, 'icon-user'),
+(9, 'Create Admins', '', '', 'site/viewuseradmin', 1, 0, 1, 1, 'icon-user'),
+(10, 'Category', '', '', 'site/viewcategory', 1, 0, 1, 1, 'icon-user');
 
 -- --------------------------------------------------------
 
@@ -425,14 +735,19 @@ CREATE TABLE IF NOT EXISTS `menuaccess` (
 
 INSERT INTO `menuaccess` (`menu`, `access`) VALUES
 (1, 1),
-(4, 1),
+(1, 2),
 (2, 1),
 (3, 1),
+(4, 1),
+(4, 2),
+(4, 3),
 (5, 1),
 (6, 1),
+(6, 2),
 (7, 1),
 (7, 3),
 (8, 1),
+(8, 2),
 (9, 1),
 (10, 1),
 (11, 1),
@@ -447,7 +762,7 @@ INSERT INTO `menuaccess` (`menu`, `access`) VALUES
 CREATE TABLE IF NOT EXISTS `statuses` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `statuses`
@@ -455,10 +770,7 @@ CREATE TABLE IF NOT EXISTS `statuses` (
 
 INSERT INTO `statuses` (`id`, `name`) VALUES
 (1, 'inactive'),
-(2, 'Active'),
-(3, 'Waiting'),
-(4, 'Active Waiting'),
-(5, 'Blocked');
+(2, 'Active');
 
 -- --------------------------------------------------------
 
@@ -497,30 +809,32 @@ CREATE TABLE IF NOT EXISTS `user` (
   `interests` text NOT NULL,
   `honorsawards` text NOT NULL,
   `wallet` double NOT NULL,
-  `access` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+  `access` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
+  `percent` int(11) NOT NULL,
+  `ameturetype` varchar(255) NOT NULL,
+  `ametureprice` double NOT NULL,
+  `professionalprice` double NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `twittersocial` varchar(255) NOT NULL,
+  `youtubesocial` varchar(255) NOT NULL,
+  `facebooksocial` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`) VALUES
-(1, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig@wohlig.com', 1, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(4, 'pratik', '0cb2b62754dfd12b6ed0161d4b447df7', 'pratik@wohlig.com', 1, '2014-05-12 06:52:44', 1, NULL, 'pratik', '1', 1, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(5, 'wohlig123', 'wohlig123', 'wohlig1@wohlig.com', 1, '2014-05-12 06:52:44', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(6, 'wohlig1', 'a63526467438df9566c508027d9cb06b', 'wohlig2@wohlig.com', 1, '2014-05-12 06:52:44', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(7, 'Avinash', '7b0a80efe0d324e937bbfc7716fb15d3', 'avinash@wohlig.com', 1, '2014-10-17 06:22:29', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(9, 'avinash', 'a208e5837519309129fa466b0c68396b', 'a@email.com', 2, '2014-12-03 11:06:19', 3, '', '', '123', 1, 'demojson', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(13, 'aaa', 'a208e5837519309129fa466b0c68396b', 'aaa3@email.com', 3, '2014-12-04 06:55:42', 3, NULL, '', '1', 2, 'userjson', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(14, 'Rohan Patil', 'aeae5b2f900e84d784a0f0111e650835', 'rohan@gmail.com', 1, '2015-01-04 10:20:37', 2, '', '', '1', 1, 'demojson', '2015-01-15', 'kacheri street', 'yashodatt apt', 'karjat', 'Maharashtra', 'India', '410201', 'rohan09@fb.com', 'rohan@google.com', '#rohand', '', '', '', 0, '', '', '', 0, ''),
-(16, 'aaa', 'pass', 'avi@aaa.aaa', NULL, '2015-03-23 11:35:02', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(17, 'chin', 'f3abbf3960a3c7683c1a14eb176d1a28', 'chi@chi.com', 2, '2015-03-23 11:43:08', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(18, 'Avinash Ghare', '', '', 3, '2015-07-13 06:58:39', 1, 'https://graph.facebook.com/846541392081594/picture?width=150&height=150', '', '846541392081594', 0, '', '0000-00-00', '', ',', '', '', '', '', '846541392081594', '', '', '', '', '', 0, '', '', '', 0, ''),
-(19, 'ambest media', '', 'ambestmediacloud@gmail.com', 3, '2015-07-13 07:15:31', 1, 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', '', '103739122467358278817', 0, '', '0000-00-00', '', ',', '', '', '', '', '', '103739122467358278817', '', '', '', '', 0, '', '', '', 0, ''),
-(20, 'avinash_ghare', '', '', 3, '2015-07-13 07:22:56', 1, 'http://abs.twimg.com/sticky/default_profile_images/default_profile_1_normal.png', '', '2478104798', 0, '', '0000-00-00', '', ',', '', '', '', '', '', '', '2478104798', '', '', '', 0, '', '', '', 0, ''),
-(21, NULL, 'a208e5837519309129fa466b0c68396b', 'a@aaa.com', 3, '2015-08-11 06:17:58', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(22, NULL, 'a208e5837519309129fa466b0c68396b', 'a23@aaa.com', 3, '2015-08-11 06:18:16', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, ''),
-(25, 'Avinash Ghare', '', 'avinash@wohlig.com', 3, '2015-08-11 11:01:24', 1, 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', '', '118313183524893739637', 4, '', '0000-00-00', '', ',', '', '', '', '', '', '118313183524893739637', '', '', '', '', 0, '', '', '', 0, '');
+INSERT INTO `user` (`id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`) VALUES
+(1, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig@wohlig.com', 1, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', 'gheth', 'fgrst', 'ty', 'bytryt', 'rtr', '', '', '', 'wohlig', 'wohligname', '', 0, '', '', '', 0, '', '8989898989', 50, '', 0, 0, '1', 'rtbe', 'rtrb', 'rtyar'),
+(7, 'Avinash', '7b0a80efe0d324e937bbfc7716fb15d3', 'avinash@wohlig.com', 4, '2015-09-07 13:40:45', 1, '', '', '1', 1, 'ahjbasj', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 1000, '', '', 70, '0', 250, 500, '', '', '', ''),
+(26, 'Accountant', 'a63526467438df9566c508027d9cb06b', 'account@wohlig.com', 3, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '8989898989', 50, '', 0, 0, '', '', '', ''),
+(27, 'Moderator', 'a63526467438df9566c508027d9cb06b', 'moderator@wohlig.com', 2, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 50, '', 0, 0, '', '', '', ''),
+(28, 'ajhsbaj', '9189e4085a9a76fd59d76d688adb4bee', 'avinash2@wohlig.com', 2, '2015-09-07 13:35:52', 2, '', '', '', 1, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 50, '', 0, 0, '', '', '', ''),
+(31, '2', 'e3ceb5881a0a1fdaad01296d7554868d', '2@2.com', 4, '2015-09-12 07:01:46', 1, '', '', '2', 1, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 1, '', '', '', 20000, '', '2', 60, '', 150, 400, '', '', '', ''),
+(32, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig1@wohlig.com', NULL, '2015-11-18 11:04:53', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 0, '', 0, 0, '', '', '', ''),
+(33, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig2@wohlig.com', NULL, '2015-11-18 11:11:20', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 0, '', 0, 0, '', '', '', ''),
+(34, 'pooja1', '4bcc674371a91bf32377cd878d754527', 'pooja1@wohlig.com', 4, '2015-11-19 07:47:06', 2, 'download.jpg', '', 'faiyer45511', 4, '', '0000-00-00', '', 'airoli11', 'navimumbai11', 'maharashtra11', 'india11', '40070811', '', '', '', '', '', '', 0, '', '', '', 8001, '', '9898981', 7001, '', 25001, 50001, '1', 'twi11', 'you11', 'fb11');
 
 -- --------------------------------------------------------
 
@@ -582,8 +896,7 @@ INSERT INTO `userlog` (`id`, `onuser`, `status`, `description`, `timestamp`) VAL
 -- Indexes for table `accesslevel`
 --
 ALTER TABLE `accesslevel`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `expert_booking`
@@ -595,6 +908,12 @@ ALTER TABLE `expert_booking`
 -- Indexes for table `expert_bookingstatus`
 --
 ALTER TABLE `expert_bookingstatus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_category`
+--
+ALTER TABLE `expert_category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -616,6 +935,42 @@ ALTER TABLE `expert_education`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `expert_hobby`
+--
+ALTER TABLE `expert_hobby`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_hobbyawards`
+--
+ALTER TABLE `expert_hobbyawards`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_hobbyeducation`
+--
+ALTER TABLE `expert_hobbyeducation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_hobbyphotos`
+--
+ALTER TABLE `expert_hobbyphotos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_hobbyvideolinks`
+--
+ALTER TABLE `expert_hobbyvideolinks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_hobbywebsite`
+--
+ALTER TABLE `expert_hobbywebsite`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `expert_language`
 --
 ALTER TABLE `expert_language`
@@ -625,6 +980,48 @@ ALTER TABLE `expert_language`
 -- Indexes for table `expert_patent`
 --
 ALTER TABLE `expert_patent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_profession`
+--
+ALTER TABLE `expert_profession`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_professionaward`
+--
+ALTER TABLE `expert_professionaward`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_professioneducation`
+--
+ALTER TABLE `expert_professioneducation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_professionexperience`
+--
+ALTER TABLE `expert_professionexperience`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_professionphoto`
+--
+ALTER TABLE `expert_professionphoto`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_professionvideolink`
+--
+ALTER TABLE `expert_professionvideolink`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expert_professionwebsite`
+--
+ALTER TABLE `expert_professionwebsite`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -664,6 +1061,12 @@ ALTER TABLE `expert_transaction`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `expert_usercategory`
+--
+ALTER TABLE `expert_usercategory`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `expert_usergallery`
 --
 ALTER TABLE `expert_usergallery`
@@ -680,6 +1083,12 @@ ALTER TABLE `logintype`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `menuaccess`
+--
+ALTER TABLE `menuaccess`
+  ADD UNIQUE KEY `menu` (`menu`,`access`);
 
 --
 -- Indexes for table `statuses`
@@ -719,6 +1128,11 @@ ALTER TABLE `expert_booking`
 ALTER TABLE `expert_bookingstatus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `expert_category`
+--
+ALTER TABLE `expert_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `expert_certification`
 --
 ALTER TABLE `expert_certification`
@@ -734,6 +1148,36 @@ ALTER TABLE `expert_course`
 ALTER TABLE `expert_education`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `expert_hobby`
+--
+ALTER TABLE `expert_hobby`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `expert_hobbyawards`
+--
+ALTER TABLE `expert_hobbyawards`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `expert_hobbyeducation`
+--
+ALTER TABLE `expert_hobbyeducation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `expert_hobbyphotos`
+--
+ALTER TABLE `expert_hobbyphotos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `expert_hobbyvideolinks`
+--
+ALTER TABLE `expert_hobbyvideolinks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `expert_hobbywebsite`
+--
+ALTER TABLE `expert_hobbywebsite`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `expert_language`
 --
 ALTER TABLE `expert_language`
@@ -742,6 +1186,41 @@ ALTER TABLE `expert_language`
 -- AUTO_INCREMENT for table `expert_patent`
 --
 ALTER TABLE `expert_patent`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `expert_profession`
+--
+ALTER TABLE `expert_profession`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `expert_professionaward`
+--
+ALTER TABLE `expert_professionaward`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `expert_professioneducation`
+--
+ALTER TABLE `expert_professioneducation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `expert_professionexperience`
+--
+ALTER TABLE `expert_professionexperience`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `expert_professionphoto`
+--
+ALTER TABLE `expert_professionphoto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `expert_professionvideolink`
+--
+ALTER TABLE `expert_professionvideolink`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `expert_professionwebsite`
+--
+ALTER TABLE `expert_professionwebsite`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `expert_publication`
@@ -757,7 +1236,7 @@ ALTER TABLE `expert_question`
 -- AUTO_INCREMENT for table `expert_questionuser`
 --
 ALTER TABLE `expert_questionuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `expert_questionuserstatus`
 --
@@ -772,7 +1251,12 @@ ALTER TABLE `expert_skill`
 -- AUTO_INCREMENT for table `expert_transaction`
 --
 ALTER TABLE `expert_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `expert_usercategory`
+--
+ALTER TABLE `expert_usercategory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `expert_usergallery`
 --
@@ -787,17 +1271,17 @@ ALTER TABLE `logintype`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `userlog`
 --

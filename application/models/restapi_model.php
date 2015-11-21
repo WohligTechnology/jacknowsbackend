@@ -155,7 +155,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
 //        
 //        // HOBBY
 //        
-        $this->db->query("INSERT INTO `expert_hobby`( `user`, `category`,`description`,`expinyrs`) VALUE('$id','$categoryid','$description','$yoexp','')");
+        $this->db->query("INSERT INTO `expert_hobby`( `user`, `category`,`description`,`expinyrs`) VALUE('$id','$categoryid','$description','$yoexp')");
         $hobbyid=$this->db->insert_id();
         
         // AWARDS

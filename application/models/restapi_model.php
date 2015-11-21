@@ -87,7 +87,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         $query=$this->db->query("SELECT * FROM `expert_category` WHERE `name` LIKE '$category'")->row();
         $categoryid=$query->id;
 //        
-//        // PROFESSION
+//        // Hoby
 //        
         $this->db->query("INSERT INTO `expert_profession`( `user`, `category`,`description`) VALUE('$id','$categoryid','$description')");
         $professionid=$this->db->insert_id();
@@ -140,6 +140,64 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
          $data=array("user" => $id,"profession" => $professionid,"website" => $websites[$i]['websites']);
         $query=$this->db->insert( "expert_professionwebsite", $data );
         $videosid=$this->db->insert_id();
+            
+        }
+
+        return 1;
+        
+    }
+    
+    
+    public function editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills){
+        
+        $query=$this->db->query("SELECT * FROM `expert_category` WHERE `name` LIKE '$category'")->row();
+        $categoryid=$query->id;
+//        
+//        // HOBBY
+//        
+        $this->db->query("INSERT INTO `expert_hobby`( `user`, `category`,`description`,`expinyrs`) VALUE('$id','$categoryid','$description','$yoexp','')");
+        $hobbyid=$this->db->insert_id();
+        
+        // AWARDS
+        for($i=0; $i<count($awards); $i++){
+         $data=array("user" => $id,"hobby" => $hobbyid,"awards" => $awards[$i]['awards']);
+        $query=$this->db->insert( "expert_hobbyaward", $data );
+        $awardid=$this->db->insert_id();
+            
+        }
+
+        
+//        //QUALIFICATION
+          for($i=0; $i<count($qualification); $i++){
+         $data=array("user" => $id,"hobby" => $hobbyid,"degree" => $qualification[$i]['degree'],"institute" => $qualification[$i]['institute'],"yearofpassing" => $qualification[$i]['year']);
+        $query=$this->db->insert( "expert_hobbyeducation", $data );
+        $hobbyid=$this->db->insert_id();
+            
+        }
+
+    
+        for($i=0; $i<count($photos); $i++){
+         $data=array("user" => $id,"hobby" => $hobbyid,"image" => $photos[$i]);
+        $query=$this->db->insert( "expert_hobbyphotos", $data );
+        $photoid=$this->db->insert_id();
+            
+        }
+        
+         // VIDEOLINKS
+        
+        for($i=0; $i<count($videos); $i++){
+         $data=array("user" => $id,"hobby" => $hobbyid,"videolink" => $videos[$i]['videos']);
+        $query=$this->db->insert( "expert_hobbyvideolinks", $data );
+        $videosid=$this->db->insert_id();
+            
+        }
+
+        // WEBSITE
+            
+         for($i=0; $i<count($websites); $i++){
+         $data=array("user" => $id,"hobby" => $hobbyid,"website" => $websites[$i]['websites']);
+        $query=$this->db->insert( "expert_hobbywebsite", $data );
+        $websitesid=$this->db->insert_id();
             
         }
 

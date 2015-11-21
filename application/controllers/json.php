@@ -948,6 +948,19 @@ $this->load->view("json",$data);
         $photos=$data['photos'];
         $data["message"] = $this->restapi_model->editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos);
         $this->load->view("json", $data);
+    } 
+    function editHobbyDetails() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id=$data['id'];
+        $awards=$data['awards'];
+        $qualification=$data['qualification'];
+        $websites=$data['websites'];
+        $videos=$data['videos'];
+        $description=$data['description'];
+        $category=$data['category'];
+        $skills=$data['skills'];
+        $data["message"] = $this->restapi_model->editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills);
+        $this->load->view("json", $data);
     }
     
 } ?>

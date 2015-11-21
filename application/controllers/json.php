@@ -935,5 +935,17 @@ $this->load->view("json",$data);
         $data["message"] = $this->restapi_model->editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial);
         $this->load->view("json", $data);
     }
+    function editProfessionDetails() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id=$data['id'];
+        $awards=$data['awards'];
+        $qualification=$data['qualification'];
+        $experience=$data['experience'];
+        $websites=$data['websites'];
+        $videos=$data['videos'];
+        $description=$data['description'];
+        $data["message"] = $this->restapi_model->editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description);
+        $this->load->view("json", $data);
+    }
     
 } ?>

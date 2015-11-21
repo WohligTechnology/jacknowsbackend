@@ -81,6 +81,27 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         else
         return 0;
 	}
+    
+    public function editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description){
+//        echo $id;
+//        print_r($awards);
+//        print_r($qualification);
+//        print_r($experience);
+//        print_r($websites);
+//        print_r($videos);
+//        echo $description;
+//        
+//        echo "  countofaward".count($awards);
+//        echo "   countofqua".count($qualification);
+//        echo "    countofexp".count($experience);
+//        echo "   countofweb".count($websites);
+//        echo "   countofvideo".count($videos);
+//        
+//        foreach(
+//        
+//        )
+        
+    }
    
     
 }

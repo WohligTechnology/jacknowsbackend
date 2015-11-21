@@ -963,5 +963,11 @@ $this->load->view("json",$data);
         $data["message"] = $this->restapi_model->editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills);
         $this->load->view("json", $data);
     }
+    public function getUserDetails(){
+        $id=$this->input->get('id');
+        $data["message"] = $this->restapi_model->getUserDetails($id);
+        $this->load->view("json", $data);
+        
+    }
     
 } ?>

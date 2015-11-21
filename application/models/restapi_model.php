@@ -219,6 +219,49 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         return 1;
         
     }
+    
+    public function getUserDetails($id){
+        $query['user']=$this->db->query("SELECT `id`, `name`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial` FROM `user` WHERE `id`='$id'")->row();
+        
+         $query['profession']=$this->db->query("SELECT `id`, `user`, `category`, `description` FROM `expert_profession` WHERE `user`='$id'")->row();
+        $professionid=$query['profession']->id;
+         $query['profession']->awards=$this->db->query("SELECT `id`, `user`, `profession`, `award` as `awards` FROM `expert_professionaward` WHERE `user`='$id' AND `profession`='$professionid'")->result();
+        
+        $query['profession']->experience=$this->db->query("SELECT `id`, `profession`, `user`, `companyname`, `jobtitle`, `companylogo` as `logo`, `jobdescription`as `jobdesc`, `startdate`, `enddate` FROM `expert_professionexperience` WHERE `user`='$id' AND `profession`='$professionid'")->result();
+        
+        $query['profession']->qualification=$this->db->query("SELECT `id`, `user`, `profession`, `degree`, `institute`, `yearofpassing` as `year` FROM `expert_professioneducation` WHERE `user`='$id' AND `profession`='$professionid'")->result(); 
+        
+        $query['profession']->skills=$this->db->query("SELECT `id`, `user`, `profession`, `skills` as `text` FROM `expert_professionskill` WHERE `user`='$id' AND `profession`='$professionid'")->result();
+        
+        $query['profession']->videos=$this->db->query("SELECT `id`, `user`, `profession`, `videolink` as `videos` FROM `expert_professionvideolink` WHERE `user`='$id' AND `profession`='$professionid'")->result();
+        
+        $query['profession']->websites=$this->db->query("SELECT `id`, `user`, `profession`, `website` as `websites` FROM `expert_professionwebsite` WHERE `user`='$id' AND `profession`='$professionid'")->result(); 
+        
+        $query['profession']->photos=$this->db->query("SELECT `id`, `user`, `profession`, `image` FROM `expert_professionphoto` WHERE `user`='$id' AND `profession`='$professionid'")->result(); 
+        
+        //HOBBY
+        
+        
+        
+        $query['hobby']=$this->db->query("SELECT `id`, `user`, `category`, `expinyrs`, `description`, `skills` FROM `expert_hobby` WHERE `user`='$id'")->row();
+        $hobbyid=$query['hobby']->id;
+         $query['hobby']->awards=$this->db->query("SELECT `id`, `user`, `hobby`, `awards` FROM `expert_hobbyawards` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result();
+        
+        
+        $query['hobby']->qualification=$this->db->query("SELECT `id`, `user`, `hobby`, `degree`, `institute`, `yearofpassing` as `year` FROM `expert_hobbyeducation` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result(); 
+        
+        $query['hobby']->skills=$this->db->query("SELECT `id`, `user`, `hobby`, `skills` as `text` FROM `expert_hobbyskill` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result();
+        
+        $query['hobby']->videos=$this->db->query("SELECT `id`, `user`, `hobby`, `videolink` as `videos` FROM `expert_hobbyvideolinks` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result();
+        
+        $query['hobby']->websites=$this->db->query("SELECT `id`, `user`, `hobby`, `website` as `websites` FROM `expert_hobbywebsite` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result(); 
+        
+        $query['hobby']->photos=$this->db->query("SELECT `id`, `user`, `hobby`, `image` FROM `expert_hobbyphotos` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result(); 
+        
+        return $query;
+   
+        
+    }
    
     
 }

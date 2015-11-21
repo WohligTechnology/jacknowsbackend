@@ -102,7 +102,6 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
 
         
 //        //QUALIFICATION
-        print_r($qualification);
           for($i=0; $i<count($qualification); $i++){
          $data=array("user" => $id,"profession" => $professionid,"degree" => $qualification[$i]['degree'],"institute" => $qualification[$i]['institute'],"yearofpassing" => $qualification[$i]['year']);
         $query=$this->db->insert( "expert_professioneducation", $data );

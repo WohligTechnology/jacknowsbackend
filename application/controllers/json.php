@@ -937,7 +937,6 @@ $this->load->view("json",$data);
     }
     function editProfessionDetails() {
         $data = json_decode(file_get_contents('php://input'), true);
-//        print_r($data);
         $id=$data['id'];
         $awards=$data['awards'];
         $qualification=$data['qualification'];

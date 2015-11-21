@@ -243,7 +243,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         
         
         
-        $query['hobby']=$this->db->query("SELECT `id`, `user`, `category`, `expinyrs`, `description`, `skills` FROM `expert_hobby` WHERE `user`='$id'")->row();
+        $query['hobby']=$this->db->query("SELECT `id`, `user`, `category`, `expinyrs` as `yoexp`, `description`, `skills` FROM `expert_hobby` WHERE `user`='$id'")->row();
         $hobbyid=$query['hobby']->id;
          $query['hobby']->awards=$this->db->query("SELECT `id`, `user`, `hobby`, `awards` FROM `expert_hobbyawards` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result();
         

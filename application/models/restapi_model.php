@@ -161,7 +161,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         // AWARDS
         for($i=0; $i<count($awards); $i++){
          $data=array("user" => $id,"hobby" => $hobbyid,"awards" => $awards[$i]['awards']);
-        $query=$this->db->insert( "expert_hobbyaward", $data );
+        $query=$this->db->insert( "expert_hobbyawards", $data );
         $awardid=$this->db->insert_id();
             
         }

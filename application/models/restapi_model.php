@@ -278,7 +278,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         
         $query['profession']->websites=$this->db->query("SELECT `id`, `user`, `profession`, `website` as `websites` FROM `expert_professionwebsite` WHERE `user`='$id' AND `profession`='$professionid'")->result(); 
         
-        $query['profession']->photos=$this->db->query("SELECT `id`, `user`, `profession`, `image` FROM `expert_professionphoto` WHERE `user`='$id' AND `profession`='$professionid'")->result(); 
+        $query['profession']->photos=$this->db->query("SELECT GROUP_CONCAT(`image`) FROM `expert_professionphoto` WHERE `user`='$id' AND `profession`='$professionid' GROUP BY `expert_professionphoto`.`id`")->result(); 
         
         //HOBBY
         

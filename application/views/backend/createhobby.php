@@ -37,7 +37,7 @@ Create hobby </h3>
 <textarea name="description" id="" cols="20" rows="10" class="form-control tinymce"><?php echo set_value( 'description');?></textarea>
 </div>
 </div>
-<div class=" form-group">
+<div class=" form-group" style="display:none">
 <label class="col-sm-2 control-label" for="normal-field">Skills</label>
 <div class="col-sm-8">
 <textarea name="skills" id="" cols="20" rows="10" class="form-control tinymce"><?php echo set_value( 'skills');?></textarea>

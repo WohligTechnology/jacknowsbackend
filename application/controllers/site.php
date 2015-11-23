@@ -3391,12 +3391,13 @@ $data["page2"]="block/userblock";
 $data['before1']=$this->input->get('id');
 $data['before2']=$this->input->get('id');
 $data['before3']=$this->input->get('id');
-$data["base_url"]=site_url("site/viewprofessionjson");
+$data["base_url"]=site_url("site/viewprofessionjson?id=".$this->input->get('id'));
 $data["title"]="View profession";
 $this->load->view("templatewith2",$data);
 }
 function viewprofessionjson()
 {
+$id=$this->input->get('id');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_profession`.`id`";
@@ -3433,7 +3434,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_profession` LEFT OUTER JOIN `user` ON `user`.`id`=`expert_profession`.`user` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_profession`.`category`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_profession` LEFT OUTER JOIN `user` ON `user`.`id`=`expert_profession`.`user` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_profession`.`category`","WHERE `expert_profession`.`user`='$id'");
 $this->load->view("json",$data);
 }
 
@@ -4315,12 +4316,13 @@ $data["page2"]="block/userblock";
 $data['before1']=$this->input->get('id');
 $data['before2']=$this->input->get('id');
 $data['before3']=$this->input->get('id');
-$data["base_url"]=site_url("site/viewhobbyjson");
+$data["base_url"]=site_url("site/viewhobbyjson?id=".$this->input->get('id'));
 $data["title"]="View hobby";
 $this->load->view("templatewith2",$data);
 }
 function viewhobbyjson()
 {
+$id=$this->input->get('id');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_hobby`.`id`";
@@ -4372,7 +4374,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobby`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobby`","WHERE `expert_hobby`.`user`='$id'");
 $this->load->view("json",$data);
 }
 

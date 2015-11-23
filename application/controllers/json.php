@@ -961,7 +961,8 @@ $this->load->view("json",$data);
         $description=$data['description'];
         $category=$data['category'];
         $skills=$data['skills'];
-        $data["message"] = $this->restapi_model->editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills);
+        $yoexp=$data['yoexp'];
+        $data["message"] = $this->restapi_model->editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills,$yoexp);
         $this->load->view("json", $data);
     }
     public function getUserDetails(){

@@ -52,6 +52,7 @@ class Site extends CI_Controller
 		$data[ 'type' ] =$this->user_model->getameturetypedropdown();
 		$data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
         $data[ 'gender' ] =$this->user_model->getgenderdropdown();
+        $data[ 'isexpert' ] =$this->user_model->getisexpertdropdown();
 //        $data['category']=$this->category_model->getcategorydropdown();
 		$data[ 'page' ] = 'createuser';
 		$data[ 'title' ] = 'Create User';
@@ -77,6 +78,7 @@ class Site extends CI_Controller
             $data[ 'status' ] =$this->user_model->getstatusdropdown();
             $data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
             $data[ 'type' ] =$this->user_model->getameturetypedropdown();
+             $data[ 'isexpert' ] =$this->user_model->getisexpertdropdown();
              $data[ 'gender' ] =$this->user_model->getgenderdropdown();
             $data['category']=$this->category_model->getcategorydropdown();
             $data[ 'page' ] = 'createuser';
@@ -108,6 +110,7 @@ class Site extends CI_Controller
             $twittersocial=$this->input->post('twittersocial');
             $youtubesocial=$this->input->post('youtubesocial');
             $facebooksocial=$this->input->post('facebooksocial');
+             $isexpert=$this->input->post('isexpert');
     
 //            $category=$this->input->post('category');
             
@@ -146,7 +149,7 @@ class Site extends CI_Controller
                 
 			}
             
-			if($this->user_model->create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial)==0)
+			if($this->user_model->create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert)==0)
 			$data['alerterror']="New user could not be created.";
 			else
 			$data['alertsuccess']="User created Successfully.";
@@ -260,8 +263,16 @@ class Site extends CI_Controller
 		$data['accesslevel']=$this->user_model->getaccesslevels();
 		$data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
 		$data[ 'type' ] =$this->user_model->getameturetypedropdown();
+         $data[ 'isexpert' ] =$this->user_model->getisexpertdropdown();
         $data[ 'gender' ] =$this->user_model->getgenderdropdown();
 		$data['before']=$this->user_model->beforeedit($this->input->get('id'));
+        if($data['before']->isexpert==0){
+            $data['page']='edituser';
+		$data['title']='Edit User';
+		$this->load->view('template',$data);
+            
+        }
+        else{
 		$data['before1']=$this->input->get('id');
 		$data['before2']=$this->input->get('id');
 		$data['before3']=$this->input->get('id');
@@ -269,6 +280,7 @@ class Site extends CI_Controller
 		$data['page2']='block/userblock';
 		$data['title']='Edit User';
 		$this->load->view('templatewith2',$data);
+            }
 	}
 	function editusersubmit()
 	{
@@ -288,6 +300,7 @@ class Site extends CI_Controller
 		{
 			$data['alerterror'] = validation_errors();
 			$data[ 'status' ] =$this->user_model->getstatusdropdown();
+             $data[ 'isexpert' ] =$this->user_model->getisexpertdropdown();
 			$data['accesslevel']=$this->user_model->getaccesslevels();
             $data[ 'logintype' ] =$this->user_model->getlogintypedropdown();
             $data[ 'type' ] =$this->user_model->getameturetypedropdown();
@@ -326,6 +339,7 @@ class Site extends CI_Controller
             $twittersocial=$this->input->post('twittersocial');
             $youtubesocial=$this->input->post('youtubesocial');
             $facebooksocial=$this->input->post('facebooksocial');
+            $isexpert=$this->input->post('isexpert');
             
 //            $category=$this->input->get_post('category');
             
@@ -371,7 +385,7 @@ class Site extends CI_Controller
                 $image=$image->image;
             }
             
-			if($this->user_model->edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial)==0)
+			if($this->user_model->edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert)==0)
 			$data['alerterror']="User Editing was unsuccesful";
 			else
 			$data['alertsuccess']="User edited Successfully.";

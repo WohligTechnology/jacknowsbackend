@@ -3,7 +3,7 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class restapi_model extends CI_Model
 {
-    public function registeruser($name, $email, $password)
+    public function registeruser($name, $email, $password,$isexpert)
     {
         $newdata=0;
         $password=md5($password);
@@ -13,7 +13,7 @@ class restapi_model extends CI_Model
 
         if($num == 0)
         {
-             $this->db->query("INSERT INTO `user`(`name`, `email`, `password`) VALUE('$name','$email','$password')");
+             $this->db->query("INSERT INTO `user`(`name`, `email`, `password`,`isexpert`) VALUE('$name','$email','$password','$isexpert')");
             $user=$this->db->insert_id();
 //            $newdata = array(
 //                    'id' => $user,
@@ -21,7 +21,7 @@ class restapi_model extends CI_Model
 //                    'name' => $name,
 //                    'logged_in' => 'true'
 //            );
-            $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice` FROM `user` WHERE `id`=$user")->row();
+            $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`,`isexpert` FROM `user` WHERE `id`=$user")->row();
             $this->session->set_userdata($newdata);
         }
         else
@@ -255,7 +255,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
     }
     
     public function getUserDetails($id){
-        $query['user']=$this->db->query("SELECT `id`, `name`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial` FROM `user` WHERE `id`='$id'")->row();
+        $query['user']=$this->db->query("SELECT `id`, `name`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`,`isexpert` FROM `user` WHERE `id`='$id'")->row();
         
          $query['profession']=$this->db->query("SELECT `expert_profession`.`id`, `expert_profession`.`user`, `expert_profession`.`category` as `categoryid`, `expert_profession`.`description`,`expert_category`.`name` as `category`  FROM `expert_profession` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_profession`.`category` WHERE `expert_profession`.`user`='$id'")->row();
         $professionid=$query['profession']->id;

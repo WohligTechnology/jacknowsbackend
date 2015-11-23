@@ -13,6 +13,15 @@
 			</header>
 			<div class="panel-body">
 			  <form class="form-horizontal tasi-form" method="post" action="<?php echo site_url('site/createusersubmit');?>" enctype= "multipart/form-data">
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label">isexpert</label>
+				  <div class="col-sm-4">
+					<?php
+						
+						echo form_dropdown('isexpert',$isexpert,set_value('isexpert'),'class="chzn-select form-control" 	data-placeholder="Choose a Accesslevel..."');
+					?>
+				  </div>
+				</div>
 				<div class="form-group">
 				  <label class="col-sm-2 control-label" for="normal-field">Name</label>
 				  <div class="col-sm-4">

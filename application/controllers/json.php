@@ -902,7 +902,8 @@ $this->load->view("json",$data);
         $name=$data['name'];
         $email=$data['email'];
         $password=$data['password'];
-        $data["message"] = $this->restapi_model->registeruser($name, $email, $password);
+        $isexpert=$data['isexpert'];
+        $data["message"] = $this->restapi_model->registeruser($name, $email, $password,$isexpert);
         $this->load->view("json", $data);
     }
     function loginuser() {

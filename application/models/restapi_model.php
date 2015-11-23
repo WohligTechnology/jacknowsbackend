@@ -34,12 +34,12 @@ class restapi_model extends CI_Model
     {   
         $query=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`, `isexpert` FROM `user` WHERE ((`name` LIKE '%$expertname%') OR (`firstname` LIKE '%$expertname%') OR (`lastname` LIKE '%$expertname%')) AND (`isexpert`=1)")->result();
         foreach($query as $row){
-            $details=array();
+            $details->userdetails=array();
             $id=$row->id;
-            $userdetails=$this->restapi_model->getUserDetails($id);
-            array_push($details,$userdetails);
+            $query1=$this->restapi_model->getUserDetails($id);
+            array_push($details->userdetails,$query1);
         }
-        return $userdetails;
+        return $details;
     }
     
       function loginuser($email,$password)

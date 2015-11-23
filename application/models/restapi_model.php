@@ -29,6 +29,12 @@ class restapi_model extends CI_Model
             $newdata=false;
 				}
         return $newdata;
+    } 
+    public function searchExpert($expertname)
+    {   
+        $query=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`, `isexpert` FROM `user` WHERE ((`name` LIKE '%$expertname%') OR (`firstname` LIKE '%$expertname%') OR (`lastname` LIKE '%$expertname%')) AND (`isexpert`=1)")->result();
+        
+        return $query;
     }
     
       function loginuser($email,$password)

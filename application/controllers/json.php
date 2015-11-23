@@ -992,4 +992,11 @@ $this->load->view("json",$data);
         
     }
     
+    public function searchExpert(){
+        $expertname=$this->input->get('expertname');
+        $data["message"] = $this->restapi_model->searchExpert($expertname);
+        $this->load->view("json", $data);
+        
+    }
+    
 } ?>

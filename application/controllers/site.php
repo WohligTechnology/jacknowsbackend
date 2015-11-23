@@ -6434,5 +6434,216 @@ $userid=$this->input->get("userid");
 $data["redirect"]="site/viewprofessionphoto?id=".$professionid."&userid=".$userid;
 $this->load->view("redirect2",$data);
 }
+    
+    // PROFESSION SKILLS
+    
+    
+    public function viewprofessionskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewprofessionskill";
+$data["base_url"]=site_url("site/viewprofessionskilljson");
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
+$data["title"]="View professionskill";
+$this->load->view("templatewith2",$data);
+}
+function viewprofessionskilljson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_professionskill`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_professionskill`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_professionskill`.`profession`";
+$elements[2]->sort="1";
+$elements[2]->header="Profession";
+$elements[2]->alias="profession";
+    
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_professionskill`.`skill`";
+$elements[3]->sort="1";
+$elements[3]->header="skill";
+$elements[3]->alias="skill";
+
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_professionskill`.`user`";
+$elements[4]->sort="1";
+$elements[4]->header="userid";
+$elements[4]->alias="userid";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_professionskill`.`profession`";
+$elements[5]->sort="1";
+$elements[5]->header="Professionid";
+$elements[5]->alias="professionid";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionskill`");
+$this->load->view("json",$data);
+}
+
+public function createprofessionskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createprofessionskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
+$data["title"]="Create professionskill";
+$this->load->view("templatewith2",$data);
+}
+public function createprofessionskillsubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("website","Website","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+$this->form_validation->set_rules("photo","photo","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createprofessionskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["user"]=$this->user_model->getuserdropdown();
+$data["title"]="Create professionskill";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$skills=$this->input->get_post("skills");
+
+if($this->professionskill_model->create($user,$profession,$skills)==0)
+$data["alerterror"]="New professionskill could not be created.";
+else
+$data["alertsuccess"]="professionskill created Successfully.";
+$data["redirect"]="site/viewprofessionskill?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
+}
+}
+public function editprofessionskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="editprofessionskill";
+$data["title"]="Edit professionskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["page2"]="block/professionblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["before"]=$this->professionskill_model->beforeedit($this->input->get("id"));
+$this->load->view("templatewith2",$data);
+}
+public function editprofessionskillsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("profession","Profession","trim");
+$this->form_validation->set_rules("website","Website","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+$this->form_validation->set_rules("photo","photo","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="editprofessionskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['profession']=$this->user_model->getprofessiondropdown();
+$data["title"]="Edit professionskill";
+$data["before"]=$this->professionskill_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$profession=$this->input->get_post("profession");
+$skills=$this->input->get_post("skills");
+
+if($this->professionskill_model->edit($id,$user,$profession,$skills)==0)
+$data["alerterror"]="New professionskill could not be Updated.";
+else
+$data["alertsuccess"]="professionskill Updated Successfully.";
+$data["redirect"]="site/viewprofessionskill?id=".$profession."&userid=".$user;
+$this->load->view("redirect2",$data);
+}
+}
+public function deleteprofessionskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->professionskill_model->delete($this->input->get("id"));
+$professionid=$this->input->get("professionid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewprofessionskill?id=".$professionid."&userid=".$userid;
+$this->load->view("redirect2",$data);
+}
 }
 ?>

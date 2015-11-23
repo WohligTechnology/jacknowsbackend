@@ -57,7 +57,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         return false;
     }
     
-    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial)
+    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact)
 	{
         
 		$data  = array(
@@ -72,17 +72,30 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
             'pincode'=> $pincode,
             'twittersocial'=>$twittersocial,
             'youtubesocial'=>$youtubesocial,
-            'facebooksocial'=>$facebooksocial
+            'facebooksocial'=>$facebooksocial,
+            'contact'=>$contact
 		);
 		$this->db->where( 'id', $id );
 		$query=$this->db->update( 'user', $data );
+        
+        $userdetails=$this->restapi_model->getUserDetails($id);
+        
         if($query)
-		return 1;
+		return $userdetails;
         else
         return 0;
 	}
     
     public function editProfessionDetails($id,$awards, $qualification, $experience,$websites,$videos,$description,$category,$photos,$skills){
+        
+        $querydelete=$this->db->query("DELETE FROM `expert_profession` WHERE `user`='$id'");
+        $querydelete1=$this->db->query("DELETE FROM `expert_professionaward` WHERE `user`='$id'");
+        $querydelete2=$this->db->query("DELETE FROM `expert_professioneducation` WHERE `user`='$id'");
+        $querydelete3=$this->db->query("DELETE FROM `expert_professionexperience` WHERE `user`='$id'");
+        $querydelete4=$this->db->query("DELETE FROM `expert_professionphoto` WHERE `user`='$id'");
+        $querydelete5=$this->db->query("DELETE FROM `expert_professionskill` WHERE `user`='$id'");
+        $querydelete6=$this->db->query("DELETE FROM `expert_professionvideolink` WHERE `user`='$id'");
+        $querydelete7=$this->db->query("DELETE FROM `expert_professionwebsite` WHERE `user`='$id'");
         
         $query=$this->db->query("SELECT * FROM `expert_category` WHERE `name` LIKE '$category'")->row();
         $categoryid=$query->id;
@@ -120,6 +133,13 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
 //        // WORK EXPERIENCE
         
          for($i=0; $i<count($experience); $i++){
+             $date = date_create( $experience[$i]['startdate']);
+             $experience[$i]['startdate']=date_format($date, 'Y-m-d');
+             
+             $date = date_create( $experience[$i]['enddate']);
+             $experience[$i]['enddate']=date_format($date, 'Y-m-d');
+             
+             
          $data=array("user" => $id,"profession" => $professionid,"companyname" => $experience[$i]['companyname'],"jobtitle" => $experience[$i]['jobtitle'],"companylogo" => $experience[$i]['joblogo'],"jobdescription" => $experience[$i]['jobdesc'],"startdate" => $experience[$i]['startdate'],"enddate" => $experience[$i]['enddate']);
         $query=$this->db->insert( "expert_professionexperience", $data );
         $qualificationid=$this->db->insert_id();
@@ -149,13 +169,25 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         $videosid=$this->db->insert_id();
             
         }
-
-        return 1;
+            
+        $userdetails=$this->restapi_model->getUserDetails($id);
+        
+		return $userdetails;
+        
         
     }
     
     
     public function editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills){
+        
+        $querydelete=$this->db->query("DELETE FROM `expert_hobby` WHERE `user`='$id'");
+        $querydelete1=$this->db->query("DELETE FROM `expert_hobbyawards` WHERE `user`='$id'");
+        $querydelete2=$this->db->query("DELETE FROM `expert_hobbyeducation` WHERE `user`='$id'");
+        $querydelete3=$this->db->query("DELETE FROM `expert_hobbyphotos` WHERE `user`='$id'");
+        $querydelete4=$this->db->query("DELETE FROM `expert_hobbyskill` WHERE `user`='$id'");
+        $querydelete5=$this->db->query("DELETE FROM `expert_hobbyvideolinks` WHERE `user`='$id'");
+        $querydelete6=$this->db->query("DELETE FROM `expert_hobbywebsite` WHERE `user`='$id'");
+        
         
         $query=$this->db->query("SELECT * FROM `expert_category` WHERE `name` LIKE '$category'")->row();
         $categoryid=$query->id;
@@ -216,14 +248,16 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
             
         }
 
-        return 1;
+        $userdetails=$this->restapi_model->getUserDetails($id);
+        
+		return $userdetails;
         
     }
     
     public function getUserDetails($id){
         $query['user']=$this->db->query("SELECT `id`, `name`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial` FROM `user` WHERE `id`='$id'")->row();
         
-         $query['profession']=$this->db->query("SELECT `id`, `user`, `category`, `description` FROM `expert_profession` WHERE `user`='$id'")->row();
+         $query['profession']=$this->db->query("SELECT `expert_profession`.`id`, `expert_profession`.`user`, `expert_profession`.`category` as `categoryid`, `expert_profession`.`description`,`expert_category`.`name` as `category`  FROM `expert_profession` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_profession`.`category` WHERE `expert_profession`.`user`='$id'")->row();
         $professionid=$query['profession']->id;
          $query['profession']->awards=$this->db->query("SELECT `id`, `user`, `profession`, `award` as `awards` FROM `expert_professionaward` WHERE `user`='$id' AND `profession`='$professionid'")->result();
         
@@ -243,7 +277,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         
         
         
-        $query['hobby']=$this->db->query("SELECT `id`, `user`, `category`, `expinyrs` as `yoexp`, `description`, `skills` FROM `expert_hobby` WHERE `user`='$id'")->row();
+        $query['hobby']=$this->db->query("SELECT `expert_hobby`.`id`, `expert_hobby`.`user`, `expert_hobby`.`category` as `categoryid`, `expert_hobby`.`expinyrs` as `yoexp`, `expert_hobby`.`description`, `expert_hobby`.`skills`,`expert_category`.`name` as `category` FROM `expert_hobby` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_hobby`.`category` WHERE `expert_hobby`.`user`='$id'")->row();
         $hobbyid=$query['hobby']->id;
          $query['hobby']->awards=$this->db->query("SELECT `id`, `user`, `hobby`, `awards` FROM `expert_hobbyawards` WHERE `user`='$id' AND `hobby`='$hobbyid'")->result();
         

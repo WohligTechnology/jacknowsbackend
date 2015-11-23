@@ -269,7 +269,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         $professionid=$query['profession']->id;
          $query['profession']->awards=$this->db->query("SELECT `id`, `user`, `profession`, `award` as `awards` FROM `expert_professionaward` WHERE `user`='$id' AND `profession`='$professionid'")->result();
         
-        $query['profession']->experience=$this->db->query("SELECT `id`, `profession`, `user`, `companyname`, `jobtitle`, `companylogo` as `logo`, `jobdescription`as `jobdesc`, `startdate`, `enddate` FROM `expert_professionexperience` WHERE `user`='$id' AND `profession`='$professionid'")->result();
+        $query['profession']->experience=$this->db->query("SELECT `id`, `profession`, `user`, `companyname`, `jobtitle`, `companylogo`, `jobdescription`as `jobdesc`, `startdate`, `enddate` FROM `expert_professionexperience` WHERE `user`='$id' AND `profession`='$professionid'")->result();
         
         $query['profession']->qualification=$this->db->query("SELECT `id`, `user`, `profession`, `degree`, `institute`, `yearofpassing` as `year` FROM `expert_professioneducation` WHERE `user`='$id' AND `profession`='$professionid'")->result(); 
         

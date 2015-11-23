@@ -3801,12 +3801,14 @@ $data['before11']=$this->input->get('id');
 $data['before12']=$this->input->get('userid');
 $data['before13']=$this->input->get('id');
 $data['before14']=$this->input->get('userid');
-$data["base_url"]=site_url("site/viewprofessionexperiencejson");
+$data["base_url"]=site_url("site/viewprofessionexperiencejson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["title"]="View professionexperience";
 $this->load->view("templatewith2",$data);
 }
 function viewprofessionexperiencejson()
 {
+$userid=$this->input->get('userid');
+$id=$this->input->get('id');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_professionexperience`.`id`";
@@ -3879,7 +3881,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionexperience`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionexperience`","WHERE `expert_professionexperience`.`profession`='$id' AND `expert_professionexperience`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -4105,7 +4107,7 @@ public function viewprofessionaward()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionaward";
-$data["base_url"]=site_url("site/viewprofessionawardjson");
+$data["base_url"]=site_url("site/viewprofessionawardjson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
@@ -4126,6 +4128,8 @@ $this->load->view("templatewith2",$data);
 }
 function viewprofessionawardjson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_professionaward`.`id`";
@@ -4174,7 +4178,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionaward`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionaward`","WHERE `expert_professionaward`.`profession`='$id' AND `expert_professionaward`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -4512,12 +4516,14 @@ $data['before9']=$this->input->get('id');
 $data['before10']=$this->input->get('userid');
 $data['before11']=$this->input->get('id');
 $data['before12']=$this->input->get('userid');
-$data["base_url"]=site_url("site/viewhobbyawardsjson");
+$data["base_url"]=site_url("site/viewhobbyawardsjson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["title"]="View hobbyawards";
 $this->load->view("templatewith2",$data);
 }
 function viewhobbyawardsjson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_hobbyawards`.`id`";
@@ -4564,7 +4570,8 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyawards`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyawards`",
+"WHERE `expert_hobbyawards`.`hobby`='$id' AND `expert_hobbyawards`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -4704,12 +4711,14 @@ $data['before9']=$this->input->get('id');
 $data['before10']=$this->input->get('userid');
 $data['before11']=$this->input->get('id');
 $data['before12']=$this->input->get('userid');
-$data["base_url"]=site_url("site/viewhobbyeducationjson");
+$data["base_url"]=site_url("site/viewhobbyeducationjson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["title"]="View hobbyeducation";
 $this->load->view("templatewith2",$data);
 }
 function viewhobbyeducationjson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_hobbyeducation`.`id`";
@@ -4765,7 +4774,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyeducation`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyeducation`","WHERE `expert_hobbyeducation`.`hobby`='$id' AND `expert_hobbyeducation`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -4913,12 +4922,14 @@ $data['before9']=$this->input->get('id');
 $data['before10']=$this->input->get('userid');
 $data['before11']=$this->input->get('id');
 $data['before12']=$this->input->get('userid');
-$data["base_url"]=site_url("site/viewhobbywebsitejson");
+$data["base_url"]=site_url("site/viewhobbywebsitejson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["title"]="View hobbywebsite";
 $this->load->view("templatewith2",$data);
 }
 function viewhobbywebsitejson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_hobbywebsite`.`id`";
@@ -4965,7 +4976,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbywebsite`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbywebsite`","WHERE `expert_hobbywebsite`.`hobby`='$id' AND `expert_hobbywebsite`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -5105,12 +5116,14 @@ $data['before9']=$this->input->get('id');
 $data['before10']=$this->input->get('userid');
 $data['before11']=$this->input->get('id');
 $data['before12']=$this->input->get('userid');
-$data["base_url"]=site_url("site/viewhobbyvideolinksjson");
+$data["base_url"]=site_url("site/viewhobbyvideolinksjson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["title"]="View hobbyvideolinks";
 $this->load->view("templatewith2",$data);
 }
 function viewhobbyvideolinksjson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_hobbyvideolinks`.`id`";
@@ -5156,7 +5169,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyvideolinks`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyvideolinks`","WHERE `expert_hobbyvideolinks`.`hobby`='$id' AND `expert_hobbyvideolinks`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -5296,12 +5309,15 @@ $data['before9']=$this->input->get('id');
 $data['before10']=$this->input->get('userid');
 $data['before11']=$this->input->get('id');
 $data['before12']=$this->input->get('userid');
-$data["base_url"]=site_url("site/viewhobbyphotosjson");
+$data["base_url"]=site_url("site/viewhobbyphotosjson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["title"]="View hobbyphotos";
 $this->load->view("templatewith2",$data);
 }
 function viewhobbyphotosjson()
 {
+
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_hobbyphotos`.`id`";
@@ -5348,7 +5364,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyphotos`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyphotos`","WHERE `expert_hobbyphotos`.`hobby`='$id' AND `expert_hobbyphotos`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -5552,7 +5568,7 @@ $this->load->view("redirect2",$data);
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionwebsite";
-$data["base_url"]=site_url("site/viewprofessionwebsitejson");
+$data["base_url"]=site_url("site/viewprofessionwebsitejson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
@@ -5573,6 +5589,8 @@ $this->load->view("templatewith2",$data);
 }
 function viewprofessionwebsitejson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_professionwebsite`.`id`";
@@ -5620,7 +5638,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionwebsite`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionwebsite`","WHERE `expert_professionwebsite`.`profession`='$id' AND `expert_professionwebsite`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -5751,7 +5769,7 @@ public function viewprofessioneducation()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessioneducation";
-$data["base_url"]=site_url("site/viewprofessioneducationjson");
+$data["base_url"]=site_url("site/viewprofessioneducationjson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
@@ -5772,6 +5790,8 @@ $this->load->view("templatewith2",$data);
 }
 function viewprofessioneducationjson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_professioneducation`.`id`";
@@ -5829,7 +5849,8 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professioneducation`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professioneducation`",
+"WHERE `expert_professioneducation`.`profession`='$id' AND `expert_professioneducation`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -5983,12 +6004,14 @@ $data['before11']=$this->input->get('id');
 $data['before12']=$this->input->get('userid');
 $data['before13']=$this->input->get('id');
 $data['before14']=$this->input->get('userid');
-$data["base_url"]=site_url("site/viewprofessionvideolinkjson");
+$data["base_url"]=site_url("site/viewprofessionvideolinkjson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["title"]="View professionvideolink";
 $this->load->view("templatewith2",$data);
 }
 function viewprofessionvideolinkjson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_professionvideolink`.`id`";
@@ -6036,7 +6059,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionvideolink`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionvideolink`","WHERE `expert_professionvideolink`.`profession`='$id' AND `expert_professionvideolink`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -6167,7 +6190,7 @@ public function viewprofessionphoto()
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionphoto";
-$data["base_url"]=site_url("site/viewprofessionphotojson");
+$data["base_url"]=site_url("site/viewprofessionphotojson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
@@ -6188,6 +6211,8 @@ $this->load->view("templatewith2",$data);
 }
 function viewprofessionphotojson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_professionphoto`.`id`";
@@ -6235,7 +6260,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionphoto`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionphoto`","WHERE `expert_professionphoto`.`profession`='$id' AND `expert_professionphoto`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 
@@ -6445,7 +6470,7 @@ $this->load->view("redirect2",$data);
 $access=array("1");
 $this->checkaccess($access);
 $data["page"]="viewprofessionskill";
-$data["base_url"]=site_url("site/viewprofessionskilljson");
+$data["base_url"]=site_url("site/viewprofessionskilljson?id=".$this->input->get('id')."&userid=".$this->input->get('userid'));
 $data["page2"]="block/professionblock";
 $data['before1']=$this->input->get('userid');
 $data['before2']=$this->input->get('id');
@@ -6466,6 +6491,8 @@ $this->load->view("templatewith2",$data);
 }
 function viewprofessionskilljson()
 {
+$id=$this->input->get('id');
+$userid=$this->input->get('userid');
 $elements=array();
 $elements[0]=new stdClass();
 $elements[0]->field="`expert_professionskill`.`id`";
@@ -6514,7 +6541,8 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionskill`");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_professionskill`",
+"WHERE `expert_professionskill`.`profession`='$id' AND `expert_professionskill`.`user`='$userid'");
 $this->load->view("json",$data);
 }
 

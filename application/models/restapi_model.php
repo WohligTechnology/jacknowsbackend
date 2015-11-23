@@ -186,7 +186,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
     }
     
     
-    public function editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills,$yoexp){
+    public function editHobbyDetails($id,$awards, $qualification,$websites,$videos,$description,$category,$skills,$yoexp,$photos){
         
         $querydelete=$this->db->query("DELETE FROM `expert_hobby` WHERE `user`='$id'");
         $querydelete1=$this->db->query("DELETE FROM `expert_hobbyawards` WHERE `user`='$id'");

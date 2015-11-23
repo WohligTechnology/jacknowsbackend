@@ -10,6 +10,7 @@
 <li><a href="<?php echo site_url('site/viewprofessionwebsite?id=').$before9.'&userid='.$before10; ?>">Website</a></li>
 <li><a href="<?php echo site_url('site/viewprofessionvideolink?id=').$before11.'&userid='.$before12; ?>">Video Links</a></li>
 <li><a href="<?php echo site_url('site/viewprofessionphoto?id=').$before13.'&userid='.$before14; ?>">Photos</a></li>
+<li><a href="<?php echo site_url('site/viewprofessionskill?id=').$before13.'&userid='.$before14; ?>">Skills</a></li>
 </ul>
 </div>
 </section>

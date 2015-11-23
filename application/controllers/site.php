@@ -6482,10 +6482,10 @@ $elements[2]->header="Profession";
 $elements[2]->alias="profession";
     
 $elements[3]=new stdClass();
-$elements[3]->field="`expert_professionskill`.`skill`";
+$elements[3]->field="`expert_professionskill`.`skills`";
 $elements[3]->sort="1";
-$elements[3]->header="skill";
-$elements[3]->alias="skill";
+$elements[3]->header="skills";
+$elements[3]->alias="skills";
 
     
 $elements[4]=new stdClass();
@@ -6643,6 +6643,217 @@ $this->professionskill_model->delete($this->input->get("id"));
 $professionid=$this->input->get("professionid");
 $userid=$this->input->get("userid");
 $data["redirect"]="site/viewprofessionskill?id=".$professionid."&userid=".$userid;
+$this->load->view("redirect2",$data);
+}
+    
+    
+    // HOBBY SKILLS
+    
+       public function viewhobbyskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="viewhobbyskill";
+$data["base_url"]=site_url("site/viewhobbyskilljson");
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
+$data["title"]="View hobbyskill";
+$this->load->view("templatewith2",$data);
+}
+function viewhobbyskilljson()
+{
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="`expert_hobbyskill`.`id`";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+$elements[1]=new stdClass();
+$elements[1]->field="`expert_hobbyskill`.`user`";
+$elements[1]->sort="1";
+$elements[1]->header="User";
+$elements[1]->alias="user";
+$elements[2]=new stdClass();
+$elements[2]->field="`expert_hobbyskill`.`hobby`";
+$elements[2]->sort="1";
+$elements[2]->header="hobby";
+$elements[2]->alias="hobby";
+    
+$elements[3]=new stdClass();
+$elements[3]->field="`expert_hobbyskill`.`skills`";
+$elements[3]->sort="1";
+$elements[3]->header="skills";
+$elements[3]->alias="skills";
+
+    
+$elements[4]=new stdClass();
+$elements[4]->field="`expert_hobbyskill`.`user`";
+$elements[4]->sort="1";
+$elements[4]->header="userid";
+$elements[4]->alias="userid";
+$elements[5]=new stdClass();
+$elements[5]->field="`expert_hobbyskill`.`hobby`";
+$elements[5]->sort="1";
+$elements[5]->header="hobbyid";
+$elements[5]->alias="hobbyid";
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+$maxrow=20;
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobbyskill`");
+$this->load->view("json",$data);
+}
+
+public function createhobbyskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="createhobbyskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['hobby']=$this->user_model->gethobbydropdown();
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
+$data["title"]="Create hobbyskill";
+$this->load->view("templatewith2",$data);
+}
+public function createhobbyskillsubmit() 
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","hobby","trim");
+$this->form_validation->set_rules("website","Website","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+$this->form_validation->set_rules("photo","photo","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="createhobbyskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['hobby']=$this->user_model->gethobbydropdown();
+$data["user"]=$this->user_model->getuserdropdown();
+$data["title"]="Create hobbyskill";
+$this->load->view("template",$data);
+}
+else
+{
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$skills=$this->input->get_post("skills");
+
+if($this->hobbyskill_model->create($user,$hobby,$skills)==0)
+$data["alerterror"]="New hobbyskill could not be created.";
+else
+$data["alertsuccess"]="hobbyskill created Successfully.";
+$data["redirect"]="site/viewhobbyskill?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
+}
+}
+public function edithobbyskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$data["page"]="edithobbyskill";
+$data["title"]="Edit hobbyskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data["page2"]="block/hobbyblock";
+$data['before1']=$this->input->get('userid');
+$data['before2']=$this->input->get('id');
+$data['before3']=$this->input->get('id');
+$data['before4']=$this->input->get('userid');
+$data['before5']=$this->input->get('id');
+$data['before6']=$this->input->get('userid');
+$data['before7']=$this->input->get('id');
+$data['before8']=$this->input->get('userid');
+$data['before9']=$this->input->get('id');
+$data['before10']=$this->input->get('userid');
+$data['before11']=$this->input->get('id');
+$data['before12']=$this->input->get('userid');
+$data['before13']=$this->input->get('id');
+$data['before14']=$this->input->get('userid');
+$data['hobby']=$this->user_model->gethobbydropdown();
+$data["before"]=$this->hobbyskill_model->beforeedit($this->input->get("id"));
+$this->load->view("templatewith2",$data);
+}
+public function edithobbyskillsubmit()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->form_validation->set_rules("id","ID","trim");
+$this->form_validation->set_rules("user","User","trim");
+$this->form_validation->set_rules("hobby","hobby","trim");
+$this->form_validation->set_rules("website","Website","trim");
+$this->form_validation->set_rules("videolink","Video Link","trim");
+$this->form_validation->set_rules("photo","photo","trim");
+if($this->form_validation->run()==FALSE)
+{
+$data["alerterror"]=validation_errors();
+$data["page"]="edithobbyskill";
+$data["user"]=$this->user_model->getuserdropdown();
+$data['hobby']=$this->user_model->gethobbydropdown();
+$data["title"]="Edit hobbyskill";
+$data["before"]=$this->hobbyskill_model->beforeedit($this->input->get("id"));
+$this->load->view("template",$data);
+}
+else
+{
+$id=$this->input->get_post("id");
+$user=$this->input->get_post("user");
+$hobby=$this->input->get_post("hobby");
+$skills=$this->input->get_post("skills");
+
+if($this->hobbyskill_model->edit($id,$user,$hobby,$skills)==0)
+$data["alerterror"]="New hobbyskill could not be Updated.";
+else
+$data["alertsuccess"]="hobbyskill Updated Successfully.";
+$data["redirect"]="site/viewhobbyskill?id=".$hobby."&userid=".$user;
+$this->load->view("redirect2",$data);
+}
+}
+public function deletehobbyskill()
+{
+$access=array("1");
+$this->checkaccess($access);
+$this->hobbyskill_model->delete($this->input->get("id"));
+$hobbyid=$this->input->get("hobbyid");
+$userid=$this->input->get("userid");
+$data["redirect"]="site/viewhobbyskill?id=".$hobbyid."&userid=".$userid;
 $this->load->view("redirect2",$data);
 }
 }

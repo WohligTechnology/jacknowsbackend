@@ -13,14 +13,14 @@
 <thead>
 <tr>
 <th data-field="id">ID</th>
-<th data-field="profession">Profession</th>
-<th data-field="user">User</th>
+<!--<th data-field="profession">Profession</th>-->
+<!--<th data-field="user">User</th>-->
 <th data-field="companyname">companyname</th>
 <th data-field="jobtitle">jobtitle</th>
 <th data-field="companylogo">Company Logo</th>
-<th data-field="jobdescription">jobdescription</th>
-<th data-field="startdate">Start date</th>
-<th data-field="enddate">End Date</th>
+<!--<th data-field="jobdescription">jobdescription</th>-->
+<!--<th data-field="startdate">Start date</th>-->
+<!--<th data-field="enddate">End Date</th>-->
 </tr>
 </thead>
 <tbody>
@@ -43,7 +43,7 @@ function drawtable(resultrow) {
                 {
                 companylogo="No Receipt Available";
                 }
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.profession + "</td><td>" + resultrow.user + "</td><td>" + resultrow.companyname + "</td><td>" + resultrow.jobtitle + "</td><td>" + companylogo + "</td><td>" + resultrow.jobdescription + "</td><td>" + resultrow.startdate + "</td><td>" + resultrow.enddate + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionexperience?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofessionexperience?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.companyname + "</td><td>" + resultrow.jobtitle + "</td><td>" + companylogo + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionexperience?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofessionexperience?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

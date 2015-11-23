@@ -218,7 +218,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
           for($i=0; $i<count($qualification); $i++){
          $data=array("user" => $id,"hobby" => $hobbyid,"degree" => $qualification[$i]['degree'],"institute" => $qualification[$i]['institute'],"yearofpassing" => $qualification[$i]['year']);
         $query=$this->db->insert( "expert_hobbyeducation", $data );
-        $hobbyid=$this->db->insert_id();
+        $educationid=$this->db->insert_id();
             
         }
 

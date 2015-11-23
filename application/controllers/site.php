@@ -3958,7 +3958,7 @@ $enddate=$this->input->get_post("enddate");
     $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$this->load->library('upload', $config);
-			$filename="image";
+			$filename="companylogo";
 			$companylogo="";
 			if (  $this->upload->do_upload($filename))
 			{
@@ -4060,7 +4060,7 @@ $enddate=$this->input->get_post("enddate");
     $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
 			$this->load->library('upload', $config);
-			$filename="image";
+			$filename="companylogo";
 			$companylogo="";
 			if (  $this->upload->do_upload($filename))
 			{
@@ -4353,7 +4353,7 @@ $elements[1]->sort="1";
 $elements[1]->header="User";
 $elements[1]->alias="user";
 $elements[2]=new stdClass();
-$elements[2]->field="`expert_hobby`.`category`";
+$elements[2]->field="`expert_category`.`name`";
 $elements[2]->sort="1";
 $elements[2]->header="Category";
 $elements[2]->alias="category";
@@ -4392,7 +4392,7 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobby`","WHERE `expert_hobby`.`user`='$id'");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `expert_hobby` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_hobby`.`category`","WHERE `expert_hobby`.`user`='$id'");
 $this->load->view("json",$data);
 }
 

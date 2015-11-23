@@ -13,8 +13,10 @@
 <thead>
 <tr>
 <th data-field="id">ID</th>
+<!--
 <th data-field="user">User</th>
 <th data-field="profession">Profession</th>
+-->
 <th data-field="website">Website</th>
 <th data-field="videolink">Video Link</th>
 <th data-field="photo">photo</th>
@@ -40,7 +42,7 @@ function drawtable(resultrow) {
                 {
                 photo="No Receipt Available";
                 }
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.profession + "</td><td>" + resultrow.website + "</td><td>" + resultrow.videolink + "</td><td>" + photo + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionaward?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofessionaward?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.website + "</td><td>" + resultrow.videolink + "</td><td>" + photo + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionaward?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofessionaward?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

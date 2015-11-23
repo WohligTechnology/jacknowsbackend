@@ -974,4 +974,74 @@ $this->load->view("json",$data);
         
     }
     
+    public function uploadprofileimage(){
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $this->load->library('upload', $config);
+        $filename="image";
+        $image="";
+        if (  $this->upload->do_upload($filename))
+        {
+            $uploaddata = $this->upload->data();
+            $image=$uploaddata['file_name'];
+            $imagename=$image;
+           
+        }
+         $data["message"] = $imagename;
+        $this->load->view("json", $data);
+        
+    }
+    public function uploadcompanylogo(){
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $this->load->library('upload', $config);
+        $filename="image";
+        $image="";
+        if (  $this->upload->do_upload($filename))
+        {
+            $uploaddata = $this->upload->data();
+            $image=$uploaddata['file_name'];
+            $imagename=$image;
+           
+        }
+         $data["message"] = $imagename;
+        $this->load->view("json", $data);
+        
+    }
+    public function uploadprofessionphoto(){
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $this->load->library('upload', $config);
+        $filename="image";
+        $image="";
+        if (  $this->upload->do_upload($filename))
+        {
+            $uploaddata = $this->upload->data();
+            $image=$uploaddata['file_name'];
+            $imagename=$image;
+           
+        }
+         $data["message"] = $imagename;
+        $this->load->view("json", $data);
+        
+    }
+    
+    public function uploadhobbyphoto(){
+        $config['upload_path'] = './uploads/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $this->load->library('upload', $config);
+        $filename="image";
+        $image="";
+        if (  $this->upload->do_upload($filename))
+        {
+            $uploaddata = $this->upload->data();
+            $image=$uploaddata['file_name'];
+            $imagename=$image;
+           
+        }
+         $data["message"] = $imagename;
+        $this->load->view("json", $data);
+        
+    }
+    
 } ?>

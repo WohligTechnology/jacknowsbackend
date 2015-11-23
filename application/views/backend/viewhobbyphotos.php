@@ -13,8 +13,10 @@
 <thead>
 <tr>
 <th data-field="id">ID</th>
+<!--
 <th data-field="user">User</th>
 <th data-field="hobby">Hobby</th>
+-->
 <th data-field="image">Image</th>
 </tr>
 </thead>
@@ -38,7 +40,7 @@ function drawtable(resultrow) {
                 {
                 image="No Receipt Available";
                 }
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.hobby + "</td><td>" + image + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/edithobbyphotos?id=');?>"+resultrow.id+"&hobbyid="+resultrow.hobbyid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deletehobbyphotos?id='); ?>"+resultrow.id+"&hobbyid="+resultrow.hobbyid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + image + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/edithobbyphotos?id=');?>"+resultrow.id+"&hobbyid="+resultrow.hobbyid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deletehobbyphotos?id='); ?>"+resultrow.id+"&hobbyid="+resultrow.hobbyid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

@@ -13,8 +13,10 @@
 <thead>
 <tr>
 <th data-field="id">ID</th>
+<!--
 <th data-field="user">User</th>
 <th data-field="profession">Profession</th>
+-->
 <th data-field="videolink">Video Link</th>
 </tr>
 </thead>
@@ -33,7 +35,7 @@
 </div>
 <script>
 function drawtable(resultrow) {
-return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.user + "</td><td>" + resultrow.profession + "</td><td>" + resultrow.videolink + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionvideolink?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofessionvideolink?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
+return "<tr><td>" + resultrow.id + "</td><td>" + resultrow.videolink + "</td><td><a class='btn btn-primary btn-xs' href='<?php echo site_url('site/editprofessionvideolink?id=');?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-pencil'></i></a><a class='btn btn-danger btn-xs' onclick=\"return confirm('Are you sure you want to delete?');\" href='<?php echo site_url('site/deleteprofessionvideolink?id='); ?>"+resultrow.id+"&professionid="+resultrow.professionid+"&userid="+resultrow.userid+"'><i class='icon-trash '></i></a></td></tr>";
 }
 generatejquery("<?php echo $base_url;?>");
 </script>

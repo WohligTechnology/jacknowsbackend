@@ -39,8 +39,13 @@ class restapi_model extends CI_Model
 //           $userdetails=$this->restapi_model->getUserDetails($id);
 //           
 //       }
+        if(!$query){
+            return false;
+        }
+        else{
+            return $query;
+        }
         
-        return $query;
     }
     
       function loginuser($email,$password)

@@ -57,7 +57,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         return false;
     }
     
-    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact)
+    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact,$isexpert)
 	{
         
 		$data  = array(
@@ -73,7 +73,8 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
             'twittersocial'=>$twittersocial,
             'youtubesocial'=>$youtubesocial,
             'facebooksocial'=>$facebooksocial,
-            'contact'=>$contact
+            'contact'=>$contact,
+            'isexpert'=>$isexpert
 		);
 		$this->db->where( 'id', $id );
 		$query=$this->db->update( 'user', $data );

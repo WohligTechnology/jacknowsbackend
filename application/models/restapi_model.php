@@ -32,7 +32,7 @@ class restapi_model extends CI_Model
     } 
     public function searchExpert($expertname)
     {   
-        $query=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`, `isexpert` FROM `user` WHERE ((`name` LIKE '%$expertname%') OR (`firstname` LIKE '%$expertname%') OR (`lastname` LIKE '%$expertname%')) AND (`isexpert`=1)")->result();
+        $query=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`, `isexpert`,`hobbyverification`,`professionverification` FROM `user` WHERE ((`name` LIKE '%$expertname%') OR (`firstname` LIKE '%$expertname%') OR (`lastname` LIKE '%$expertname%')) AND (`isexpert`=1)")->result();
 //       foreach($query as $row){
 //           
 //           $id=$row->id;
@@ -269,7 +269,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
     }
     
     public function getUserDetails($id){
-        $query['user']=$this->db->query("SELECT `id`, `name`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`,`isexpert` FROM `user` WHERE `id`='$id'")->row();
+        $query['user']=$this->db->query("SELECT `id`, `name`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`,`isexpert`,`professionverification`,`hobbyverification` FROM `user` WHERE `id`='$id'")->row();
         
          $query['profession']=$this->db->query("SELECT `expert_profession`.`id`, `expert_profession`.`user`, `expert_profession`.`category` as `categoryid`, `expert_profession`.`description`,`expert_category`.`name` as `category`  FROM `expert_profession` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_profession`.`category` WHERE `expert_profession`.`user`='$id'")->row();
         $professionid=$query['profession']->id;

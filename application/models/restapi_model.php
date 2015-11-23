@@ -63,7 +63,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         return false;
     }
     
-    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact,$isexpert)
+    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact,$isexpert,$image)
 	{
         
 		$data  = array(
@@ -80,7 +80,8 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
             'youtubesocial'=>$youtubesocial,
             'facebooksocial'=>$facebooksocial,
             'contact'=>$contact,
-            'isexpert'=>$isexpert
+            'isexpert'=>$isexpert,
+            'image'=>$image
 		);
 		$this->db->where( 'id', $id );
 		$query=$this->db->update( 'user', $data );
@@ -147,7 +148,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
              $experience[$i]['enddate']=date_format($date, 'Y-m-d');
              
              
-         $data=array("user" => $id,"profession" => $professionid,"companyname" => $experience[$i]['companyname'],"jobtitle" => $experience[$i]['jobtitle'],"companylogo" => $experience[$i]['joblogo'],"jobdescription" => $experience[$i]['jobdesc'],"startdate" => $experience[$i]['startdate'],"enddate" => $experience[$i]['enddate']);
+         $data=array("user" => $id,"profession" => $professionid,"companyname" => $experience[$i]['companyname'],"jobtitle" => $experience[$i]['jobtitle'],"companylogo" => $experience[$i]['companylogo'],"jobdescription" => $experience[$i]['jobdesc'],"startdate" => $experience[$i]['startdate'],"enddate" => $experience[$i]['enddate']);
         $query=$this->db->insert( "expert_professionexperience", $data );
         $qualificationid=$this->db->insert_id();
             

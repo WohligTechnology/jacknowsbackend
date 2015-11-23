@@ -935,7 +935,8 @@ $this->load->view("json",$data);
         $facebooksocial=$data['facebooksocial'];
         $contact=$data['contact'];
         $isexpert=$data['isexpert'];
-        $data["message"] = $this->restapi_model->editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact,$isexpert);
+        $image=$data['image'];
+        $data["message"] = $this->restapi_model->editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact,$isexpert,$image);
         $this->load->view("json", $data);
     }
     function editProfessionDetails() {

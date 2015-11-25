@@ -13,7 +13,7 @@ class restapi_model extends CI_Model
 
         if($num == 0)
         {
-             $this->db->query("INSERT INTO `user`(`name`, `email`, `password`,`isexpert`) VALUE('$name','$email','$password','$isexpert')");
+             $this->db->query("INSERT INTO `user`(`name`, `email`, `password`,`isexpert`,`status`,`accesslevel`) VALUE('$name','$email','$password','$isexpert','1','4')");
             $user=$this->db->insert_id();
 //            $newdata = array(
 //                    'id' => $user,
@@ -92,7 +92,9 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
             'facebooksocial'=>$facebooksocial,
             'contact'=>$contact,
             'isexpert'=>$isexpert,
-            'image'=>$image
+            'image'=>$image,
+            'status'=>1,
+            'accesslevel'=>4
 		);
 		$this->db->where( 'id', $id );
 		$query=$this->db->update( 'user', $data );

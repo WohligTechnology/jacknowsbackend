@@ -217,6 +217,24 @@
 					<input type="text" id="normal-field" class="form-control" name="facebooksocial" value="<?php echo set_value('facebooksocial');?>">
 				  </div>
 				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label">hobby verification</label>
+				  <div class="col-sm-4">
+					<?php
+						
+						echo form_dropdown('hobbyverification',$hobbyverification,set_value('hobbyverification'),'class="chzn-select form-control" 	data-placeholder="Choose a hobbyverification..."');
+					?>
+				  </div>
+				</div>
+                  <div class=" form-group">
+				  <label class="col-sm-2 control-label">profession verification</label>
+				  <div class="col-sm-4">
+					<?php
+						
+						echo form_dropdown('professionverification',$professionverification,set_value('professionverification'),'class="chzn-select form-control" 	data-placeholder="Choose a professionverification..."');
+					?>
+				  </div>
+				</div>
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label">&nbsp;</label>
 				  <div class="col-sm-4">

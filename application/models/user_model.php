@@ -32,7 +32,7 @@ class User_model extends CI_Model
 	}
 	
 	
-	public function create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert)
+	public function create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification)
 	{
 		$data  = array(
 			'name' => $name,
@@ -59,7 +59,9 @@ class User_model extends CI_Model
             'twittersocial'=>$twittersocial,
             'youtubesocial'=>$youtubesocial,
             'facebooksocial'=>$facebooksocial,
-            'isexpert'=>$isexpert
+            'isexpert'=>$isexpert,
+            'hobbyverification'=>$hobbyverification,
+            'professionverification'=>$professionverification
 		);
 		$query=$this->db->insert( 'user', $data );
 		$id=$this->db->insert_id();
@@ -128,7 +130,7 @@ class User_model extends CI_Model
 		return $query;
 	}
 	
-	public function edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert)
+	public function edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification)
 	{
 		$data  = array(
 			'name' => $name,
@@ -154,7 +156,9 @@ class User_model extends CI_Model
             'twittersocial'=>$twittersocial,
             'youtubesocial'=>$youtubesocial,
             'facebooksocial'=>$facebooksocial,
-            'isexpert'=>$isexpert
+            'isexpert'=>$isexpert,
+            'hobbyverification'=>$hobbyverification,
+            'professionverification'=>$professionverification
 		);
 		if($password != "")
 			$data['password'] =md5($password);
@@ -530,6 +534,18 @@ class User_model extends CI_Model
 	public function getlogintypedropdown()
 	{
 		$query=$this->db->query("SELECT * FROM `logintype`  ORDER BY `id` ASC")->result();
+		$return=array(
+		);
+		foreach($query as $row)
+		{
+			$return[$row->id]=$row->name;
+		}
+		
+		return $return;
+	}
+    public function getverificationdropdown()
+	{
+		$query=$this->db->query("SELECT * FROM `verification`  ORDER BY `id` ASC")->result();
 		$return=array(
 		);
 		foreach($query as $row)

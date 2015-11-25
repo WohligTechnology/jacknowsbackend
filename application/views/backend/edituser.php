@@ -6,7 +6,8 @@
 			  <form class="form-horizontal tasi-form" method="post" action="<?php echo site_url('site/editusersubmit');?>" enctype= "multipart/form-data">
 				<input type="hidden" id="normal-field" class="form-control" name="id" value="<?php echo set_value('id',$before->id);?>" style="display:none;">
                    <div class=" form-group">
-				  <label class="col-sm-2 control-label">isexpert</label>
+				  <label class="col-sm-2 control-label">
+Approve this profile</label>
 				  <div class="col-sm-4">
 					<?php
 						
@@ -210,7 +211,7 @@
 				  <div class="col-sm-4">
 					<?php
 						
-						echo form_dropdown('hobbyverification',$hobbyverification,set_value('hobbyverification'),'class="chzn-select form-control" 	data-placeholder="Choose a hobbyverification..."');
+						echo form_dropdown('hobbyverification',$hobbyverification,set_value('hobbyverification',$before->hobbyverification),'class="chzn-select form-control" 	data-placeholder="Choose a hobbyverification..."');
 					?>
 				  </div>
 				</div>
@@ -219,7 +220,7 @@
 				  <div class="col-sm-4">
 					<?php
 						
-						echo form_dropdown('professionverification',$professionverification,set_value('professionverification'),'class="chzn-select form-control" 	data-placeholder="Choose a professionverification..."');
+						echo form_dropdown('professionverification',$professionverification,set_value('professionverification',$before->professionverification),'class="chzn-select form-control" 	data-placeholder="Choose a professionverification..."');
 					?>
 				  </div>
 				</div>

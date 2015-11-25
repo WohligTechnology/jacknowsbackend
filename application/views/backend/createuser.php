@@ -14,7 +14,8 @@
 			<div class="panel-body">
 			  <form class="form-horizontal tasi-form" method="post" action="<?php echo site_url('site/createusersubmit');?>" enctype= "multipart/form-data">
                   <div class=" form-group">
-				  <label class="col-sm-2 control-label">isexpert</label>
+				  <label class="col-sm-2 control-label">
+Approve this profile</label>
 				  <div class="col-sm-4">
 					<?php
 						

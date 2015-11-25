@@ -1000,5 +1000,21 @@ $this->load->view("json",$data);
         $this->load->view("json", $data);
         
     }
+
+    public function editHobbyVerification(){
+        $id=$this->input->get('id');
+        $hobbyval=$this->input->get('hobbyverification');
+        $data["message"] = $this->restapi_model->editHobbyVerification($id,$hobbyval);
+        $this->load->view("json", $data);
+        
+    }
+
+    public function editProfessionVerification(){
+    	$id=$this->input->get('id');
+        $profval=$this->input->get('professionverification');
+        $data["message"] = $this->restapi_model->editProfessionVerification($id,$profval);
+        $this->load->view("json", $data);
+        
+    }
     
 } ?>

@@ -317,7 +317,34 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
    
         
     }
-   
     
+    public function editHobbyVerification($id,$hobbyvalue)
+    {
+        $data  = array(
+            'hobbyverification' => $hobbyvalue
+        );
+        $this->db->where( 'id', $id );
+        $query=$this->db->update( 'user', $data );
+        
+        if($query)
+            return true;
+        else
+            return false;
+    }
+
+    public function editProfessionVerification($id,$profvalue)
+    {
+        $data  = array(
+            'professionverification' => $profvalue
+        );
+        $this->db->where( 'id', $id );
+        $query=$this->db->update( 'user', $data );
+        
+        if($query)
+            return true;
+        else
+            return false;
+    }
+
 }
 ?>

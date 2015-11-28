@@ -347,6 +347,36 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         else
             return false;
     }
+    public function askQuestion($fromuser, $question, $touser)
+    {
+        $this->db->query("INSERT INTO `expert_question`(`fromuser`, `question`) VALUE('$fromuser','$question')");
+            $questionid=$this->db->insert_id();
+        
+        for($i=0 ;$i<count($touser); $i++){
+            $this->db->query("INSERT INTO `expert_questionuser`(`question`, `touser`,`status`) VALUE('$questionid','$touser[$i]',2)");
+            $questionuserid=$this->db->insert_id();
+        }
+        if($questionid && $questionuserid)
+        return true;
+        else
+            return false;
+    }
+    public function getUserQuestions($user)
+    {
+         $query=$this->db->query("SELECT `expert_question`.`id`,`expert_question`.`question`,`expert_question`.`fromuser` FROM `expert_question` LEFT OUTER JOIN `expert_questionuser` ON `expert_questionuser`.`question`=`expert_question`.`id` WHERE `expert_questionuser`.`touser`='$user'")->result();
+        foreach($query as $row)
+        {
+            $fromuser=$row->fromuser;
+            $row->category=$this->db->query("SELECT `user`.`id`, `user`.`name`, `user`.`firstname`, `user`.`lastname`,`expert_category`.`id` as `categoryid`,`expert_category`.`name` as `categoryname` FROM `user` LEFT OUTER JOIN `expert_usercategory` ON `expert_usercategory`.`user`=`user`.`id` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_usercategory`.`category` WHERE `user`.`id`='$fromuser'")->row();
+            
+        }
+        return $query;
+    }
+    public function getUserReplies($user)
+    {
+         $query=$this->db->query("SELECT `expert_question`.`id`,`expert_question`.`question`,`expert_question`.`fromuser` FROM `expert_question` LEFT OUTER JOIN `expert_questionuser` ON `expert_questionuser`.`question`=`expert_question`.`id` WHERE `expert_questionuser`.`touser`='$user'")->result();
+        return $query;
+    }
 
 }
 ?>

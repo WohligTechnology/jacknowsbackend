@@ -994,12 +994,12 @@ $this->load->view("json",$data);
         
     }
     
-    public function searchExpert(){
-        $expertname=$this->input->get('expertname');
-        $data["message"] = $this->restapi_model->searchExpert($expertname);
-        $this->load->view("json", $data);
-        
-    }
+//    public function searchExpert(){
+//        
+//        $data["message"] = $this->restapi_model->searchExpert($expertname);
+//        $this->load->view("json", $data);
+//        
+//    }
 
     public function editHobbyVerification(){
         $id=$this->input->get('id');
@@ -1015,6 +1015,104 @@ $this->load->view("json",$data);
         $data["message"] = $this->restapi_model->editProfessionVerification($id,$profval);
         $this->load->view("json", $data);
         
+    }
+    
+     public function searchExpert()
+{
+    $expertname=$this->input->get('expertname');     
+    $userid=$this->session->userdata("id");
+         if($userid)
+         {
+             $where="AND `user`.`id`!='$userid'";
+             
+         }
+         else{
+             
+             $where="";
+         }
+$elements=array();
+$elements[0]=new stdClass();
+$elements[0]->field="DISTINCT(`user`.`id`)";
+$elements[0]->sort="1";
+$elements[0]->header="ID";
+$elements[0]->alias="id";
+
+$elements[1]=new stdClass();
+$elements[1]->field="`user`.`name`";
+$elements[1]->sort="1";
+$elements[1]->header="name";
+$elements[1]->alias="name";
+
+$elements[2]=new stdClass();
+$elements[2]->field="`user`.`email`";
+$elements[2]->sort="1";
+$elements[2]->header="email";
+$elements[2]->alias="email";
+
+$elements[3]=new stdClass();
+$elements[3]->field="`user`.`image`";
+$elements[3]->sort="1";
+$elements[3]->header="Image";
+$elements[3]->alias="image";
+
+$elements[4]=new stdClass();
+$elements[4]->field="`user`.`firstname`";
+$elements[4]->sort="1";
+$elements[4]->header="firstname";
+$elements[4]->alias="firstname";
+
+$elements[5]=new stdClass();
+$elements[5]->field="`user`.`lastname`";
+$elements[5]->sort="1";
+$elements[5]->header="lastname";
+$elements[5]->alias="lastname";
+         
+$elements[6]=new stdClass();
+$elements[6]->field="`expert_category`.`id`";
+$elements[6]->sort="1";
+$elements[6]->header="categoryid";
+$elements[6]->alias="categoryid";
+         
+$elements[7]=new stdClass();
+$elements[7]->field="`expert_category`.`name`";
+$elements[7]->sort="1";
+$elements[7]->header="name";
+$elements[7]->alias="name";
+         
+
+$search=$this->input->get_post("search");
+$pageno=$this->input->get_post("pageno");
+$orderby=$this->input->get_post("orderby");
+$orderorder=$this->input->get_post("orderorder");
+$maxrow=$this->input->get_post("maxrow");
+if($maxrow=="")
+{
+}
+if($orderby=="")
+{
+$orderby="id";
+$orderorder="ASC";
+}
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `user` LEFT OUTER JOIN `expert_usercategory` ON `expert_usercategory`.`user`=`user`.`id`  LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_usercategory`.`category` LEFT OUTER JOIN `expert_hobbyskill` ON `expert_hobbyskill`.`user`=`user`.`id` LEFT OUTER JOIN `expert_professionskill` ON `expert_professionskill`.`user`=`user`.`id` AND `user`.`hobbyverification`=2 AND `user`.`professionverification`=2  $where","WHERE `user`.`name` LIKE '%$expertname%' OR `user`.`firstname` LIKE '%$expertname%'OR `user`.`lastname` LIKE '%$expertname%' OR `expert_category`.`name` LIKE '%$expertname%' OR `expert_hobbyskill`.`skills` LIKE '%$expertname%' OR `expert_professionskill`.`skills` LIKE '%$expertname%' ");
+$this->load->view("json",$data);
+}
+    public function askQuestion(){
+    $data = json_decode(file_get_contents('php://input'), true);
+        $fromuser=$data['id'];
+        $question=$data['question'];
+        $touser=$data['touser'];
+        $data["message"] = $this->restapi_model->askQuestion($fromuser, $question, $touser);
+        $this->load->view("json", $data);
+    }
+    public function getUserQuestions(){
+        $user=$this->input->get("id");
+        $data["message"] = $this->restapi_model->getUserQuestions($user);
+        $this->load->view("json", $data);
+    }
+    public function getUserReplies(){
+        $user=$this->input->get("id");
+        $data["message"] = $this->restapi_model->getUserReplies($user);
+        $this->load->view("json", $data);
     }
     
 } ?>

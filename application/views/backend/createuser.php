@@ -236,6 +236,12 @@ Approve this profile</label>
 					?>
 				  </div>
 				</div>
+                  <div class="form-group">
+				  <label class="col-sm-2 control-label" for="normal-field">Category</label>
+				  <div class="col-sm-4">
+					<input type="text" id="normal-field" class="form-control" name="category" value="<?php echo set_value('category');?>">
+				  </div>
+				</div>
 				<div class=" form-group">
 				  <label class="col-sm-2 control-label">&nbsp;</label>
 				  <div class="col-sm-4">

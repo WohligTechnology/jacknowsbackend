@@ -123,7 +123,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
 //        
 //        // Hoby
 //        
-        $this->db->query("INSERT INTO `expert_profession`( `user`, `category`,`description`) VALUE('$id','$categoryid','$description')");
+        $this->db->query("INSERT INTO `expert_profession`( `user`, `category`,`description`) VALUE('$id','$category','$description')");
         $professionid=$this->db->insert_id();
         
         // AWARDS
@@ -215,7 +215,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
 //        
 //        // HOBBY
 //        
-        $this->db->query("INSERT INTO `expert_hobby`( `user`, `category`,`description`,`expinyrs`) VALUE('$id','$categoryid','$description','$yoexp')");
+        $this->db->query("INSERT INTO `expert_hobby`( `user`, `category`,`description`,`expinyrs`) VALUE('$id','$category','$description','$yoexp')");
         $hobbyid=$this->db->insert_id();
         
         // Skills

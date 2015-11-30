@@ -1068,16 +1068,29 @@ $elements[5]->header="lastname";
 $elements[5]->alias="lastname";
          
 $elements[6]=new stdClass();
-$elements[6]->field="`expert_category`.`id`";
+$elements[6]->field="`expert_hobby`.`category`";
 $elements[6]->sort="1";
-$elements[6]->header="categoryid";
-$elements[6]->alias="categoryid";
+$elements[6]->header="hobbycategory";
+$elements[6]->alias="hobbycategory";
          
 $elements[7]=new stdClass();
-$elements[7]->field="`expert_category`.`name`";
+$elements[7]->field="`expert_profession`.`category`";
 $elements[7]->sort="1";
-$elements[7]->header="categoryname";
-$elements[7]->alias="categoryname";
+$elements[7]->header="professioncategory";
+$elements[7]->alias="professioncategory";
+         
+$elements[8]=new stdClass();
+$elements[8]->field="`expert_hobby`.`description`";
+$elements[8]->sort="1";
+$elements[8]->header="hobbydescription";
+$elements[8]->alias="hobbydescription";
+         
+$elements[9]=new stdClass();
+$elements[9]->field="`expert_profession`.`description`";
+$elements[9]->sort="1";
+$elements[9]->header="professiondescription";
+$elements[9]->alias="professiondescription";
+         
          
 
 $search=$this->input->get_post("search");
@@ -1093,7 +1106,15 @@ if($orderby=="")
 $orderby="id";
 $orderorder="ASC";
 }
-$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `user` LEFT OUTER JOIN `expert_usercategory` ON `expert_usercategory`.`user`=`user`.`id`  LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_usercategory`.`category` LEFT OUTER JOIN `expert_hobbyskill` ON `expert_hobbyskill`.`user`=`user`.`id` LEFT OUTER JOIN `expert_professionskill` ON `expert_professionskill`.`user`=`user`.`id` AND `user`.`hobbyverification`=2 AND `user`.`professionverification`=2  $where","WHERE `user`.`name` LIKE '%$expertname%' OR `user`.`firstname` LIKE '%$expertname%'OR `user`.`lastname` LIKE '%$expertname%' OR `expert_category`.`name` LIKE '%$expertname%' OR `expert_hobbyskill`.`skills` LIKE '%$expertname%' OR `expert_professionskill`.`skills` LIKE '%$expertname%' ");
+$data["message"]=$this->chintantable->query($pageno,$maxrow,$orderby,$orderorder,$search,$elements,"FROM `user`
+LEFT OUTER JOIN `expert_hobby` ON `expert_hobby`.`user`=`user`.`id`
+
+LEFT OUTER JOIN `expert_profession` ON  `expert_profession`.`user`=`user`.`id`
+
+LEFT OUTER JOIN `expert_hobbyskill` ON `expert_hobbyskill`.`user`=`user`.`id`
+
+LEFT OUTER JOIN `expert_professionskill` ON `expert_professionskill`.`user`=`user`.`id`
+AND `user`.`hobbyverification`=2 AND `user`.`professionverification`=2  $where","WHERE `user`.`name` LIKE '%$expertname%' OR `user`.`firstname` LIKE '%$expertname%'OR `user`.`lastname` LIKE '%$expertname%' OR `expert_profession`.`category` LIKE '%$expertname%' OR `expert_hobby`.`category` LIKE '%$expertname%' OR `expert_hobbyskill`.`skills` LIKE '%$expertname%' OR `expert_professionskill`.`skills` LIKE '%$expertname%' ");
 $this->load->view("json",$data);
 }
     public function askQuestion(){

@@ -1076,8 +1076,8 @@ $elements[6]->alias="categoryid";
 $elements[7]=new stdClass();
 $elements[7]->field="`expert_category`.`name`";
 $elements[7]->sort="1";
-$elements[7]->header="name";
-$elements[7]->alias="name";
+$elements[7]->header="categoryname";
+$elements[7]->alias="categoryname";
          
 
 $search=$this->input->get_post("search");

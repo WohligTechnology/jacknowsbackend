@@ -1114,7 +1114,7 @@ LEFT OUTER JOIN `expert_profession` ON  `expert_profession`.`user`=`user`.`id`
 
 LEFT OUTER JOIN `expert_hobbyskill` ON `expert_hobbyskill`.`user`=`user`.`id`
 
-LEFT OUTER JOIN `expert_professionskill` ON `expert_professionskill`.`user`=`user`.`id`  $where","WHERE (`user`.`hobbyverification`=2 AND `user`.`professionverification`=2 AND `user`.`isexpert`=1) AND ( `user`.`name` LIKE '%$expertname%' OR `user`.`firstname` LIKE '%$expertname%'OR `user`.`lastname` LIKE '%$expertname%' OR `expert_profession`.`category` LIKE '%$expertname%' OR `expert_hobby`.`category` LIKE '%$expertname%' OR `expert_hobbyskill`.`skills` LIKE '%$expertname%' OR `expert_professionskill`.`skills` LIKE '%$expertname%') ");
+LEFT OUTER JOIN `expert_professionskill` ON `expert_professionskill`.`user`=`user`.`id`  $where","WHERE ((`user`.`hobbyverification`=2 OR `user`.`professionverification`=2) AND `user`.`isexpert`=1) AND ( `user`.`name` LIKE '%$expertname%' OR `user`.`firstname` LIKE '%$expertname%'OR `user`.`lastname` LIKE '%$expertname%' OR `expert_profession`.`category` LIKE '%$expertname%' OR `expert_hobby`.`category` LIKE '%$expertname%' OR `expert_hobbyskill`.`skills` LIKE '%$expertname%' OR `expert_professionskill`.`skills` LIKE '%$expertname%') ");
 $this->load->view("json",$data);
 }
     public function askQuestion(){

@@ -118,6 +118,7 @@ class Site extends CI_Controller
              $hobbyverification=$this->input->post('hobbyverification');
              $professionverification=$this->input->post('professionverification');
              $category=$this->input->post('category');
+             $dob=$this->input->post('dob');
     
 //            $category=$this->input->post('category');
             
@@ -156,7 +157,7 @@ class Site extends CI_Controller
                 
 			}
             
-			if($this->user_model->create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category)==0)
+			if($this->user_model->create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category,$dob)==0)
 			$data['alerterror']="New user could not be created.";
 			else
 			$data['alertsuccess']="User created Successfully.";
@@ -354,6 +355,7 @@ class Site extends CI_Controller
             $hobbyverification=$this->input->post('hobbyverification');
              $professionverification=$this->input->post('professionverification');
             $category=$this->input->get_post('category');
+             $dob=$this->input->post('dob');
             
             $config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -397,7 +399,7 @@ class Site extends CI_Controller
                 $image=$image->image;
             }
             
-			if($this->user_model->edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category)==0)
+			if($this->user_model->edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category,$dob)==0)
 			$data['alerterror']="User Editing was unsuccesful";
 			else
 			$data['alertsuccess']="User edited Successfully.";

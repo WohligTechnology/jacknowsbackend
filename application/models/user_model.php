@@ -32,7 +32,7 @@ class User_model extends CI_Model
 	}
 	
 	
-	public function create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category)
+	public function create($name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category,$dob)
 	{
 		$data  = array(
 			'name' => $name,
@@ -62,7 +62,8 @@ class User_model extends CI_Model
             'isexpert'=>$isexpert,
             'hobbyverification'=>$hobbyverification,
             'professionverification'=>$professionverification,
-            'category'=>$category
+            'category'=>$category,
+            'dob'=>$dob
 		);
 		$query=$this->db->insert( 'user', $data );
 		$id=$this->db->insert_id();
@@ -131,7 +132,7 @@ class User_model extends CI_Model
 		return $query;
 	}
 	
-	public function edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category)
+	public function edit($id,$name,$email,$password,$accesslevel,$status,$socialid,$logintype,$image,$json,$wallet,$contact,$percent,$type,$ametureprice,$professionalprice,$gender,$address,$country,$city,$state,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$isexpert,$hobbyverification,$professionverification,$category,$dob)
 	{
 		$data  = array(
 			'name' => $name,
@@ -160,7 +161,8 @@ class User_model extends CI_Model
             'isexpert'=>$isexpert,
             'hobbyverification'=>$hobbyverification,
             'professionverification'=>$professionverification,
-            'category'=>$category
+            'category'=>$category,
+            'dob'=>$dob
 		);
 		if($password != "")
 			$data['password'] =md5($password);

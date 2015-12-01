@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2015 at 06:19 AM
+-- Generation Time: Dec 01, 2015 at 10:27 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -188,7 +188,7 @@ INSERT INTO `expert_education` (`id`, `educationid`, `user`, `schoolname`, `fiel
 CREATE TABLE IF NOT EXISTS `expert_hobby` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL,
   `expinyrs` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `skills` text
@@ -199,9 +199,9 @@ CREATE TABLE IF NOT EXISTS `expert_hobby` (
 --
 
 INSERT INTO `expert_hobby` (`id`, `user`, `category`, `expinyrs`, `description`, `skills`) VALUES
-(3, 40, 2, '5', 'dv dv', NULL),
-(4, 41, 2, '2015', 'dddddd', NULL),
-(7, 39, 2, '10', 'Travel', NULL);
+(3, 40, 'Travel', '5', 'dv dv', NULL),
+(4, 41, 'Travel', '2015', 'dddddd', NULL),
+(7, 34, 'Travel', '10', 'Travel', NULL);
 
 -- --------------------------------------------------------
 
@@ -400,7 +400,7 @@ INSERT INTO `expert_patent` (`id`, `patentid`, `user`, `title`, `summary`, `numb
 CREATE TABLE IF NOT EXISTS `expert_profession` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
@@ -409,10 +409,10 @@ CREATE TABLE IF NOT EXISTS `expert_profession` (
 --
 
 INSERT INTO `expert_profession` (`id`, `user`, `category`, `description`) VALUES
-(3, 40, 1, 'dv'),
-(4, 41, 4, 'asdasda'),
-(8, 39, 1, 'Integration'),
-(12, 42, 4, 'dbsdzb');
+(3, 40, 'Career Counselling', 'dv'),
+(4, 41, 'Life style', 'asdasda'),
+(8, 39, 'Career Counselling', 'Integration'),
+(12, 34, 'Life style', 'dbsdzb');
 
 -- --------------------------------------------------------
 
@@ -634,14 +634,15 @@ CREATE TABLE IF NOT EXISTS `expert_question` (
   `id` int(11) NOT NULL,
   `fromuser` int(11) NOT NULL,
   `question` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `expert_question`
 --
 
 INSERT INTO `expert_question` (`id`, `fromuser`, `question`) VALUES
-(1, 26, 'What are advantages of laravel over codeigniter?');
+(1, 34, 'What are advantages of laravel over codeigniter?'),
+(2, 23, 'qu3es');
 
 -- --------------------------------------------------------
 
@@ -654,7 +655,7 @@ CREATE TABLE IF NOT EXISTS `expert_questionuser` (
   `question` int(11) NOT NULL,
   `touser` int(11) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `expert_questionuser`
@@ -662,7 +663,8 @@ CREATE TABLE IF NOT EXISTS `expert_questionuser` (
 
 INSERT INTO `expert_questionuser` (`id`, `question`, `touser`, `status`) VALUES
 (2, 1, 1, 2),
-(4, 1, 1, 3);
+(4, 1, 1, 3),
+(5, 2, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -736,7 +738,14 @@ CREATE TABLE IF NOT EXISTS `expert_usercategory` (
   `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `category` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `expert_usercategory`
+--
+
+INSERT INTO `expert_usercategory` (`id`, `user`, `category`) VALUES
+(1, 26, 2);
 
 -- --------------------------------------------------------
 
@@ -916,27 +925,30 @@ CREATE TABLE IF NOT EXISTS `user` (
   `facebooksocial` varchar(255) NOT NULL,
   `isexpert` int(11) NOT NULL,
   `hobbyverification` int(11) NOT NULL,
-  `professionverification` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+  `professionverification` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`, `isexpert`, `hobbyverification`, `professionverification`) VALUES
-(1, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig@wohlig.com', 1, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', 'gheth', 'fgrst', 'ty', 'bytryt', 'rtr', '', '', '', 'wohlig', 'wohligname', '', 0, '', '', '', 0, '', '8989898989', 50, '', 0, 0, '1', 'rtbe', 'rtrb', 'rtyar', 0, 0, 0),
-(7, 'Avinash', '7b0a80efe0d324e937bbfc7716fb15d3', 'avinash@wohlig.com', 4, '2015-09-07 13:40:45', 1, '', '', '1', 1, 'ahjbasj', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 1000, '', '', 70, '0', 250, 500, '', '', '', '', 0, 0, 0),
-(26, 'Accountant', 'a63526467438df9566c508027d9cb06b', 'account@wohlig.com', 3, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '8989898989', 50, '', 0, 0, '', '', '', '', 0, 0, 0),
-(27, 'Moderator', 'a63526467438df9566c508027d9cb06b', 'moderator@wohlig.com', 2, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 50, '', 0, 0, '', '', '', '', 0, 0, 0),
-(28, 'ajhsbaj', '9189e4085a9a76fd59d76d688adb4bee', 'avinash2@wohlig.com', 2, '2015-09-07 13:35:52', 2, '', '', '', 1, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 50, '', 0, 0, '', '', '', '', 0, 0, 0),
-(31, '2', 'e3ceb5881a0a1fdaad01296d7554868d', '2@2.com', 4, '2015-09-12 07:01:46', 1, '', '', '2', 1, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 1, '', '', '', 20000, '', '2', 60, '', 150, 400, '', '', '', '', 0, 0, 0),
-(32, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig1@wohlig.com', NULL, '2015-11-18 11:04:53', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 0, '', 0, 0, '', '', '', '', 0, 0, 0),
-(33, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig2@wohlig.com', NULL, '2015-11-18 11:11:20', NULL, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 0, '', 0, 0, '', '', '', '', 0, 0, 0),
-(34, 'pooja1', '4bcc674371a91bf32377cd878d754527', 'pooja1@wohlig.com', 4, '2015-11-19 07:47:06', 2, '', '', 'faiyer45511', 4, '', '0000-00-00', '', 'airoli11', 'navimumbai11', 'maharashtra11', 'india11', '40070811', '', '', '', '', '', '', 0, '', '', '', 8001, '', '9898981', 7001, '', 25001, 50001, '1', 'twi11', 'you11', 'fb11', 0, 0, 0),
-(39, 'Dhaval Gala', '9fd4b1c58bfbd10a6498754b7e1836c6', 'dhaval@wohlig.com', NULL, '2015-11-23 11:20:32', NULL, 'IMG_20150312_172654991_HDR1.jpg', '', '', 0, '', '0000-00-00', '', 'Grant Road', 'Mumbai', 'Maharashtra', 'India', '400007', '', '', '', 'Dhaval', 'Gala', '', 0, '', '', '', 0, '', '9029145077', 0, '', 0, 0, '1', 'twi.com', 'you.com', 'fb.com', 1, 0, 0),
-(40, 'mahesh@wohlig.com', 'e10adc3949ba59abbe56e057f20f883e', 'mahesh@wohlig.com', NULL, '2015-11-23 12:16:12', NULL, '2.jpg', '', '', 0, '', '0000-00-00', '', 'mumbai', 'mumbai', 'maharastra', 'india', '421001', '', '', '', 'mahesh2', 'maurya', '', 0, '', '', '', 0, '', '87966666', 0, '', 0, 0, '1', '', '', '', 1, 0, 0),
-(41, 'mahesh maurya', 'e10adc3949ba59abbe56e057f20f883e', 'm@wohlig.com', NULL, '2015-11-23 14:02:28', NULL, 'Professional_JSON1.png', '', '', 0, '', '0000-00-00', '', 'mumbai', 'mumbai', 'goa', 'india', '421001', '', '', '', 'mahesh', 'maurya', '', 0, '', '', '', 0, '', '8796644444', 0, '', 0, 0, '1', '', '', '', 1, 0, 0),
-(42, 'asd aasd', '4297f44b13955235245b2497399d7a93', 'mahesh@mhaesh.com', NULL, '2015-11-24 09:46:09', NULL, 'Professional_JSON2.png', '', '', 0, '', '0000-00-00', '', 'my address', 'mum', 'maharashtra', 'india', '456465', '', '', '', 'asd', 'aasd', '', 0, '', '', '', 0, '', '8987453453', 0, '', 0, 0, '1', '', '', '', 1, 0, 0);
+INSERT INTO `user` (`id`, `name`, `password`, `email`, `accesslevel`, `timestamp`, `status`, `image`, `username`, `socialid`, `logintype`, `json`, `dob`, `street`, `address`, `city`, `state`, `country`, `pincode`, `facebook`, `google`, `twitter`, `firstname`, `lastname`, `maidenname`, `type`, `shortspecialities`, `interests`, `honorsawards`, `wallet`, `access`, `contact`, `percent`, `ameturetype`, `ametureprice`, `professionalprice`, `gender`, `twittersocial`, `youtubesocial`, `facebooksocial`, `isexpert`, `hobbyverification`, `professionverification`, `category`) VALUES
+(1, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig@wohlig.com', 1, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', 'gheth', 'fgrst', 'ty', 'bytryt', 'rtr', '', '', '', 'wohlig', 'wohligname', '', 0, '', '', '', 0, '', '8989898989', 50, '', 0, 0, '1', 'rtbe', 'rtrb', 'rtyar', 0, 0, 0, ''),
+(7, 'Avinash', '7b0a80efe0d324e937bbfc7716fb15d3', 'avinash@wohlig.com', 4, '2015-09-07 13:40:45', 1, '', '', '1', 1, 'ahjbasj', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 1000, '', '', 70, '0', 250, 500, '', '', '', '', 0, 0, 0, ''),
+(26, 'Accountant', 'a63526467438df9566c508027d9cb06b', 'account@wohlig.com', 3, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '8989898989', 50, '', 0, 0, '', '', '', '', 0, 0, 0, ''),
+(27, 'Moderator', 'a63526467438df9566c508027d9cb06b', 'moderator@wohlig.com', 2, '0000-00-00 00:00:00', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 50, '', 0, 0, '', '', '', '', 0, 0, 0, ''),
+(28, 'ajhsbaj', '9189e4085a9a76fd59d76d688adb4bee', 'avinash2@wohlig.com', 2, '2015-09-07 13:35:52', 2, '', '', '', 1, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 50, '', 0, 0, '', '', '', '', 0, 0, 0, ''),
+(31, '2', 'e3ceb5881a0a1fdaad01296d7554868d', '2@2.com', 4, '2015-09-12 07:01:46', 1, '', '', '2', 1, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 1, '', '', '', 20000, '', '2', 60, '', 150, 400, '', '', '', '', 0, 0, 0, ''),
+(32, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig1@wohlig.com', 4, '2015-11-18 11:04:53', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 0, '', 0, 0, '', '', '', '', 0, 0, 0, ''),
+(33, 'wohlig', 'a63526467438df9566c508027d9cb06b', 'wohlig2@wohlig.com', 4, '2015-11-18 11:11:20', 1, NULL, '', '', 0, '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '', '', 0, '', '', 0, '', 0, 0, '', '', '', '', 0, 0, 0, ''),
+(34, 'pooja1', '4bcc674371a91bf32377cd878d754527', 'pooja1@wohlig.com', 4, '2015-11-19 07:47:06', 2, '', '', 'faiyer45511', 4, '', '0000-00-00', '', 'airoli11', 'navimumbai11', 'maharashtra11', 'india11', '40070811', '', '', '', '', '', '', 0, '', '', '', 8001, '', '9898981', 7001, '', 25001, 50001, '1', 'twi11', 'you11', 'fb11', 1, 2, 2, ''),
+(39, 'Dhaval Gala', '9fd4b1c58bfbd10a6498754b7e1836c6', 'dhaval@wohlig.com', 4, '2015-11-23 11:20:32', 1, 'IMG_20150312_172654991_HDR1.jpg', '', '', 0, '', '0000-00-00', '', 'Grant Road', 'Mumbai', 'Maharashtra', 'India', '400007', '', '', '', 'Dhaval', 'Gala', '', 0, '', '', '', 0, '', '9029145077', 0, '', 0, 0, '1', 'twi.com', 'you.com', 'fb.com', 1, 2, 2, ''),
+(40, 'mahesh@wohlig.com', 'e10adc3949ba59abbe56e057f20f883e', 'mahesh@wohlig.com', 4, '2015-11-23 12:16:12', 1, '2.jpg', '', '', 0, '', '0000-00-00', '', 'mumbai', 'mumbai', 'maharastra', 'india', '421001', '', '', '', 'mahesh2', 'maurya', '', 0, '', '', '', 0, '', '87966666', 0, '', 0, 0, '1', '', '', '', 1, 2, 2, ''),
+(41, 'mahesh maurya', 'e10adc3949ba59abbe56e057f20f883e', 'm@wohlig.com', 4, '2015-11-23 14:02:28', 1, 'Professional_JSON1.png', '', '', 0, '', '0000-00-00', '', 'mumbai', 'mumbai', 'goa', 'india', '421001', '', '', '', 'mahesh', 'maurya', '', 0, '', '', '', 0, '', '8796644444', 0, '', 0, 0, '1', '', '', '', 1, 2, 2, ''),
+(42, 'asd aasd', '4297f44b13955235245b2497399d7a93', 'mahesh@mhaesh.com', 4, '2015-11-24 09:46:09', 1, 'Professional_JSON2.png', '', '', 0, '', '0000-00-00', '', 'my address', 'mum', 'maharashtra', 'india', '456465', '', '', '', 'asd', 'aasd', '', 0, '', '', '', 0, '', '8987453453', 0, '', 0, 0, '1', '', '', '', 1, 0, 0, ''),
+(43, 'puja', 'bb1a3428923be23e476267e097e4b342', 'puja@email.com', 4, '2015-11-25 06:44:42', 1, 'download.jpg', '', '89879', 1, '', '0000-00-00', '', 'hgsdr', 'tyxt', 'ftgyhj', 'g', 'fgh', '', '', '', '', '', '', 0, '', '', '', 65576, '', '123', 70, '', 250, 500, '1', 'hj', 'vgbhn', 'gf', 1, 2, 3, ''),
+(44, 'Jagruti Patil', 'd6a610a22818c5643c236e30d0011374', 'jagruti@wohlig.com', 4, '2015-12-01 08:06:08', 2, '61fWioKx9aL._SX522__.jpg', '', 'faiyer455', 1, '', '2015-12-25', '', 'airoli', 'navimumbai', 'maharashtra', 'india', '40070811', '', '', '', '', '', '', 0, '', '', '', 800, '', '989898', 70, '', 250, 500, '2', 'twi', 'you', 'fb', 1, 2, 2, 'Travel');
 
 -- --------------------------------------------------------
 
@@ -989,6 +1001,26 @@ INSERT INTO `userlog` (`id`, `onuser`, `status`, `description`, `timestamp`) VAL
 (30, 4, 6, 'User Details Edited', '2014-12-03 10:36:34'),
 (31, 4, 6, 'User Details Edited', '2014-12-03 10:36:49'),
 (32, 8, 6, 'User Details Edited', '2014-12-03 10:47:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verification`
+--
+
+CREATE TABLE IF NOT EXISTS `verification` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `verification`
+--
+
+INSERT INTO `verification` (`id`, `name`) VALUES
+(1, 'Waiting'),
+(2, 'Approved'),
+(3, 'Rejected');
 
 --
 -- Indexes for dumped tables
@@ -1223,6 +1255,12 @@ ALTER TABLE `userlog`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `verification`
+--
+ALTER TABLE `verification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1355,12 +1393,12 @@ ALTER TABLE `expert_publication`
 -- AUTO_INCREMENT for table `expert_question`
 --
 ALTER TABLE `expert_question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `expert_questionuser`
 --
 ALTER TABLE `expert_questionuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `expert_questionuserstatus`
 --
@@ -1380,7 +1418,7 @@ ALTER TABLE `expert_transaction`
 -- AUTO_INCREMENT for table `expert_usercategory`
 --
 ALTER TABLE `expert_usercategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `expert_usergallery`
 --
@@ -1405,12 +1443,17 @@ ALTER TABLE `statuses`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `verification`
+--
+ALTER TABLE `verification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

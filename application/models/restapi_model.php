@@ -74,7 +74,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         return false;
     }
     
-    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact,$isexpert,$image)
+    public function editPersonalDetails($id,$firstname, $lastname, $email,$gender,$address,$country,$state,$city,$pincode,$twittersocial,$youtubesocial,$facebooksocial,$contact,$isexpert,$image,$dob)
 	{
         
 		$data  = array(
@@ -94,7 +94,8 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
             'isexpert'=>$isexpert,
             'image'=>$image,
             'status'=>1,
-            'accesslevel'=>4
+            'accesslevel'=>4,
+            'dob'=>$dob
 		);
 		$this->db->where( 'id', $id );
 		$query=$this->db->update( 'user', $data );
@@ -367,7 +368,7 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
         foreach($query as $row)
         {
             $fromuser=$row->fromuser;
-            $row->category=$this->db->query("SELECT `user`.`id`, `user`.`name`, `user`.`firstname`, `user`.`lastname`,`expert_category`.`id` as `categoryid`,`expert_category`.`name` as `categoryname` FROM `user` LEFT OUTER JOIN `expert_usercategory` ON `expert_usercategory`.`user`=`user`.`id` LEFT OUTER JOIN `expert_category` ON `expert_category`.`id`=`expert_usercategory`.`category` WHERE `user`.`id`='$fromuser'")->row();
+            $row->category=$this->db->query("SELECT `user`.`id`, `user`.`name`, `user`.`firstname`, `user`.`lastname`,`expert_profession`.`category` as `professioncategory`,`expert_hobby`.`category` as `hobbycategory` FROM `user` LEFT OUTER JOIN `expert_profession` ON `expert_profession`.`user`=`user`.`id` LEFT OUTER JOIN `expert_hobby` ON `expert_hobby`.`user`=`user`.`id` WHERE `user`.`id`='$fromuser'")->row();
             
         }
         return $query;

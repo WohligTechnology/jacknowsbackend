@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class booking_model extends CI_Model
 {
-    public function create($fromuser,$touser,$date,$starttime,$endtime,$status)
+    public function create($fromuser,$touser,$date,$starttime,$endtime,$status,$round,$price)
     {
-        $data=array("fromuser" => $fromuser,"touser" => $touser,"date" => $date,"starttime" => $starttime,"endtime" => $endtime,"status" => $status);
+        $data=array("fromuser" => $fromuser,"touser" => $touser,"date" => $date,"starttime" => $starttime,"endtime" => $endtime,"status" => $status,"round" => $round,"price" => $price);
         $query=$this->db->insert( "expert_booking", $data );
         $id=$this->db->insert_id();
         if(!$query)
@@ -25,9 +25,9 @@ class booking_model extends CI_Model
         $query=$this->db->get("expert_booking")->row();
         return $query;
     }
-    public function edit($id,$fromuser,$touser,$date,$starttime,$endtime,$status)
+    public function edit($id,$fromuser,$touser,$date,$starttime,$endtime,$status,$round,$price)
     {
-        $data=array("fromuser" => $fromuser,"touser" => $touser,"date" => $date,"starttime" => $starttime,"endtime" => $endtime,"status" => $status);
+        $data=array("fromuser" => $fromuser,"touser" => $touser,"date" => $date,"starttime" => $starttime,"endtime" => $endtime,"status" => $status,"round" => $round,"price" => $price);
         $this->db->where( "id", $id );
         $query=$this->db->update( "expert_booking", $data );
         return 1;

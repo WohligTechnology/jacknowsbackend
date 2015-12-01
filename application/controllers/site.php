@@ -947,7 +947,9 @@ class Site extends CI_Controller
             $starttime=$this->input->get_post("starttime");
             $endtime=$this->input->get_post("endtime");
             $status=$this->input->get_post("status");
-            if($this->booking_model->create($fromuser,$touser,$date,$starttime,$endtime,$status)==0)
+            $round=$this->input->get_post("round");
+            $price=$this->input->get_post("price");
+            if($this->booking_model->create($fromuser,$touser,$date,$starttime,$endtime,$status,$round,$price)==0)
             $data["alerterror"]="New booking could not be created.";
             else
             $data["alertsuccess"]="booking created Successfully.";
@@ -997,7 +999,9 @@ class Site extends CI_Controller
             $starttime=$this->input->get_post("starttime");
             $endtime=$this->input->get_post("endtime");
             $status=$this->input->get_post("status");
-            if($this->booking_model->edit($id,$fromuser,$touser,$date,$starttime,$endtime,$status)==0)
+            $round=$this->input->get_post("round");
+            $price=$this->input->get_post("price");
+            if($this->booking_model->edit($id,$fromuser,$touser,$date,$starttime,$endtime,$status,$round,$price)==0)
             $data["alerterror"]="New booking could not be Updated.";
             else
             $data["alertsuccess"]="booking Updated Successfully.";
@@ -1231,6 +1235,7 @@ class Site extends CI_Controller
         $data['question']=$this->input->get('id');
         $data['user']=$this->user_model->getuserdropdown();
         $data['status']=$this->questionuserstatus_model->getquestionuserstatus();
+        $data['reply']=$this->user_model->getreplydropdown();
         $data['before']=$this->question_model->beforeedit($this->input->get('id'));
         $this->load->view("templatewith2",$data);
     }
@@ -1246,6 +1251,7 @@ class Site extends CI_Controller
             $data["alerterror"]=validation_errors();
             $data["page"]="createquestionuser";
             $data["title"]="Create questionuser";
+             $data['reply']=$this->user_model->getreplydropdown();
             $data["page2"]="block/questionblock";
             $data['question']=$this->input->get('id');
             $data['user']=$this->user_model->getuserdropdown();
@@ -1258,7 +1264,8 @@ class Site extends CI_Controller
             $question=$this->input->get_post("question");
             $touser=$this->input->get_post("touser");
             $status=$this->input->get_post("status");
-            if($this->questionuser_model->create($question,$touser,$status)==0)
+             $reply=$this->input->get_post("reply");
+            if($this->questionuser_model->create($question,$touser,$status,$reply)==0)
             $data["alerterror"]="New questionuser could not be created.";
             else
             $data["alertsuccess"]="questionuser created Successfully.";
@@ -1272,6 +1279,7 @@ class Site extends CI_Controller
         $this->checkaccess($access);
         $data["page"]="editquestionuser";
         $data["title"]="Edit questionuser";
+         $data['reply']=$this->user_model->getreplydropdown();
         $data["page2"]="block/questionblock";
         $data['question']=$this->input->get('id');
         $data['user']=$this->user_model->getuserdropdown();
@@ -1293,6 +1301,7 @@ class Site extends CI_Controller
             $data["alerterror"]=validation_errors();
             $data["page"]="editquestionuser";
             $data["title"]="Edit questionuser";
+             $data['reply']=$this->user_model->getreplydropdown();
             $data["page2"]="block/questionblock";
             $data['question']=$this->input->get_post('question');
             $data['user']=$this->user_model->getuserdropdown();
@@ -1307,7 +1316,8 @@ class Site extends CI_Controller
             $question=$this->input->get_post("question");
             $touser=$this->input->get_post("touser");
             $status=$this->input->get_post("status");
-            if($this->questionuser_model->edit($id,$question,$touser,$status)==0)
+            $reply=$this->input->get_post("reply");
+            if($this->questionuser_model->edit($id,$question,$touser,$status,$reply)==0)
             $data["alerterror"]="New questionuser could not be Updated.";
             else
             $data["alertsuccess"]="questionuser Updated Successfully.";

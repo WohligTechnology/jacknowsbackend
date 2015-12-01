@@ -41,6 +41,18 @@
                     <?php echo form_dropdown( "status",$status,set_value( 'status',$before->status),"class='chzn-select form-control'");?>
                 </div>
             </div>
+             <div class="form-group">
+                                <label class="col-sm-2 control-label" for="normal-field">Price</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="normal-field" class="form-control" name="price" value='<?php echo set_value(' price ',$before->price);?>'>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="normal-field">Round</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="normal-field" class="form-control" name="round" value='<?php echo set_value(' round ',$before->round);?>'>
+                                </div>
+                            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="normal-field">&nbsp;</label>
                 <div class="col-sm-4">

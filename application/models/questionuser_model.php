@@ -3,9 +3,9 @@ if ( !defined( "BASEPATH" ) )
 exit( "No direct script access allowed" );
 class questionuser_model extends CI_Model
 {
-    public function create($question,$touser,$status)
+    public function create($question,$touser,$status,$reply)
     {
-        $data=array("question" => $question,"touser" => $touser,"status" => $status);
+        $data=array("question" => $question,"touser" => $touser,"status" => $status,"reply" => $reply);
         $query=$this->db->insert( "expert_questionuser", $data );
         $id=$this->db->insert_id();
         if(!$query)
@@ -25,9 +25,9 @@ class questionuser_model extends CI_Model
         $query=$this->db->get("expert_questionuser")->row();
         return $query;
     }
-    public function edit($id,$question,$touser,$status)
+    public function edit($id,$question,$touser,$status,$reply)
     {
-        $data=array("question" => $question,"touser" => $touser,"status" => $status);
+        $data=array("question" => $question,"touser" => $touser,"status" => $status,"reply" => $reply);
         $this->db->where( "id", $id );
         $query=$this->db->update( "expert_questionuser", $data );
         return 1;

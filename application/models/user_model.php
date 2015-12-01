@@ -230,6 +230,16 @@ class User_model extends CI_Model
 		
 		return $return;
 	} 
+    public function getreplydropdown()
+	{
+		$return=array(
+		"1" => "Yes",
+		"2" => "No"
+		);
+		
+		
+		return $return;
+	} 
      public function getcategorydropdown()
 	{
 		$query=$this->db->query("SELECT * FROM `expert_category`  ORDER BY `id` ASC")->result();

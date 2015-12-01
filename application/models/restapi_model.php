@@ -375,9 +375,14 @@ $newdata=$this->db->query("SELECT `id`, `name`, `password`, `email`, `accessleve
     }
     public function getUserReplies($user)
     {
-         $query=$this->db->query("SELECT `expert_question`.`id`,`expert_question`.`question`,`expert_question`.`fromuser` FROM `expert_question` LEFT OUTER JOIN `expert_questionuser` ON `expert_questionuser`.`question`=`expert_question`.`id` WHERE `expert_questionuser`.`touser`='$user'")->result();
-        return $query;
+        $query=$this->db->query("SELECT `expert_question`.`id`,`expert_question`.`question`,`expert_question`.`fromuser` FROM `expert_question` WHERE `expert_question`.`fromuser`='$user'")->row();
+        $questionid=$query->question;
+    
+        $query1=$this->db->query("SELECT `user`.`id`,`user`.`firstname`,`user`.`lastname`,`user`.`image`,`expert_profession`.`category` as `profcat`,`expert_hobby`.`category` as `hobbycat` FROM `expert_questionuser` LEFT OUTER JOIN `user` ON `user`.`id`=`expert_questionuser`.`touser` LEFT OUTER JOIN `expert_profession` ON `expert_profession`.`user`=`expert_questionuser`.`touser` LEFT OUTER JOIN `expert_hobby` ON `expert_hobby`.`user`=`expert_questionuser`.`touser` WHERE `expert_questionuser`.`touser`='$user' AND `expert_questionuser`.`question`='$questionid'")->result();
+        
+        return $query1;
     }
+    
 
 }
 ?>

@@ -23,6 +23,12 @@
                     <?php echo form_dropdown( "status",$status,set_value( 'status',$beforequestionuser->status),"class='chzn-select form-control'");?>
                 </div>
             </div>
+            <div class=" form-group">
+                                <label class="col-sm-2 control-label" for="normal-field">Reply</label>
+                                <div class="col-sm-4">
+                                    <?php echo form_dropdown( "reply",$reply,set_value( 'reply',$beforequestionuser->reply), "class='chzn-select form-control'");?>
+                                </div>
+                            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="normal-field">&nbsp;</label>
                 <div class="col-sm-4">

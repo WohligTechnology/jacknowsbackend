@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2015 at 10:27 AM
+-- Generation Time: Jan 09, 2016 at 05:40 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -54,15 +54,17 @@ CREATE TABLE IF NOT EXISTS `expert_booking` (
   `date` date NOT NULL,
   `starttime` varchar(255) NOT NULL,
   `endtime` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `round` varchar(255) NOT NULL,
+  `price` varchar(255) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `expert_booking`
 --
 
-INSERT INTO `expert_booking` (`id`, `fromuser`, `touser`, `date`, `starttime`, `endtime`, `status`) VALUES
-(1, 1, 26, '2015-09-19', '12:00', '01:00', 1);
+INSERT INTO `expert_booking` (`id`, `fromuser`, `touser`, `date`, `starttime`, `endtime`, `status`, `round`, `price`) VALUES
+(1, 1, 26, '2015-09-19', '12:00', '01:00', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -201,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `expert_hobby` (
 INSERT INTO `expert_hobby` (`id`, `user`, `category`, `expinyrs`, `description`, `skills`) VALUES
 (3, 40, 'Travel', '5', 'dv dv', NULL),
 (4, 41, 'Travel', '2015', 'dddddd', NULL),
-(7, 34, 'Travel', '10', 'Travel', NULL);
+(7, 1, 'Travel', '10', 'Travel', NULL);
 
 -- --------------------------------------------------------
 
@@ -411,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `expert_profession` (
 INSERT INTO `expert_profession` (`id`, `user`, `category`, `description`) VALUES
 (3, 40, 'Career Counselling', 'dv'),
 (4, 41, 'Life style', 'asdasda'),
-(8, 39, 'Career Counselling', 'Integration'),
+(8, 1, 'Career Counselling', 'Integration'),
 (12, 34, 'Life style', 'dbsdzb');
 
 -- --------------------------------------------------------
@@ -633,16 +635,17 @@ INSERT INTO `expert_publication` (`id`, `publicationid`, `user`, `title`, `publi
 CREATE TABLE IF NOT EXISTS `expert_question` (
   `id` int(11) NOT NULL,
   `fromuser` int(11) NOT NULL,
-  `question` text NOT NULL
+  `question` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `expert_question`
 --
 
-INSERT INTO `expert_question` (`id`, `fromuser`, `question`) VALUES
-(1, 34, 'What are advantages of laravel over codeigniter?'),
-(2, 23, 'qu3es');
+INSERT INTO `expert_question` (`id`, `fromuser`, `question`, `timestamp`) VALUES
+(1, 34, 'What are advantages of laravel over codeigniter?', '2015-12-01 10:23:34'),
+(2, 23, 'qu3es', '2015-12-01 10:23:34');
 
 -- --------------------------------------------------------
 
@@ -654,17 +657,18 @@ CREATE TABLE IF NOT EXISTS `expert_questionuser` (
   `id` int(11) NOT NULL,
   `question` int(11) NOT NULL,
   `touser` int(11) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `reply` varchar(255) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `expert_questionuser`
 --
 
-INSERT INTO `expert_questionuser` (`id`, `question`, `touser`, `status`) VALUES
-(2, 1, 1, 2),
-(4, 1, 1, 3),
-(5, 2, 3, 2);
+INSERT INTO `expert_questionuser` (`id`, `question`, `touser`, `status`, `reply`, `timestamp`) VALUES
+(2, 1, 1, 2, '', '2015-12-01 10:25:19'),
+(5, 2, 3, 2, '', '2015-12-01 10:25:19');
 
 -- --------------------------------------------------------
 
